@@ -3,6 +3,9 @@ import { PageHero } from "@/components/site/PageHero";
 import consultationImg from "@/assets/consultation-bc.jpg";
 import { Calendar, Check } from "lucide-react";
 import { useState } from "react";
+import { calendlyUrl, type ConsultationTypeId } from "@/lib/calendly";
+import { useSubmitLead } from "@/lib/leads/client";
+
 
 const TYPES = [
   {
@@ -51,8 +54,11 @@ export const Route = createFileRoute("/consultation")({
 });
 
 function Consultation() {
-  const [selected, setSelected] = useState<string>(TYPES[0].id);
+  const [selected, setSelected] = useState<ConsultationTypeId>(TYPES[0].id as ConsultationTypeId);
   const active = TYPES.find((t) => t.id === selected)!;
+  const submit = useSubmitLead();
+  const [reqState, setReqState] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [reqError, setReqError] = useState<string | null>(null);
 
   return (
     <>
@@ -69,7 +75,7 @@ function Consultation() {
             return (
               <button
                 key={t.id}
-                onClick={() => setSelected(t.id)}
+                onClick={() => setSelected(t.id as ConsultationTypeId)}
                 className={`text-left rounded-2xl border p-5 transition-all ${
                   isActive
                     ? "border-primary bg-primary/5"
@@ -112,17 +118,16 @@ function Consultation() {
             <h3 className="mt-2 font-serif text-2xl text-foreground">{active.title}</h3>
             <p className="mt-2 text-muted-foreground">{active.desc}</p>
 
-            <div className="mt-6 rounded-2xl border border-dashed border-border bg-secondary/40 p-6">
+            <div className="mt-6 rounded-2xl border border-border bg-secondary/40 p-6">
               <div className="flex items-center gap-3">
                 <Calendar className="h-5 w-5 text-primary" />
-                <p className="text-sm font-medium text-foreground">Calendly integration</p>
+                <p className="text-sm font-medium text-foreground">Book instantly with Calendly</p>
               </div>
               <p className="mt-2 text-sm text-muted-foreground">
-                [Embed the Calendly link for &ldquo;{active.title}&rdquo; here. Different
-                consultation types can point to different Calendly event types.]
+                Pick a time that works for you. Bookings are tracked back to this page.
               </p>
               <a
-                href="https://calendly.com/"
+                href={calendlyUrl(selected, `consultation_${selected}`)}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-4 inline-flex h-11 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground"
@@ -130,9 +135,58 @@ function Consultation() {
                 Open Calendly →
               </a>
             </div>
+
+            <form
+              className="mt-6 grid gap-3"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const fd = new FormData(e.currentTarget);
+                setReqState("sending");
+                setReqError(null);
+                const res = await submit({
+                  source: "consultation",
+                  name: String(fd.get("name") || ""),
+                  email: String(fd.get("email") || ""),
+                  phone: String(fd.get("phone") || "") || undefined,
+                  engagement: {
+                    consultationRequested: selected,
+                    message: String(fd.get("message") || "") || undefined,
+                  },
+                });
+                if (res.ok) setReqState("done");
+                else {
+                  setReqError(res.error ?? "Something went wrong.");
+                  setReqState("error");
+                }
+              }}
+            >
+              <p className="text-sm font-medium text-foreground">Or request a call back</p>
+              {reqState === "done" ? (
+                <p className="text-sm text-muted-foreground">
+                  Thanks — we&rsquo;ll reach out to schedule your {active.title.toLowerCase()}.
+                </p>
+              ) : (
+                <>
+                  <div className="grid gap-3 md:grid-cols-2">
+                    <input required name="name" placeholder="Your name" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
+                    <input required name="email" type="email" placeholder="Email" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
+                  </div>
+                  <input name="phone" placeholder="Phone (optional)" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
+                  <textarea name="message" rows={3} placeholder="Anything we should know?" className="rounded-lg border border-input bg-background px-3 py-2 text-sm resize-none" />
+                  <button
+                    disabled={reqState === "sending"}
+                    className="h-11 rounded-full bg-secondary text-secondary-foreground text-sm font-medium disabled:opacity-60"
+                  >
+                    {reqState === "sending" ? "Sending…" : "Request a call back"}
+                  </button>
+                  {reqError && <p className="text-sm text-destructive">{reqError}</p>}
+                </>
+              )}
+            </form>
           </div>
         </div>
       </section>
     </>
   );
 }
+

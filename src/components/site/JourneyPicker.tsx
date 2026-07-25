@@ -1,18 +1,35 @@
 import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
+import { useSubmitLead } from "@/lib/leads/client";
+import type { Timeline, VisitorGoal } from "@/lib/leads/types";
 
-const OPTIONS = [
-  { id: "new", label: "I'm new to BC", next: "Welcome. Explore our newcomer guides and consultation options." },
+const OPTIONS: {
+  id: VisitorGoal;
+  label: string;
+  next: string;
+}[] = [
+  { id: "newcomer", label: "I'm new to BC", next: "Welcome. Explore our newcomer guides and consultation options." },
   { id: "moving", label: "I'm planning to move to BC", next: "Get a relocation roadmap and connect with a moving-to-BC consultation." },
   { id: "buying", label: "I'm looking to buy a home", next: "Start with our home-buying education and a Buying a Home consultation." },
-  { id: "finance", label: "I'm interested in financial planning", next: "Explore Plan Your Future and book a Future Planning consultation." },
-  { id: "invest", label: "I'm exploring investment opportunities", next: "Learn the basics of Build Wealth and book an Investment consultation." },
-  { id: "learn", label: "I want to learn about BC", next: "Dive into our community stories, guides, and neighborhood resources." },
-] as const;
+  { id: "planning", label: "I'm interested in financial planning", next: "Explore Plan Your Future and book a Future Planning consultation." },
+  { id: "investing", label: "I'm exploring investment opportunities", next: "Learn the basics of Build Wealth and book an Investment consultation." },
+  { id: "learning", label: "I want to learn about BC", next: "Dive into our community stories, guides, and neighborhood resources." },
+];
+
+const TIMELINES: { id: Timeline; label: string }[] = [
+  { id: "immediate", label: "0–3 months" },
+  { id: "short", label: "3–6 months" },
+  { id: "medium", label: "6–12 months" },
+  { id: "long", label: "12+ months" },
+  { id: "exploring", label: "Just exploring" },
+];
 
 export function JourneyPicker() {
-  const [selected, setSelected] = useState<string | null>(null);
+  const submit = useSubmitLead();
+  const [selected, setSelected] = useState<VisitorGoal | null>(null);
   const [step, setStep] = useState<"pick" | "contact" | "done">("pick");
+  const [state, setState] = useState<"idle" | "sending" | "error">("idle");
+  const [error, setError] = useState<string | null>(null);
 
   const active = OPTIONS.find((o) => o.id === selected) ?? null;
 
@@ -80,18 +97,49 @@ export function JourneyPicker() {
           )}
           {step === "contact" && (
             <form
-              className="mt-6 grid gap-3 md:grid-cols-3"
-              onSubmit={(e) => {
+              className="mt-6 grid gap-3 md:grid-cols-2"
+              onSubmit={async (e) => {
                 e.preventDefault();
-                setStep("done");
+                const fd = new FormData(e.currentTarget);
+                setState("sending");
+                setError(null);
+                const res = await submit({
+                  source: "journey_picker",
+                  name: String(fd.get("name") || ""),
+                  email: String(fd.get("email") || ""),
+                  phone: String(fd.get("phone") || "") || undefined,
+                  journey: {
+                    goal: active.id,
+                    timeline: (fd.get("timeline") as Timeline) || undefined,
+                    locationInterest: String(fd.get("location") || "") || undefined,
+                  },
+                });
+                if (res.ok) {
+                  setState("idle");
+                  setStep("done");
+                } else {
+                  setError(res.error ?? "Something went wrong.");
+                  setState("error");
+                }
               }}
             >
-              <input required placeholder="Your name" className="h-11 rounded-lg border border-input bg-background px-3 text-sm md:col-span-1" />
-              <input required type="email" placeholder="Email" className="h-11 rounded-lg border border-input bg-background px-3 text-sm md:col-span-1" />
-              <input placeholder="Phone (optional)" className="h-11 rounded-lg border border-input bg-background px-3 text-sm md:col-span-1" />
-              <button className="md:col-span-3 h-11 rounded-full bg-primary text-primary-foreground text-sm font-medium">
-                Send me my roadmap
+              <input required name="name" placeholder="Your name" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
+              <input required name="email" type="email" placeholder="Email" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
+              <input name="phone" placeholder="Phone (optional)" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
+              <input name="location" placeholder="Area of BC you're interested in" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
+              <select name="timeline" defaultValue="" className="h-11 rounded-lg border border-input bg-background px-3 text-sm md:col-span-2">
+                <option value="" disabled>What's your timeline?</option>
+                {TIMELINES.map((t) => (
+                  <option key={t.id} value={t.id}>{t.label}</option>
+                ))}
+              </select>
+              <button
+                disabled={state === "sending"}
+                className="md:col-span-2 h-11 rounded-full bg-primary text-primary-foreground text-sm font-medium disabled:opacity-60"
+              >
+                {state === "sending" ? "Sending…" : "Send me my roadmap"}
               </button>
+              {error && <p className="md:col-span-2 text-sm text-destructive">{error}</p>}
             </form>
           )}
           {step === "done" && (

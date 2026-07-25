@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
 import { Mail, MessageCircle, Calendar } from "lucide-react";
 import { useState } from "react";
+import { useSubmitLead } from "@/lib/leads/client";
+
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -22,7 +24,9 @@ export const Route = createFileRoute("/contact")({
 });
 
 function Contact() {
-  const [sent, setSent] = useState(false);
+  const submit = useSubmitLead();
+  const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [error, setError] = useState<string | null>(null);
   return (
     <>
       <PageHero
@@ -57,12 +61,26 @@ function Contact() {
         </div>
         <form
           className="rounded-3xl border border-border bg-card p-8"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
-            setSent(true);
+            const fd = new FormData(e.currentTarget);
+            setState("sending");
+            setError(null);
+            const res = await submit({
+              source: "contact_form",
+              name: String(fd.get("name") || ""),
+              email: String(fd.get("email") || ""),
+              phone: String(fd.get("phone") || "") || undefined,
+              engagement: { message: String(fd.get("message") || "") || undefined },
+            });
+            if (res.ok) setState("done");
+            else {
+              setError(res.error ?? "Something went wrong.");
+              setState("error");
+            }
           }}
         >
-          {sent ? (
+          {state === "done" ? (
             <div>
               <p className="eyebrow">Thanks</p>
               <h3 className="mt-2 font-serif text-2xl">We&rsquo;ll be in touch soon.</h3>
@@ -70,22 +88,26 @@ function Contact() {
           ) : (
             <div className="grid gap-4">
               <Field label="Your name">
-                <input required className="input" />
+                <input required name="name" className="input" />
               </Field>
               <div className="grid gap-4 md:grid-cols-2">
                 <Field label="Email">
-                  <input required type="email" className="input" />
+                  <input required name="email" type="email" className="input" />
                 </Field>
                 <Field label="Phone (optional)">
-                  <input className="input" />
+                  <input name="phone" className="input" />
                 </Field>
               </div>
               <Field label="How can we help?">
-                <textarea required rows={5} className="input py-3 resize-none" />
+                <textarea required name="message" rows={5} className="input py-3 resize-none" />
               </Field>
-              <button className="mt-2 h-12 rounded-full bg-primary text-primary-foreground text-sm font-medium">
-                Send message
+              <button
+                disabled={state === "sending"}
+                className="mt-2 h-12 rounded-full bg-primary text-primary-foreground text-sm font-medium disabled:opacity-60"
+              >
+                {state === "sending" ? "Sending…" : "Send message"}
               </button>
+              {error && <p className="text-sm text-destructive">{error}</p>}
             </div>
           )}
         </form>
@@ -95,6 +117,7 @@ function Contact() {
     </>
   );
 }
+
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (

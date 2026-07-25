@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSubmitLead } from "@/lib/leads/client";
 
 export function Newsletter({
   title = "Stay Connected With BC",
@@ -9,7 +10,10 @@ export function Newsletter({
   description?: string;
   compact?: boolean;
 }) {
-  const [done, setDone] = useState(false);
+  const submit = useSubmitLead();
+  const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [error, setError] = useState<string | null>(null);
+
   return (
     <section
       className={
@@ -54,12 +58,25 @@ export function Newsletter({
         </div>
         <form
           className="grid gap-3"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
-            setDone(true);
+            const fd = new FormData(e.currentTarget);
+            setState("sending");
+            setError(null);
+            const res = await submit({
+              source: "newsletter",
+              name: String(fd.get("name") || ""),
+              email: String(fd.get("email") || ""),
+              consent: { marketing: true },
+            });
+            if (res.ok) setState("done");
+            else {
+              setError(res.error ?? "Something went wrong.");
+              setState("error");
+            }
           }}
         >
-          {done ? (
+          {state === "done" ? (
             <p
               className={
                 compact
@@ -73,26 +90,34 @@ export function Newsletter({
             <>
               <input
                 required
+                name="name"
                 type="text"
                 placeholder="Your name"
                 className={inputCls(compact)}
               />
               <input
                 required
+                name="email"
                 type="email"
                 placeholder="Email address"
                 className={inputCls(compact)}
               />
               <button
                 type="submit"
+                disabled={state === "sending"}
                 className={
                   compact
-                    ? "h-11 rounded-full bg-primary text-primary-foreground text-sm font-medium"
-                    : "h-12 rounded-full bg-accent text-accent-foreground font-medium hover:opacity-95"
+                    ? "h-11 rounded-full bg-primary text-primary-foreground text-sm font-medium disabled:opacity-60"
+                    : "h-12 rounded-full bg-accent text-accent-foreground font-medium hover:opacity-95 disabled:opacity-60"
                 }
               >
-                Subscribe
+                {state === "sending" ? "Subscribing…" : "Subscribe"}
               </button>
+              {error && (
+                <p className={compact ? "text-sm text-destructive" : "text-sm text-primary-foreground/90"}>
+                  {error}
+                </p>
+              )}
             </>
           )}
         </form>
