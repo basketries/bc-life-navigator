@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
 import { Mail, MessageCircle, Calendar } from "lucide-react";
 import { useState } from "react";
+import { useSubmitLead } from "@/lib/leads/client";
+
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
