@@ -13,6 +13,11 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as ServicesProtectYourFamilyRouteImport } from './routes/services.protect-your-family'
+import { Route as ServicesPlanYourFutureRouteImport } from './routes/services.plan-your-future'
+import { Route as ServicesFinanceYourHomeRouteImport } from './routes/services.finance-your-home'
+import { Route as ServicesBuyYourHomeRouteImport } from './routes/services.buy-your-home'
+import { Route as ServicesBuildWealthRouteImport } from './routes/services.build-wealth'
 
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
@@ -34,17 +39,53 @@ const ServicesIndexRoute = ServicesIndexRouteImport.update({
   path: '/services/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesProtectYourFamilyRoute =
+  ServicesProtectYourFamilyRouteImport.update({
+    id: '/services/protect-your-family',
+    path: '/services/protect-your-family',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesPlanYourFutureRoute = ServicesPlanYourFutureRouteImport.update({
+  id: '/services/plan-your-future',
+  path: '/services/plan-your-future',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesFinanceYourHomeRoute = ServicesFinanceYourHomeRouteImport.update({
+  id: '/services/finance-your-home',
+  path: '/services/finance-your-home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesBuyYourHomeRoute = ServicesBuyYourHomeRouteImport.update({
+  id: '/services/buy-your-home',
+  path: '/services/buy-your-home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesBuildWealthRoute = ServicesBuildWealthRouteImport.update({
+  id: '/services/build-wealth',
+  path: '/services/build-wealth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/services/build-wealth': typeof ServicesBuildWealthRoute
+  '/services/buy-your-home': typeof ServicesBuyYourHomeRoute
+  '/services/finance-your-home': typeof ServicesFinanceYourHomeRoute
+  '/services/plan-your-future': typeof ServicesPlanYourFutureRoute
+  '/services/protect-your-family': typeof ServicesProtectYourFamilyRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/services/build-wealth': typeof ServicesBuildWealthRoute
+  '/services/buy-your-home': typeof ServicesBuyYourHomeRoute
+  '/services/finance-your-home': typeof ServicesFinanceYourHomeRoute
+  '/services/plan-your-future': typeof ServicesPlanYourFutureRoute
+  '/services/protect-your-family': typeof ServicesProtectYourFamilyRoute
   '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
@@ -52,20 +93,58 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/services/build-wealth': typeof ServicesBuildWealthRoute
+  '/services/buy-your-home': typeof ServicesBuyYourHomeRoute
+  '/services/finance-your-home': typeof ServicesFinanceYourHomeRoute
+  '/services/plan-your-future': typeof ServicesPlanYourFutureRoute
+  '/services/protect-your-family': typeof ServicesProtectYourFamilyRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/services/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/services/build-wealth'
+    | '/services/buy-your-home'
+    | '/services/finance-your-home'
+    | '/services/plan-your-future'
+    | '/services/protect-your-family'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/services'
-  id: '__root__' | '/' | '/about' | '/contact' | '/services/'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/services/build-wealth'
+    | '/services/buy-your-home'
+    | '/services/finance-your-home'
+    | '/services/plan-your-future'
+    | '/services/protect-your-family'
+    | '/services'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/services/build-wealth'
+    | '/services/buy-your-home'
+    | '/services/finance-your-home'
+    | '/services/plan-your-future'
+    | '/services/protect-your-family'
+    | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
+  ServicesBuildWealthRoute: typeof ServicesBuildWealthRoute
+  ServicesBuyYourHomeRoute: typeof ServicesBuyYourHomeRoute
+  ServicesFinanceYourHomeRoute: typeof ServicesFinanceYourHomeRoute
+  ServicesPlanYourFutureRoute: typeof ServicesPlanYourFutureRoute
+  ServicesProtectYourFamilyRoute: typeof ServicesProtectYourFamilyRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
@@ -99,6 +178,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/protect-your-family': {
+      id: '/services/protect-your-family'
+      path: '/services/protect-your-family'
+      fullPath: '/services/protect-your-family'
+      preLoaderRoute: typeof ServicesProtectYourFamilyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/plan-your-future': {
+      id: '/services/plan-your-future'
+      path: '/services/plan-your-future'
+      fullPath: '/services/plan-your-future'
+      preLoaderRoute: typeof ServicesPlanYourFutureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/finance-your-home': {
+      id: '/services/finance-your-home'
+      path: '/services/finance-your-home'
+      fullPath: '/services/finance-your-home'
+      preLoaderRoute: typeof ServicesFinanceYourHomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/buy-your-home': {
+      id: '/services/buy-your-home'
+      path: '/services/buy-your-home'
+      fullPath: '/services/buy-your-home'
+      preLoaderRoute: typeof ServicesBuyYourHomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/build-wealth': {
+      id: '/services/build-wealth'
+      path: '/services/build-wealth'
+      fullPath: '/services/build-wealth'
+      preLoaderRoute: typeof ServicesBuildWealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -106,6 +220,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
+  ServicesBuildWealthRoute: ServicesBuildWealthRoute,
+  ServicesBuyYourHomeRoute: ServicesBuyYourHomeRoute,
+  ServicesFinanceYourHomeRoute: ServicesFinanceYourHomeRoute,
+  ServicesPlanYourFutureRoute: ServicesPlanYourFutureRoute,
+  ServicesProtectYourFamilyRoute: ServicesProtectYourFamilyRoute,
   ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
