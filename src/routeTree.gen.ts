@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ConsultationRouteImport } from './routes/consultation'
@@ -28,6 +29,11 @@ import { Route as ResourcesArticlesRouteImport } from './routes/resources.articl
 import { Route as CommunityStoriesRouteImport } from './routes/community.stories'
 import { Route as CommunityEventsRouteImport } from './routes/community.events'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JourneyRoute = JourneyRouteImport.update({
   id: '/journey',
   path: '/journey',
@@ -126,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/consultation': typeof ConsultationRoute
   '/contact': typeof ContactRoute
   '/journey': typeof JourneyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
   '/resources/articles': typeof ResourcesArticlesRoute
@@ -146,6 +153,7 @@ export interface FileRoutesByTo {
   '/consultation': typeof ConsultationRoute
   '/contact': typeof ContactRoute
   '/journey': typeof JourneyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
   '/resources/articles': typeof ResourcesArticlesRoute
@@ -167,6 +175,7 @@ export interface FileRoutesById {
   '/consultation': typeof ConsultationRoute
   '/contact': typeof ContactRoute
   '/journey': typeof JourneyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
   '/resources/articles': typeof ResourcesArticlesRoute
@@ -189,6 +198,7 @@ export interface FileRouteTypes {
     | '/consultation'
     | '/contact'
     | '/journey'
+    | '/sitemap.xml'
     | '/community/events'
     | '/community/stories'
     | '/resources/articles'
@@ -209,6 +219,7 @@ export interface FileRouteTypes {
     | '/consultation'
     | '/contact'
     | '/journey'
+    | '/sitemap.xml'
     | '/community/events'
     | '/community/stories'
     | '/resources/articles'
@@ -229,6 +240,7 @@ export interface FileRouteTypes {
     | '/consultation'
     | '/contact'
     | '/journey'
+    | '/sitemap.xml'
     | '/community/events'
     | '/community/stories'
     | '/resources/articles'
@@ -250,6 +262,7 @@ export interface RootRouteChildren {
   ConsultationRoute: typeof ConsultationRoute
   ContactRoute: typeof ContactRoute
   JourneyRoute: typeof JourneyRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CommunityEventsRoute: typeof CommunityEventsRoute
   CommunityStoriesRoute: typeof CommunityStoriesRoute
   ResourcesArticlesRoute: typeof ResourcesArticlesRoute
@@ -267,6 +280,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/journey': {
       id: '/journey'
       path: '/journey'
@@ -402,6 +422,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConsultationRoute: ConsultationRoute,
   ContactRoute: ContactRoute,
   JourneyRoute: JourneyRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   CommunityEventsRoute: CommunityEventsRoute,
   CommunityStoriesRoute: CommunityStoriesRoute,
   ResourcesArticlesRoute: ResourcesArticlesRoute,
