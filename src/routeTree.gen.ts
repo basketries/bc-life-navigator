@@ -9,19 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ConsultationRouteImport } from './routes/consultation'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
+import { Route as CommunityIndexRouteImport } from './routes/community.index'
 import { Route as ServicesProtectYourFamilyRouteImport } from './routes/services.protect-your-family'
 import { Route as ServicesPlanYourFutureRouteImport } from './routes/services.plan-your-future'
 import { Route as ServicesFinanceYourHomeRouteImport } from './routes/services.finance-your-home'
 import { Route as ServicesBuyYourHomeRouteImport } from './routes/services.buy-your-home'
 import { Route as ServicesBuildWealthRouteImport } from './routes/services.build-wealth'
+import { Route as ResourcesVideosRouteImport } from './routes/resources.videos'
+import { Route as ResourcesGuidesRouteImport } from './routes/resources.guides'
+import { Route as ResourcesArticlesRouteImport } from './routes/resources.articles'
+import { Route as CommunityStoriesRouteImport } from './routes/community.stories'
+import { Route as CommunityEventsRouteImport } from './routes/community.events'
 
+const JourneyRoute = JourneyRouteImport.update({
+  id: '/journey',
+  path: '/journey',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConsultationRoute = ConsultationRouteImport.update({
+  id: '/consultation',
+  path: '/consultation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -37,6 +56,16 @@ const IndexRoute = IndexRouteImport.update({
 const ServicesIndexRoute = ServicesIndexRouteImport.update({
   id: '/services/',
   path: '/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesIndexRoute = ResourcesIndexRouteImport.update({
+  id: '/resources/',
+  path: '/resources/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityIndexRoute = CommunityIndexRouteImport.update({
+  id: '/community/',
+  path: '/community/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesProtectYourFamilyRoute =
@@ -65,39 +94,91 @@ const ServicesBuildWealthRoute = ServicesBuildWealthRouteImport.update({
   path: '/services/build-wealth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResourcesVideosRoute = ResourcesVideosRouteImport.update({
+  id: '/resources/videos',
+  path: '/resources/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesGuidesRoute = ResourcesGuidesRouteImport.update({
+  id: '/resources/guides',
+  path: '/resources/guides',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesArticlesRoute = ResourcesArticlesRouteImport.update({
+  id: '/resources/articles',
+  path: '/resources/articles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityStoriesRoute = CommunityStoriesRouteImport.update({
+  id: '/community/stories',
+  path: '/community/stories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityEventsRoute = CommunityEventsRouteImport.update({
+  id: '/community/events',
+  path: '/community/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/consultation': typeof ConsultationRoute
   '/contact': typeof ContactRoute
+  '/journey': typeof JourneyRoute
+  '/community/events': typeof CommunityEventsRoute
+  '/community/stories': typeof CommunityStoriesRoute
+  '/resources/articles': typeof ResourcesArticlesRoute
+  '/resources/guides': typeof ResourcesGuidesRoute
+  '/resources/videos': typeof ResourcesVideosRoute
   '/services/build-wealth': typeof ServicesBuildWealthRoute
   '/services/buy-your-home': typeof ServicesBuyYourHomeRoute
   '/services/finance-your-home': typeof ServicesFinanceYourHomeRoute
   '/services/plan-your-future': typeof ServicesPlanYourFutureRoute
   '/services/protect-your-family': typeof ServicesProtectYourFamilyRoute
+  '/community/': typeof CommunityIndexRoute
+  '/resources/': typeof ResourcesIndexRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/consultation': typeof ConsultationRoute
   '/contact': typeof ContactRoute
+  '/journey': typeof JourneyRoute
+  '/community/events': typeof CommunityEventsRoute
+  '/community/stories': typeof CommunityStoriesRoute
+  '/resources/articles': typeof ResourcesArticlesRoute
+  '/resources/guides': typeof ResourcesGuidesRoute
+  '/resources/videos': typeof ResourcesVideosRoute
   '/services/build-wealth': typeof ServicesBuildWealthRoute
   '/services/buy-your-home': typeof ServicesBuyYourHomeRoute
   '/services/finance-your-home': typeof ServicesFinanceYourHomeRoute
   '/services/plan-your-future': typeof ServicesPlanYourFutureRoute
   '/services/protect-your-family': typeof ServicesProtectYourFamilyRoute
+  '/community': typeof CommunityIndexRoute
+  '/resources': typeof ResourcesIndexRoute
   '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/consultation': typeof ConsultationRoute
   '/contact': typeof ContactRoute
+  '/journey': typeof JourneyRoute
+  '/community/events': typeof CommunityEventsRoute
+  '/community/stories': typeof CommunityStoriesRoute
+  '/resources/articles': typeof ResourcesArticlesRoute
+  '/resources/guides': typeof ResourcesGuidesRoute
+  '/resources/videos': typeof ResourcesVideosRoute
   '/services/build-wealth': typeof ServicesBuildWealthRoute
   '/services/buy-your-home': typeof ServicesBuyYourHomeRoute
   '/services/finance-your-home': typeof ServicesFinanceYourHomeRoute
   '/services/plan-your-future': typeof ServicesPlanYourFutureRoute
   '/services/protect-your-family': typeof ServicesProtectYourFamilyRoute
+  '/community/': typeof CommunityIndexRoute
+  '/resources/': typeof ResourcesIndexRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
@@ -105,56 +186,106 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/consultation'
     | '/contact'
+    | '/journey'
+    | '/community/events'
+    | '/community/stories'
+    | '/resources/articles'
+    | '/resources/guides'
+    | '/resources/videos'
     | '/services/build-wealth'
     | '/services/buy-your-home'
     | '/services/finance-your-home'
     | '/services/plan-your-future'
     | '/services/protect-your-family'
+    | '/community/'
+    | '/resources/'
     | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/consultation'
     | '/contact'
+    | '/journey'
+    | '/community/events'
+    | '/community/stories'
+    | '/resources/articles'
+    | '/resources/guides'
+    | '/resources/videos'
     | '/services/build-wealth'
     | '/services/buy-your-home'
     | '/services/finance-your-home'
     | '/services/plan-your-future'
     | '/services/protect-your-family'
+    | '/community'
+    | '/resources'
     | '/services'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/consultation'
     | '/contact'
+    | '/journey'
+    | '/community/events'
+    | '/community/stories'
+    | '/resources/articles'
+    | '/resources/guides'
+    | '/resources/videos'
     | '/services/build-wealth'
     | '/services/buy-your-home'
     | '/services/finance-your-home'
     | '/services/plan-your-future'
     | '/services/protect-your-family'
+    | '/community/'
+    | '/resources/'
     | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ConsultationRoute: typeof ConsultationRoute
   ContactRoute: typeof ContactRoute
+  JourneyRoute: typeof JourneyRoute
+  CommunityEventsRoute: typeof CommunityEventsRoute
+  CommunityStoriesRoute: typeof CommunityStoriesRoute
+  ResourcesArticlesRoute: typeof ResourcesArticlesRoute
+  ResourcesGuidesRoute: typeof ResourcesGuidesRoute
+  ResourcesVideosRoute: typeof ResourcesVideosRoute
   ServicesBuildWealthRoute: typeof ServicesBuildWealthRoute
   ServicesBuyYourHomeRoute: typeof ServicesBuyYourHomeRoute
   ServicesFinanceYourHomeRoute: typeof ServicesFinanceYourHomeRoute
   ServicesPlanYourFutureRoute: typeof ServicesPlanYourFutureRoute
   ServicesProtectYourFamilyRoute: typeof ServicesProtectYourFamilyRoute
+  CommunityIndexRoute: typeof CommunityIndexRoute
+  ResourcesIndexRoute: typeof ResourcesIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/journey': {
+      id: '/journey'
+      path: '/journey'
+      fullPath: '/journey'
+      preLoaderRoute: typeof JourneyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/consultation': {
+      id: '/consultation'
+      path: '/consultation'
+      fullPath: '/consultation'
+      preLoaderRoute: typeof ConsultationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -176,6 +307,20 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services/'
       preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources/': {
+      id: '/resources/'
+      path: '/resources'
+      fullPath: '/resources/'
+      preLoaderRoute: typeof ResourcesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community/': {
+      id: '/community/'
+      path: '/community'
+      fullPath: '/community/'
+      preLoaderRoute: typeof CommunityIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/protect-your-family': {
@@ -213,20 +358,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesBuildWealthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resources/videos': {
+      id: '/resources/videos'
+      path: '/resources/videos'
+      fullPath: '/resources/videos'
+      preLoaderRoute: typeof ResourcesVideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources/guides': {
+      id: '/resources/guides'
+      path: '/resources/guides'
+      fullPath: '/resources/guides'
+      preLoaderRoute: typeof ResourcesGuidesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources/articles': {
+      id: '/resources/articles'
+      path: '/resources/articles'
+      fullPath: '/resources/articles'
+      preLoaderRoute: typeof ResourcesArticlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community/stories': {
+      id: '/community/stories'
+      path: '/community/stories'
+      fullPath: '/community/stories'
+      preLoaderRoute: typeof CommunityStoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community/events': {
+      id: '/community/events'
+      path: '/community/events'
+      fullPath: '/community/events'
+      preLoaderRoute: typeof CommunityEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ConsultationRoute: ConsultationRoute,
   ContactRoute: ContactRoute,
+  JourneyRoute: JourneyRoute,
+  CommunityEventsRoute: CommunityEventsRoute,
+  CommunityStoriesRoute: CommunityStoriesRoute,
+  ResourcesArticlesRoute: ResourcesArticlesRoute,
+  ResourcesGuidesRoute: ResourcesGuidesRoute,
+  ResourcesVideosRoute: ResourcesVideosRoute,
   ServicesBuildWealthRoute: ServicesBuildWealthRoute,
   ServicesBuyYourHomeRoute: ServicesBuyYourHomeRoute,
   ServicesFinanceYourHomeRoute: ServicesFinanceYourHomeRoute,
   ServicesPlanYourFutureRoute: ServicesPlanYourFutureRoute,
   ServicesProtectYourFamilyRoute: ServicesProtectYourFamilyRoute,
+  CommunityIndexRoute: CommunityIndexRoute,
+  ResourcesIndexRoute: ResourcesIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
