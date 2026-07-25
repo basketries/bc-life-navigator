@@ -88,8 +88,35 @@ function Home() {
         </div>
       </section>
 
+      {/* JOURNEY PATH */}
+      <section className="border-y border-border bg-card/60">
+        <div className="container-page py-14 md:py-16">
+          <div className="max-w-2xl">
+            <p className="eyebrow">How it works</p>
+            <h2 className="mt-3 text-2xl md:text-3xl text-foreground">
+              Four simple steps — at your own pace.
+            </h2>
+          </div>
+          <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { n: "01", t: "Discover BC", d: "Explore neighborhoods, guides, and stories from across the province." },
+              { n: "02", t: "Choose your goal", d: "Tell us where you are — new to BC, buying, financing, or planning." },
+              { n: "03", t: "Get resources", d: "Read, watch, and use tools tailored to your next step." },
+              { n: "04", t: "Connect with professionals", d: "Meet trusted BC experts — only when you're ready." },
+            ].map((s) => (
+              <li key={s.n} className="rounded-2xl border border-border bg-background p-5">
+                <span className="font-serif text-sm text-accent">{s.n}</span>
+                <h3 className="mt-2 text-lg text-foreground">{s.t}</h3>
+                <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">{s.d}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       <JourneyPicker />
       <ServiceGrid />
+
 
       {/* WHY */}
       <section className="bg-secondary/50 py-24 border-y border-border">
