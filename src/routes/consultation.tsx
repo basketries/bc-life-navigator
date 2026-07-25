@@ -3,6 +3,9 @@ import { PageHero } from "@/components/site/PageHero";
 import consultationImg from "@/assets/consultation-bc.jpg";
 import { Calendar, Check } from "lucide-react";
 import { useState } from "react";
+import { calendlyUrl, type ConsultationTypeId } from "@/lib/calendly";
+import { useSubmitLead } from "@/lib/leads/client";
+
 
 const TYPES = [
   {
