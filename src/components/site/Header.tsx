@@ -32,9 +32,11 @@ export function Header() {
               to={n.to}
               className="text-muted-foreground transition-colors hover:text-foreground"
               activeProps={{ className: "text-foreground font-medium" }}
+              activeOptions={n.to === "/" ? { exact: true } : undefined}
             >
               {n.label}
             </Link>
+
           ))}
         </nav>
         <div className="hidden md:flex items-center gap-2">
