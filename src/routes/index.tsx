@@ -140,10 +140,9 @@ function Home() {
               </Link>
             </div>
           </div>
-          <div className="relative">
+          <div className="relative" data-parallax="image">
             <div className="aspect-[4/5] overflow-hidden rounded-3xl border border-border shadow-lg">
               <img
-                ref={heroImgRef}
                 src={heroImg}
                 alt="Snow-capped coastal mountains above a calm ocean inlet in British Columbia"
                 width={1280}
