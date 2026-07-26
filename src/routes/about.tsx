@@ -11,8 +11,8 @@ import {
   Users,
 } from "lucide-react";
 import heroImg from "@/assets/about-bc-lifestyle.jpg";
-import landscapeImg from "@/assets/hero-bc-landscape.jpg";
-import communityImg from "@/assets/community-bc.jpg";
+import landscapeImg from "@/assets/bc-valley.jpg";
+import communityImg from "@/assets/about-guidance.jpg";
 import { Newsletter } from "@/components/site/Newsletter";
 
 export const Route = createFileRoute("/about")({
@@ -251,7 +251,7 @@ function About() {
         <div className="order-1 lg:order-2 overflow-hidden rounded-3xl border border-border">
           <img
             src={communityImg}
-            alt="Neighbours gathering outdoors at a community event in a British Columbia town"
+            alt="Two people talking over coffee and notes at a sunlit table overlooking British Columbia forest"
             width={1600}
             height={1104}
             loading="lazy"
@@ -266,7 +266,7 @@ function About() {
           <div className="overflow-hidden rounded-3xl border border-border">
             <img
               src={landscapeImg}
-              alt="Snow-capped coastal mountains rising above a calm ocean inlet in British Columbia"
+              alt="Autumn vineyards above a wide blue lake in the Okanagan valley, British Columbia"
               width={1280}
               height={1600}
               loading="lazy"
