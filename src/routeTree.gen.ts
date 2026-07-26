@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as NewToBcRouteImport } from './routes/new-to-bc'
 import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ConsultationRouteImport } from './routes/consultation'
@@ -32,6 +33,11 @@ import { Route as CommunityEventsRouteImport } from './routes/community.events'
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewToBcRoute = NewToBcRouteImport.update({
+  id: '/new-to-bc',
+  path: '/new-to-bc',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JourneyRoute = JourneyRouteImport.update({
@@ -132,6 +138,7 @@ export interface FileRoutesByFullPath {
   '/consultation': typeof ConsultationRoute
   '/contact': typeof ContactRoute
   '/journey': typeof JourneyRoute
+  '/new-to-bc': typeof NewToBcRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
@@ -153,6 +160,7 @@ export interface FileRoutesByTo {
   '/consultation': typeof ConsultationRoute
   '/contact': typeof ContactRoute
   '/journey': typeof JourneyRoute
+  '/new-to-bc': typeof NewToBcRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
@@ -175,6 +183,7 @@ export interface FileRoutesById {
   '/consultation': typeof ConsultationRoute
   '/contact': typeof ContactRoute
   '/journey': typeof JourneyRoute
+  '/new-to-bc': typeof NewToBcRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
@@ -198,6 +207,7 @@ export interface FileRouteTypes {
     | '/consultation'
     | '/contact'
     | '/journey'
+    | '/new-to-bc'
     | '/sitemap.xml'
     | '/community/events'
     | '/community/stories'
@@ -219,6 +229,7 @@ export interface FileRouteTypes {
     | '/consultation'
     | '/contact'
     | '/journey'
+    | '/new-to-bc'
     | '/sitemap.xml'
     | '/community/events'
     | '/community/stories'
@@ -240,6 +251,7 @@ export interface FileRouteTypes {
     | '/consultation'
     | '/contact'
     | '/journey'
+    | '/new-to-bc'
     | '/sitemap.xml'
     | '/community/events'
     | '/community/stories'
@@ -262,6 +274,7 @@ export interface RootRouteChildren {
   ConsultationRoute: typeof ConsultationRoute
   ContactRoute: typeof ContactRoute
   JourneyRoute: typeof JourneyRoute
+  NewToBcRoute: typeof NewToBcRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CommunityEventsRoute: typeof CommunityEventsRoute
   CommunityStoriesRoute: typeof CommunityStoriesRoute
@@ -285,6 +298,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/new-to-bc': {
+      id: '/new-to-bc'
+      path: '/new-to-bc'
+      fullPath: '/new-to-bc'
+      preLoaderRoute: typeof NewToBcRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/journey': {
@@ -422,6 +442,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConsultationRoute: ConsultationRoute,
   ContactRoute: ContactRoute,
   JourneyRoute: JourneyRoute,
+  NewToBcRoute: NewToBcRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   CommunityEventsRoute: CommunityEventsRoute,
   CommunityStoriesRoute: CommunityStoriesRoute,
