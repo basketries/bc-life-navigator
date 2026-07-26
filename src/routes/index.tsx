@@ -31,8 +31,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const heroImgRef = useRef<HTMLImageElement>(null);
-  const stepsRef = useRef<HTMLOListElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -50,39 +49,54 @@ function Home() {
       gsap.registerPlugin(ScrollTrigger);
 
       ctx = gsap.context(() => {
-        if (heroImgRef.current) {
-          gsap.fromTo(
-            heroImgRef.current,
-            { yPercent: -4 },
-            {
-              yPercent: 4,
-              ease: "none",
-              scrollTrigger: {
-                trigger: heroImgRef.current,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true,
-              },
-            },
-          );
-        }
+        // One-time slide + fade reveal per section, alternating direction.
+        const sections = gsap.utils.toArray<HTMLElement>("[data-reveal]");
+        sections.forEach((section) => {
+          const dir = section.dataset.reveal === "right" ? 1 : -1;
+          gsap.from(section, {
+            opacity: 0,
+            x: 60 * dir,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: { trigger: section, start: "top 80%", once: true },
+          });
+        });
 
-        const steps = stepsRef.current?.querySelectorAll("li");
-        if (steps?.length) {
+        // Staggered reveal for the journey steps.
+        const steps = gsap.utils.toArray<HTMLElement>("[data-journey-step]");
+        if (steps.length) {
           gsap.from(steps, {
             opacity: 0,
             y: 24,
             duration: 0.6,
             ease: "power2.out",
             stagger: 0.12,
-            scrollTrigger: {
-              trigger: stepsRef.current,
-              start: "top 85%",
-              once: true,
-            },
+            scrollTrigger: { trigger: steps[0], start: "top 85%", once: true },
           });
         }
-      });
+
+        // Subtle layered horizontal parallax on image/text pairs.
+        const layers = gsap.utils.toArray<HTMLElement>("[data-parallax]");
+        layers.forEach((layer) => {
+          const depth = layer.dataset.parallax === "image" ? 1 : -1;
+          gsap.fromTo(
+            layer,
+            { xPercent: -1.5 * depth },
+            {
+              xPercent: 1.5 * depth,
+              ease: "none",
+              scrollTrigger: {
+                trigger: layer.closest("section") ?? layer,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            },
+          );
+        });
+      }, rootRef);
+
+      ScrollTrigger.refresh();
     })();
 
     return () => {
@@ -92,11 +106,11 @@ function Home() {
   }, []);
 
   return (
-    <>
+    <div ref={rootRef} className="overflow-x-hidden">
       {/* HERO */}
-      <section className="relative overflow-hidden border-b border-border">
+      <section data-reveal="left" className="relative overflow-hidden border-b border-border">
         <div className="container-page pt-14 md:pt-20 pb-16 md:pb-24 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-          <div>
+          <div data-parallax="text">
             <p className="eyebrow inline-flex items-center gap-2">
               <Sparkles className="h-3 w-3" /> Your BC life journey platform
             </p>
@@ -126,10 +140,9 @@ function Home() {
               </Link>
             </div>
           </div>
-          <div className="relative">
+          <div className="relative" data-parallax="image">
             <div className="aspect-[4/5] overflow-hidden rounded-3xl border border-border shadow-lg">
               <img
-                ref={heroImgRef}
                 src={heroImg}
                 alt="Snow-capped coastal mountains above a calm ocean inlet in British Columbia"
                 width={1280}
@@ -148,7 +161,7 @@ function Home() {
       </section>
 
       {/* JOURNEY PATH */}
-      <section className="border-y border-border bg-card/60">
+      <section data-reveal="right" className="border-y border-border bg-card/60">
         <div className="container-page py-14 md:py-16">
           <div className="max-w-2xl">
             <p className="eyebrow">How it works</p>
@@ -156,14 +169,14 @@ function Home() {
               Four simple steps — at your own pace.
             </h2>
           </div>
-          <ol ref={stepsRef} className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { n: "01", t: "Discover BC", d: "Explore neighborhoods, guides, and stories from across the province." },
               { n: "02", t: "Choose your goal", d: "Tell us where you are — new to BC, buying, financing, or planning." },
               { n: "03", t: "Get resources", d: "Read, watch, and use tools tailored to your next step." },
               { n: "04", t: "Connect with professionals", d: "Meet trusted BC experts — only when you're ready." },
             ].map((s) => (
-              <li key={s.n} className="rounded-2xl border border-border bg-background p-5">
+              <li data-journey-step key={s.n} className="rounded-2xl border border-border bg-background p-5">
                 <span className="font-serif text-sm text-accent">{s.n}</span>
                 <h3 className="mt-2 text-lg text-foreground">{s.t}</h3>
                 <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">{s.d}</p>
@@ -173,12 +186,16 @@ function Home() {
         </div>
       </section>
 
-      <JourneyPicker />
-      <ServiceGrid />
+      <div data-reveal="left">
+        <JourneyPicker />
+      </div>
+      <div data-reveal="right">
+        <ServiceGrid />
+      </div>
 
       {/* AFTER YOU ARRIVE */}
-      <section className="container-page my-24 grid gap-10 lg:grid-cols-2 lg:items-center">
-        <div className="overflow-hidden rounded-3xl border border-border">
+      <section data-reveal="left" className="container-page my-24 grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div data-parallax="image" className="overflow-hidden rounded-3xl border border-border">
           <img
             src={familyImg}
             alt="A family walking together through a British Columbia neighbourhood at golden hour"
@@ -188,7 +205,7 @@ function Home() {
             className="h-full w-full object-cover"
           />
         </div>
-        <div>
+        <div data-parallax="text">
           <p className="eyebrow">Life after the move</p>
           <h2 className="mt-3 text-3xl md:text-4xl text-foreground">
             Your journey doesn&rsquo;t end when you arrive.
@@ -217,7 +234,7 @@ function Home() {
 
 
       {/* WHY */}
-      <section className="bg-secondary/50 py-24 border-y border-border">
+      <section data-reveal="right" className="bg-secondary/50 py-24 border-y border-border">
         <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.4fr]">
           <div>
             <p className="eyebrow">Why SettleInBC</p>
@@ -255,8 +272,8 @@ function Home() {
       </section>
 
       {/* CONTENT HUB PROMO */}
-      <section className="container-page my-24 grid gap-10 lg:grid-cols-2 lg:items-center">
-        <div className="order-2 lg:order-1">
+      <section data-reveal="left" className="container-page my-24 grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div data-parallax="text" className="order-2 lg:order-1">
           <p className="eyebrow">Content hub</p>
           <h2 className="mt-3 text-3xl md:text-4xl text-foreground">
             Guides, articles, videos & calculators for life in BC.
@@ -284,7 +301,7 @@ function Home() {
             </Link>
           </div>
         </div>
-        <div className="order-1 lg:order-2">
+        <div data-parallax="image" className="order-1 lg:order-2">
           <div className="aspect-[5/4] overflow-hidden rounded-3xl border border-border">
             <img
               src={communityImg}
@@ -299,7 +316,7 @@ function Home() {
       </section>
 
       {/* COMMUNITY */}
-      <section className="container-page my-24">
+      <section data-reveal="right" className="container-page my-24">
         <div className="rounded-3xl bg-forest-deep text-primary-foreground p-10 md:p-16 grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-end"
              style={{ backgroundColor: "var(--forest-deep)" }}>
           <div>
@@ -331,8 +348,10 @@ function Home() {
         </div>
       </section>
 
-      <Newsletter />
-    </>
+      <div data-reveal="left">
+        <Newsletter />
+      </div>
+    </div>
   );
 }
 
