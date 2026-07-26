@@ -31,8 +31,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const heroImgRef = useRef<HTMLImageElement>(null);
-  const stepsRef = useRef<HTMLOListElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -50,39 +49,54 @@ function Home() {
       gsap.registerPlugin(ScrollTrigger);
 
       ctx = gsap.context(() => {
-        if (heroImgRef.current) {
-          gsap.fromTo(
-            heroImgRef.current,
-            { yPercent: -4 },
-            {
-              yPercent: 4,
-              ease: "none",
-              scrollTrigger: {
-                trigger: heroImgRef.current,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true,
-              },
-            },
-          );
-        }
+        // One-time slide + fade reveal per section, alternating direction.
+        const sections = gsap.utils.toArray<HTMLElement>("[data-reveal]");
+        sections.forEach((section) => {
+          const dir = section.dataset.reveal === "right" ? 1 : -1;
+          gsap.from(section, {
+            opacity: 0,
+            x: 60 * dir,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: { trigger: section, start: "top 80%", once: true },
+          });
+        });
 
-        const steps = stepsRef.current?.querySelectorAll("li");
-        if (steps?.length) {
+        // Staggered reveal for the journey steps.
+        const steps = gsap.utils.toArray<HTMLElement>("[data-journey-step]");
+        if (steps.length) {
           gsap.from(steps, {
             opacity: 0,
             y: 24,
             duration: 0.6,
             ease: "power2.out",
             stagger: 0.12,
-            scrollTrigger: {
-              trigger: stepsRef.current,
-              start: "top 85%",
-              once: true,
-            },
+            scrollTrigger: { trigger: steps[0], start: "top 85%", once: true },
           });
         }
-      });
+
+        // Subtle layered horizontal parallax on image/text pairs.
+        const layers = gsap.utils.toArray<HTMLElement>("[data-parallax]");
+        layers.forEach((layer) => {
+          const depth = layer.dataset.parallax === "image" ? 1 : -1;
+          gsap.fromTo(
+            layer,
+            { xPercent: -1.5 * depth },
+            {
+              xPercent: 1.5 * depth,
+              ease: "none",
+              scrollTrigger: {
+                trigger: layer.closest("section") ?? layer,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            },
+          );
+        });
+      }, rootRef);
+
+      ScrollTrigger.refresh();
     })();
 
     return () => {
