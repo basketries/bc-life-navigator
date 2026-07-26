@@ -301,7 +301,7 @@ function Home() {
             </Link>
           </div>
         </div>
-        <div className="order-1 lg:order-2">
+        <div data-parallax="image" className="order-1 lg:order-2">
           <div className="aspect-[5/4] overflow-hidden rounded-3xl border border-border">
             <img
               src={communityImg}
