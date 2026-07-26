@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Sparkles, Compass, Users, MapPin } from "lucide-react";
-import heroImg from "@/assets/hero-bc.jpg";
+import heroImg from "@/assets/hero-bc-landscape.jpg";
+import familyImg from "@/assets/hero-bc.jpg";
 import communityImg from "@/assets/community-bc.jpg";
 import { JourneyPicker } from "@/components/site/JourneyPicker";
 import { ServiceGrid } from "@/components/site/ServiceGrid";
