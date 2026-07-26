@@ -10,7 +10,7 @@ export type ConsultationTypeId =
   | "planning"
   | "investment";
 
-const FALLBACK = "https://calendly.com/settleinbc/discovery";
+const FALLBACK = "https://calendly.com/theyesrealtor/60min";
 
 const URLS: Record<ConsultationTypeId, string> = {
   buying: import.meta.env.VITE_CALENDLY_BUYING ?? FALLBACK,

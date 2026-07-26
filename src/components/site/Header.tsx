@@ -1,3 +1,4 @@
+import logo from "@/assets/settleinbc-logo.png.asset.json";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
