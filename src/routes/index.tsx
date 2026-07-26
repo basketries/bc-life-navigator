@@ -169,7 +169,7 @@ function Home() {
               Four simple steps — at your own pace.
             </h2>
           </div>
-          <ol ref={stepsRef} className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { n: "01", t: "Discover BC", d: "Explore neighborhoods, guides, and stories from across the province." },
               { n: "02", t: "Choose your goal", d: "Tell us where you are — new to BC, buying, financing, or planning." },
