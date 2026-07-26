@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import heroImg from "@/assets/newcomers-bc.jpg";
 import neighbourhoodImg from "@/assets/neighbourhood-bc.jpg";
-import landscapeImg from "@/assets/hero-bc-landscape.jpg";
+import landscapeImg from "@/assets/bc-coastal-forest.jpg";
 import {
   Accordion,
   AccordionContent,
@@ -190,7 +190,7 @@ function NewToBC() {
           <div className="overflow-hidden rounded-3xl border border-border">
             <img
               src={landscapeImg}
-              alt="Snow-capped coastal mountains above a calm ocean inlet in British Columbia"
+              alt="Mossy coastal rainforest trail opening to the Pacific ocean and misty islands in British Columbia"
               width={1280}
               height={1600}
               loading="lazy"

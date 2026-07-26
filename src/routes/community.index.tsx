@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
-import communityImg from "@/assets/community-bc.jpg";
+import communityImg from "@/assets/community-market-bc.jpg";
 
 export const Route = createFileRoute("/community/")({
   head: () => ({
@@ -46,7 +46,7 @@ function CommunityIndex() {
           <div className="aspect-[16/10] overflow-hidden">
             <img
               src={communityImg}
-              alt="Coastal BC community from above"
+              alt="Neighbours browsing produce stalls at a small-town farmers market in British Columbia"
               width={1400}
               height={900}
               loading="lazy"
