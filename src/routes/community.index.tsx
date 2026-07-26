@@ -5,13 +5,13 @@ import communityImg from "@/assets/community-bc.jpg";
 export const Route = createFileRoute("/community/")({
   head: () => ({
     meta: [
-      { title: "Community — SettleInBC" },
+      { title: "New to BC — SettleInBC" },
       {
         name: "description",
         content:
           "Events, BC lifestyle, and community stories from across British Columbia. Independent partnership with BCVoice.ca.",
       },
-      { property: "og:title", content: "SettleInBC Community" },
+      { property: "og:title", content: "New to BC — SettleInBC" },
       { property: "og:description", content: "Stories, events, and BC lifestyle." },
       { property: "og:url", content: "/community" },
     ],
@@ -24,7 +24,7 @@ function CommunityIndex() {
   return (
     <>
       <PageHero
-        eyebrow="Community"
+        eyebrow="New to BC"
         title="You&rsquo;re not just moving to BC — you&rsquo;re joining it."
         description="Discover events, neighborhood guides, and community stories that help you feel connected. We partner with BCVoice.ca, an independent community media brand, to bring more voices to the conversation."
       />

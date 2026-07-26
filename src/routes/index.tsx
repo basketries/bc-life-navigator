@@ -75,9 +75,9 @@ function Home() {
               />
             </div>
             <div className="absolute -bottom-6 -left-6 hidden md:block rounded-2xl border border-border bg-card p-4 shadow-md w-64">
-              <p className="eyebrow">This could be</p>
-              <p className="mt-1 font-serif text-lg text-foreground">
-                your future in BC.
+              <p className="eyebrow">Welcome home</p>
+              <p className="mt-1 font-serif text-lg leading-snug text-foreground">
+                Helping you confidently build your future in British Columbia.
               </p>
             </div>
           </div>
@@ -240,7 +240,7 @@ function Home() {
         <div className="rounded-3xl bg-forest-deep text-primary-foreground p-10 md:p-16 grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-end"
              style={{ backgroundColor: "var(--forest-deep)" }}>
           <div>
-            <p className="eyebrow text-primary-foreground/70">Community</p>
+            <p className="eyebrow text-primary-foreground/70">New to BC</p>
             <h2 className="mt-3 font-serif text-3xl md:text-4xl">
               Real stories, real neighborhoods, real people in BC.
             </h2>
@@ -256,7 +256,7 @@ function Home() {
               to="/community"
               className="inline-flex h-11 items-center rounded-full bg-primary-foreground text-primary px-5 text-sm font-medium"
             >
-              Explore community
+              Explore New to BC
             </Link>
             <Link
               to="/community/events"
