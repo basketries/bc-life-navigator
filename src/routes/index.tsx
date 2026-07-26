@@ -161,7 +161,7 @@ function Home() {
       </section>
 
       {/* JOURNEY PATH */}
-      <section className="border-y border-border bg-card/60">
+      <section data-reveal="right" className="border-y border-border bg-card/60">
         <div className="container-page py-14 md:py-16">
           <div className="max-w-2xl">
             <p className="eyebrow">How it works</p>
