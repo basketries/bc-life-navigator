@@ -31,6 +31,66 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const heroImgRef = useRef<HTMLImageElement>(null);
+  const stepsRef = useRef<HTMLOListElement>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let ctx: { revert: () => void } | undefined;
+    let cancelled = false;
+
+    (async () => {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+      ]);
+      if (cancelled) return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      ctx = gsap.context(() => {
+        if (heroImgRef.current) {
+          gsap.fromTo(
+            heroImgRef.current,
+            { yPercent: -4 },
+            {
+              yPercent: 4,
+              ease: "none",
+              scrollTrigger: {
+                trigger: heroImgRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            },
+          );
+        }
+
+        const steps = stepsRef.current?.querySelectorAll("li");
+        if (steps?.length) {
+          gsap.from(steps, {
+            opacity: 0,
+            y: 24,
+            duration: 0.6,
+            ease: "power2.out",
+            stagger: 0.12,
+            scrollTrigger: {
+              trigger: stepsRef.current,
+              start: "top 85%",
+              once: true,
+            },
+          });
+        }
+      });
+    })();
+
+    return () => {
+      cancelled = true;
+      ctx?.revert();
+    };
+  }, []);
+
   return (
     <>
       {/* HERO */}
