@@ -12,7 +12,7 @@ export const Route = createFileRoute("/services/buy-your-home")({
       },
       { property: "og:title", content: "Buy Your Home in BC" },
       { property: "og:description", content: "Education-first home buying guidance for BC." },
-      { property: "og:url", content: "/services/buy-your-home" },
+      { property: "og:url", content: "https://settleinbc.com/services/buy-your-home" },
     ],
     links: [{ rel: "canonical", href: "/services/buy-your-home" }],
   }),

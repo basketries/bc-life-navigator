@@ -9,7 +9,7 @@ export const Route = createFileRoute("/resources/videos")({
       { name: "description", content: "Video explainers and interviews with BC-focused experts." },
       { property: "og:title", content: "Videos — SettleInBC" },
       { property: "og:description", content: "Watch and learn about life in BC." },
-      { property: "og:url", content: "/resources/videos" },
+      { property: "og:url", content: "https://settleinbc.com/resources/videos" },
     ],
     links: [{ rel: "canonical", href: "/resources/videos" }],
   }),

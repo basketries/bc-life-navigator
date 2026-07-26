@@ -36,7 +36,7 @@ export const Route = createFileRoute("/resources/guides")({
       { name: "description", content: "In-depth guides for settling, buying, financing, and planning your future in BC." },
       { property: "og:title", content: "Guides — SettleInBC" },
       { property: "og:description", content: "Step-by-step BC guides." },
-      { property: "og:url", content: "/resources/guides" },
+      { property: "og:url", content: "https://settleinbc.com/resources/guides" },
     ],
     links: [{ rel: "canonical", href: "/resources/guides" }],
   }),

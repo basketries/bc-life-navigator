@@ -31,7 +31,7 @@ export const Route = createFileRoute("/about")({
           "Why SettleInBC exists, what we believe, and how we help people build a future in British Columbia.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/about" },
+      { property: "og:url", content: "https://settleinbc.com/about" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/about" }],

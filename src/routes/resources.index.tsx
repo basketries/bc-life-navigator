@@ -17,7 +17,7 @@ export const Route = createFileRoute("/resources/")({
         property: "og:description",
         content: "Educational guides, articles, videos and calculators for BC life.",
       },
-      { property: "og:url", content: "/resources" },
+      { property: "og:url", content: "https://settleinbc.com/resources" },
     ],
     links: [{ rel: "canonical", href: "/resources" }],
   }),

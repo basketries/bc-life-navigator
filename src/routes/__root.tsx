@@ -87,6 +87,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "SettleInBC" },
       { property: "og:site_name", content: "SettleInBC" },
       { property: "og:type", content: "website" },
+      // TODO: replace public/og-image.jpg with a real branded 1200x630 image.
+      { property: "og:image", content: "https://settleinbc.com/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [

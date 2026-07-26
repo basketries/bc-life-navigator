@@ -15,7 +15,7 @@ export const Route = createFileRoute("/community/events")({
       { name: "description", content: "Upcoming SettleInBC events across British Columbia." },
       { property: "og:title", content: "SettleInBC Events" },
       { property: "og:description", content: "Workshops, meetups & gatherings across BC." },
-      { property: "og:url", content: "/community/events" },
+      { property: "og:url", content: "https://settleinbc.com/community/events" },
     ],
     links: [{ rel: "canonical", href: "/community/events" }],
   }),

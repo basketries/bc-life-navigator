@@ -16,7 +16,7 @@ export const Route = createFileRoute("/contact")({
       },
       { property: "og:title", content: "Contact SettleInBC" },
       { property: "og:description", content: "Reach the SettleInBC team." },
-      { property: "og:url", content: "/contact" },
+      { property: "og:url", content: "https://settleinbc.com/contact" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
   }),

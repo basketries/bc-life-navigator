@@ -12,7 +12,7 @@ export const Route = createFileRoute("/services/build-wealth")({
       },
       { property: "og:title", content: "Build Wealth in BC" },
       { property: "og:description", content: "Investment education for BC residents." },
-      { property: "og:url", content: "/services/build-wealth" },
+      { property: "og:url", content: "https://settleinbc.com/services/build-wealth" },
     ],
     links: [{ rel: "canonical", href: "/services/build-wealth" }],
   }),

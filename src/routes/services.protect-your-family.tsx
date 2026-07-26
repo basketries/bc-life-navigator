@@ -15,7 +15,7 @@ export const Route = createFileRoute("/services/protect-your-family")({
         property: "og:description",
         content: "Protection basics and family planning for BC.",
       },
-      { property: "og:url", content: "/services/protect-your-family" },
+      { property: "og:url", content: "https://settleinbc.com/services/protect-your-family" },
     ],
     links: [{ rel: "canonical", href: "/services/protect-your-family" }],
   }),
