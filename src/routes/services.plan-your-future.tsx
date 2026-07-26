@@ -15,7 +15,7 @@ export const Route = createFileRoute("/services/plan-your-future")({
         property: "og:description",
         content: "Long-term planning for life in British Columbia.",
       },
-      { property: "og:url", content: "/services/plan-your-future" },
+      { property: "og:url", content: "https://settleinbc.com/services/plan-your-future" },
     ],
     links: [{ rel: "canonical", href: "/services/plan-your-future" }],
   }),

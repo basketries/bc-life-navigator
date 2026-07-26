@@ -15,7 +15,7 @@ export const Route = createFileRoute("/services/finance-your-home")({
         property: "og:description",
         content: "Understand mortgages and affordability before you shop.",
       },
-      { property: "og:url", content: "/services/finance-your-home" },
+      { property: "og:url", content: "https://settleinbc.com/services/finance-your-home" },
     ],
     links: [{ rel: "canonical", href: "/services/finance-your-home" }],
   }),

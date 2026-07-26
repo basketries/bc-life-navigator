@@ -46,7 +46,7 @@ export const Route = createFileRoute("/consultation")({
       },
       { property: "og:title", content: "Book a SettleInBC Consultation" },
       { property: "og:description", content: "Choose the consultation that fits your journey." },
-      { property: "og:url", content: "/consultation" },
+      { property: "og:url", content: "https://settleinbc.com/consultation" },
     ],
     links: [{ rel: "canonical", href: "/consultation" }],
   }),

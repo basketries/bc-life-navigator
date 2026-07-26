@@ -8,7 +8,7 @@ export const Route = createFileRoute("/community/stories")({
       { name: "description", content: "Real stories from people building their lives across British Columbia." },
       { property: "og:title", content: "SettleInBC Community Stories" },
       { property: "og:description", content: "Voices from across BC." },
-      { property: "og:url", content: "/community/stories" },
+      { property: "og:url", content: "https://settleinbc.com/community/stories" },
     ],
     links: [{ rel: "canonical", href: "/community/stories" }],
   }),

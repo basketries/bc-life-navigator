@@ -40,7 +40,7 @@ export const Route = createFileRoute("/new-to-bc")({
         content:
           "Trusted guidance and newcomer resources for relocating to BC and living in British Columbia.",
       },
-      { property: "og:url", content: "/new-to-bc" },
+      { property: "og:url", content: "https://settleinbc.com/new-to-bc" },
     ],
     links: [{ rel: "canonical", href: "/new-to-bc" }],
   }),

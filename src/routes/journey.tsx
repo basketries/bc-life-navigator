@@ -13,7 +13,7 @@ export const Route = createFileRoute("/journey")({
       },
       { property: "og:title", content: "Start Your BC Journey" },
       { property: "og:description", content: "A personal roadmap for life in British Columbia." },
-      { property: "og:url", content: "/journey" },
+      { property: "og:url", content: "https://settleinbc.com/journey" },
     ],
     links: [{ rel: "canonical", href: "/journey" }],
   }),

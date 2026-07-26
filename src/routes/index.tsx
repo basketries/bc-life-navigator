@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
         content:
           "Education, resources, and community for people building their future in British Columbia.",
       },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: "https://settleinbc.com/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),

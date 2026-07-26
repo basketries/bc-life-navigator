@@ -13,7 +13,7 @@ export const Route = createFileRoute("/community/")({
       },
       { property: "og:title", content: "New to BC — SettleInBC" },
       { property: "og:description", content: "Stories, events, and BC lifestyle." },
-      { property: "og:url", content: "/community" },
+      { property: "og:url", content: "https://settleinbc.com/community" },
     ],
     links: [{ rel: "canonical", href: "/community" }],
   }),

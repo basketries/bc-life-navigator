@@ -8,7 +8,7 @@ export const Route = createFileRoute("/resources/articles")({
       { name: "description", content: "Short reads on life, home, money, and community in British Columbia." },
       { property: "og:title", content: "Articles — SettleInBC" },
       { property: "og:description", content: "BC-focused short reads." },
-      { property: "og:url", content: "/resources/articles" },
+      { property: "og:url", content: "https://settleinbc.com/resources/articles" },
     ],
     links: [{ rel: "canonical", href: "/resources/articles" }],
   }),

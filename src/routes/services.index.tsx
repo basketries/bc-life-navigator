@@ -13,7 +13,7 @@ export const Route = createFileRoute("/services/")({
       },
       { property: "og:title", content: "SettleInBC Services" },
       { property: "og:description", content: "Goal-based guidance for life in BC." },
-      { property: "og:url", content: "/services" },
+      { property: "og:url", content: "https://settleinbc.com/services" },
     ],
     links: [{ rel: "canonical", href: "/services" }],
   }),
