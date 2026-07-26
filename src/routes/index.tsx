@@ -234,16 +234,6 @@ function Home() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <div className="font-serif text-2xl text-foreground">{value}</div>
-      <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">
-        {label}
-      </div>
-    </div>
-  );
-}
 
 function WhyCard({
   icon,
