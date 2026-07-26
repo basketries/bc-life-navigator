@@ -40,7 +40,7 @@ function Contact() {
           <InfoCard
             icon={<Mail className="h-5 w-5" />}
             title="Email us"
-            body="hello@settleinbc.com"
+            body="settleinbc@gmail.com"
           />
           <InfoCard
             icon={<MessageCircle className="h-5 w-5" />}

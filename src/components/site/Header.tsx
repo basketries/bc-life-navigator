@@ -1,3 +1,4 @@
+import logo from "@/assets/settleinbc-logo.png.asset.json";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -18,9 +19,7 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
       <div className="container-page flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
-          <span className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground font-serif text-lg">
-            S
-          </span>
+          <img src={logo.url} alt="SettleInBC logo" className="h-9 w-9 object-contain" />
           <span className="font-serif text-lg tracking-tight text-foreground">
             SettleIn<span className="text-accent">BC</span>
           </span>

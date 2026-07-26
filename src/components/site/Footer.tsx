@@ -1,3 +1,4 @@
+import logo from "@/assets/settleinbc-logo.png.asset.json";
 import { Link } from "@tanstack/react-router";
 
 export function Footer() {
@@ -6,9 +7,7 @@ export function Footer() {
       <div className="container-page py-16 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-1">
           <div className="flex items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground font-serif text-lg">
-              S
-            </span>
+            <img src={logo.url} alt="SettleInBC logo" className="h-9 w-9 object-contain" />
             <span className="font-serif text-lg tracking-tight">
               SettleIn<span className="text-accent">BC</span>
             </span>
