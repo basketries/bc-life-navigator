@@ -205,7 +205,7 @@ function Home() {
             className="h-full w-full object-cover"
           />
         </div>
-        <div>
+        <div data-parallax="text">
           <p className="eyebrow">Life after the move</p>
           <h2 className="mt-3 text-3xl md:text-4xl text-foreground">
             Your journey doesn&rsquo;t end when you arrive.
