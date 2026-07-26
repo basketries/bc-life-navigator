@@ -1,4 +1,5 @@
 import logo from "@/assets/settleinbc-logo.png.asset.json";
+import wordmark from "@/assets/settleinbc-wordmark.png.asset.json";
 import { Link } from "@tanstack/react-router";
 
 export function Footer() {
