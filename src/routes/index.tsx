@@ -186,8 +186,12 @@ function Home() {
         </div>
       </section>
 
-      <JourneyPicker />
-      <ServiceGrid />
+      <div data-reveal="left">
+        <JourneyPicker />
+      </div>
+      <div data-reveal="right">
+        <ServiceGrid />
+      </div>
 
       {/* AFTER YOU ARRIVE */}
       <section className="container-page my-24 grid gap-10 lg:grid-cols-2 lg:items-center">
