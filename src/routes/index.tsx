@@ -194,8 +194,8 @@ function Home() {
       </div>
 
       {/* AFTER YOU ARRIVE */}
-      <section className="container-page my-24 grid gap-10 lg:grid-cols-2 lg:items-center">
-        <div className="overflow-hidden rounded-3xl border border-border">
+      <section data-reveal="left" className="container-page my-24 grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div data-parallax="image" className="overflow-hidden rounded-3xl border border-border">
           <img
             src={familyImg}
             alt="A family walking together through a British Columbia neighbourhood at golden hour"
