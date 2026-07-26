@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Sparkles, Compass, Users, MapPin } from "lucide-react";
-import heroImg from "@/assets/hero-bc.jpg";
+import heroImg from "@/assets/hero-bc-landscape.jpg";
+import familyImg from "@/assets/hero-bc.jpg";
 import communityImg from "@/assets/community-bc.jpg";
 import { JourneyPicker } from "@/components/site/JourneyPicker";
 import { ServiceGrid } from "@/components/site/ServiceGrid";
@@ -62,19 +63,14 @@ function Home() {
                 Book a Consultation
               </Link>
             </div>
-            <div className="mt-10 grid grid-cols-3 gap-6 max-w-md">
-              <Stat label="Communities" value="200+" />
-              <Stat label="Resources" value="120+" />
-              <Stat label="Partners" value="40+" />
-            </div>
           </div>
           <div className="relative">
             <div className="aspect-[4/5] overflow-hidden rounded-3xl border border-border shadow-lg">
               <img
                 src={heroImg}
-                alt="Family walking through a British Columbia neighborhood at golden hour"
-                width={1600}
-                height={1100}
+                alt="Snow-capped coastal mountains above a calm ocean inlet in British Columbia"
+                width={1280}
+                height={1600}
                 className="h-full w-full object-cover"
               />
             </div>
@@ -116,6 +112,45 @@ function Home() {
 
       <JourneyPicker />
       <ServiceGrid />
+
+      {/* AFTER YOU ARRIVE */}
+      <section className="container-page my-24 grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div className="overflow-hidden rounded-3xl border border-border">
+          <img
+            src={familyImg}
+            alt="A family walking together through a British Columbia neighbourhood at golden hour"
+            width={1600}
+            height={1100}
+            loading="lazy"
+            className="h-full w-full object-cover"
+          />
+        </div>
+        <div>
+          <p className="eyebrow">Life after the move</p>
+          <h2 className="mt-3 text-3xl md:text-4xl text-foreground">
+            Your journey doesn&rsquo;t end when you arrive.
+          </h2>
+          <p className="mt-4 text-muted-foreground max-w-md">
+            Settling in is the beginning. From finding a neighbourhood that fits your
+            family, to understanding how homes, mortgages, and long-term planning work
+            here — we stay with you as your life in BC grows.
+          </p>
+          <ul className="mt-6 space-y-3 text-sm text-muted-foreground">
+            {[
+              "Neighbourhood and school-area insight across the province",
+              "Plain-language education on homes, financing, and planning",
+              "Community events and stories to help you feel at home",
+            ].map((i) => (
+              <li key={i} className="flex gap-3">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                {i}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+
 
 
       {/* WHY */}
@@ -238,16 +273,6 @@ function Home() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <div className="font-serif text-2xl text-foreground">{value}</div>
-      <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">
-        {label}
-      </div>
-    </div>
-  );
-}
 
 function WhyCard({
   icon,
