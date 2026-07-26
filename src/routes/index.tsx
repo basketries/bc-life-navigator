@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 import { ArrowRight, Sparkles, Compass, Users, MapPin } from "lucide-react";
 import heroImg from "@/assets/hero-bc-landscape.jpg";
 import familyImg from "@/assets/hero-bc.jpg";
@@ -30,6 +31,66 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const heroImgRef = useRef<HTMLImageElement>(null);
+  const stepsRef = useRef<HTMLOListElement>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let ctx: { revert: () => void } | undefined;
+    let cancelled = false;
+
+    (async () => {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+      ]);
+      if (cancelled) return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      ctx = gsap.context(() => {
+        if (heroImgRef.current) {
+          gsap.fromTo(
+            heroImgRef.current,
+            { yPercent: -4 },
+            {
+              yPercent: 4,
+              ease: "none",
+              scrollTrigger: {
+                trigger: heroImgRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            },
+          );
+        }
+
+        const steps = stepsRef.current?.querySelectorAll("li");
+        if (steps?.length) {
+          gsap.from(steps, {
+            opacity: 0,
+            y: 24,
+            duration: 0.6,
+            ease: "power2.out",
+            stagger: 0.12,
+            scrollTrigger: {
+              trigger: stepsRef.current,
+              start: "top 85%",
+              once: true,
+            },
+          });
+        }
+      });
+    })();
+
+    return () => {
+      cancelled = true;
+      ctx?.revert();
+    };
+  }, []);
+
   return (
     <>
       {/* HERO */}
@@ -68,11 +129,12 @@ function Home() {
           <div className="relative">
             <div className="aspect-[4/5] overflow-hidden rounded-3xl border border-border shadow-lg">
               <img
+                ref={heroImgRef}
                 src={heroImg}
                 alt="Snow-capped coastal mountains above a calm ocean inlet in British Columbia"
                 width={1280}
                 height={1600}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover scale-110 will-change-transform"
               />
             </div>
             <div className="absolute -bottom-6 -left-6 hidden md:block rounded-2xl border border-border bg-card p-4 shadow-md w-64">
@@ -94,7 +156,7 @@ function Home() {
               Four simple steps — at your own pace.
             </h2>
           </div>
-          <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ol ref={stepsRef} className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { n: "01", t: "Discover BC", d: "Explore neighborhoods, guides, and stories from across the province." },
               { n: "02", t: "Choose your goal", d: "Tell us where you are — new to BC, buying, financing, or planning." },
