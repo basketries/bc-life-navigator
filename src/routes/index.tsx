@@ -234,7 +234,7 @@ function Home() {
 
 
       {/* WHY */}
-      <section className="bg-secondary/50 py-24 border-y border-border">
+      <section data-reveal="right" className="bg-secondary/50 py-24 border-y border-border">
         <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.4fr]">
           <div>
             <p className="eyebrow">Why SettleInBC</p>
