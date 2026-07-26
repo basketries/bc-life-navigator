@@ -206,10 +206,10 @@ function Home() {
         </div>
       </section>
 
-      <div data-reveal="left">
+      <div data-reveal="left" data-interactive>
         <JourneyPicker />
       </div>
-      <div data-reveal="right">
+      <div data-reveal="right" data-interactive>
         <ServiceGrid />
       </div>
 
@@ -368,7 +368,7 @@ function Home() {
         </div>
       </section>
 
-      <div data-reveal="left">
+      <div data-reveal="left" data-interactive>
         <Newsletter />
       </div>
     </div>
