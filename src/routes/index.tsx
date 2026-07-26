@@ -75,9 +75,9 @@ function Home() {
               />
             </div>
             <div className="absolute -bottom-6 -left-6 hidden md:block rounded-2xl border border-border bg-card p-4 shadow-md w-64">
-              <p className="eyebrow">This could be</p>
-              <p className="mt-1 font-serif text-lg text-foreground">
-                your future in BC.
+              <p className="eyebrow">Welcome home</p>
+              <p className="mt-1 font-serif text-lg leading-snug text-foreground">
+                Helping you confidently build your future in British Columbia.
               </p>
             </div>
           </div>
