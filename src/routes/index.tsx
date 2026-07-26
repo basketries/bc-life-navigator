@@ -316,7 +316,7 @@ function Home() {
       </section>
 
       {/* COMMUNITY */}
-      <section className="container-page my-24">
+      <section data-reveal="right" className="container-page my-24">
         <div className="rounded-3xl bg-forest-deep text-primary-foreground p-10 md:p-16 grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-end"
              style={{ backgroundColor: "var(--forest-deep)" }}>
           <div>
