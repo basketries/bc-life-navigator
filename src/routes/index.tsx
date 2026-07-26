@@ -129,6 +129,7 @@ function Home() {
           <div className="relative">
             <div className="aspect-[4/5] overflow-hidden rounded-3xl border border-border shadow-lg">
               <img
+                ref={heroImgRef}
                 src={heroImg}
                 alt="Snow-capped coastal mountains above a calm ocean inlet in British Columbia"
                 width={1280}
