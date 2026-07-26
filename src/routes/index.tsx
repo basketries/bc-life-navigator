@@ -63,19 +63,14 @@ function Home() {
                 Book a Consultation
               </Link>
             </div>
-            <div className="mt-10 grid grid-cols-3 gap-6 max-w-md">
-              <Stat label="Communities" value="200+" />
-              <Stat label="Resources" value="120+" />
-              <Stat label="Partners" value="40+" />
-            </div>
           </div>
           <div className="relative">
             <div className="aspect-[4/5] overflow-hidden rounded-3xl border border-border shadow-lg">
               <img
                 src={heroImg}
-                alt="Family walking through a British Columbia neighborhood at golden hour"
-                width={1600}
-                height={1100}
+                alt="Snow-capped coastal mountains above a calm ocean inlet in British Columbia"
+                width={1280}
+                height={1600}
                 className="h-full w-full object-cover"
               />
             </div>
