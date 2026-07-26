@@ -348,8 +348,10 @@ function Home() {
         </div>
       </section>
 
-      <Newsletter />
-    </>
+      <div data-reveal="left">
+        <Newsletter />
+      </div>
+    </div>
   );
 }
 
