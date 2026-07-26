@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 import { ArrowRight, Sparkles, Compass, Users, MapPin } from "lucide-react";
 import heroImg from "@/assets/hero-bc-landscape.jpg";
 import familyImg from "@/assets/hero-bc.jpg";
