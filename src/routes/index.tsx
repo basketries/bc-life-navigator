@@ -113,6 +113,45 @@ function Home() {
       <JourneyPicker />
       <ServiceGrid />
 
+      {/* AFTER YOU ARRIVE */}
+      <section className="container-page my-24 grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div className="overflow-hidden rounded-3xl border border-border">
+          <img
+            src={familyImg}
+            alt="A family walking together through a British Columbia neighbourhood at golden hour"
+            width={1600}
+            height={1100}
+            loading="lazy"
+            className="h-full w-full object-cover"
+          />
+        </div>
+        <div>
+          <p className="eyebrow">Life after the move</p>
+          <h2 className="mt-3 text-3xl md:text-4xl text-foreground">
+            Your journey doesn&rsquo;t end when you arrive.
+          </h2>
+          <p className="mt-4 text-muted-foreground max-w-md">
+            Settling in is the beginning. From finding a neighbourhood that fits your
+            family, to understanding how homes, mortgages, and long-term planning work
+            here — we stay with you as your life in BC grows.
+          </p>
+          <ul className="mt-6 space-y-3 text-sm text-muted-foreground">
+            {[
+              "Neighbourhood and school-area insight across the province",
+              "Plain-language education on homes, financing, and planning",
+              "Community events and stories to help you feel at home",
+            ].map((i) => (
+              <li key={i} className="flex gap-3">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                {i}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+
+
 
       {/* WHY */}
       <section className="bg-secondary/50 py-24 border-y border-border">
