@@ -106,11 +106,11 @@ function Home() {
   }, []);
 
   return (
-    <>
+    <div ref={rootRef} className="overflow-x-hidden">
       {/* HERO */}
-      <section className="relative overflow-hidden border-b border-border">
+      <section data-reveal="left" className="relative overflow-hidden border-b border-border">
         <div className="container-page pt-14 md:pt-20 pb-16 md:pb-24 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-          <div>
+          <div data-parallax="text">
             <p className="eyebrow inline-flex items-center gap-2">
               <Sparkles className="h-3 w-3" /> Your BC life journey platform
             </p>
