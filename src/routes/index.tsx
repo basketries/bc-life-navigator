@@ -272,8 +272,8 @@ function Home() {
       </section>
 
       {/* CONTENT HUB PROMO */}
-      <section className="container-page my-24 grid gap-10 lg:grid-cols-2 lg:items-center">
-        <div className="order-2 lg:order-1">
+      <section data-reveal="left" className="container-page my-24 grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div data-parallax="text" className="order-2 lg:order-1">
           <p className="eyebrow">Content hub</p>
           <h2 className="mt-3 text-3xl md:text-4xl text-foreground">
             Guides, articles, videos & calculators for life in BC.
