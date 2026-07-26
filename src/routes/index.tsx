@@ -256,7 +256,7 @@ function Home() {
               to="/community"
               className="inline-flex h-11 items-center rounded-full bg-primary-foreground text-primary px-5 text-sm font-medium"
             >
-              Explore community
+              Explore New to BC
             </Link>
             <Link
               to="/community/events"
