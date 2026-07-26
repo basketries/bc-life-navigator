@@ -24,7 +24,7 @@ function CommunityIndex() {
   return (
     <>
       <PageHero
-        eyebrow="Community"
+        eyebrow="New to BC"
         title="You&rsquo;re not just moving to BC — you&rsquo;re joining it."
         description="Discover events, neighborhood guides, and community stories that help you feel connected. We partner with BCVoice.ca, an independent community media brand, to bring more voices to the conversation."
       />
