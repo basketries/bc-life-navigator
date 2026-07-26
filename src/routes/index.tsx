@@ -176,7 +176,7 @@ function Home() {
               { n: "03", t: "Get resources", d: "Read, watch, and use tools tailored to your next step." },
               { n: "04", t: "Connect with professionals", d: "Meet trusted BC experts — only when you're ready." },
             ].map((s) => (
-              <li key={s.n} className="rounded-2xl border border-border bg-background p-5">
+              <li data-journey-step key={s.n} className="rounded-2xl border border-border bg-background p-5">
                 <span className="font-serif text-sm text-accent">{s.n}</span>
                 <h3 className="mt-2 text-lg text-foreground">{s.t}</h3>
                 <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">{s.d}</p>
