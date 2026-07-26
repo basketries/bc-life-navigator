@@ -62,7 +62,7 @@ function Home() {
           const trigger = {
             trigger: section,
             start: "top 85%",
-            once: true,
+            toggleActions: "play reverse play reverse",
           } as const;
 
           if (layers.length) {
@@ -79,7 +79,6 @@ function Home() {
                   scale: 0.92,
                   duration: 0.9,
                   ease: "power2.out",
-                  clearProps: "transform",
                 },
                 isImage ? 0 : 0.15,
               );
@@ -87,18 +86,23 @@ function Home() {
             return;
           }
 
-          if (interactive) section.style.pointerEvents = "none";
+          const lock = () => {
+            if (interactive) section.style.pointerEvents = "none";
+          };
+          const unlock = () => {
+            if (interactive) section.style.pointerEvents = "";
+          };
+          lock();
           gsap.from(section, {
             opacity: 0,
             x: 48 * dir,
             scale: 0.92,
             duration: 0.9,
             ease: "power2.out",
-            clearProps: "transform",
             scrollTrigger: trigger,
-            onComplete: () => {
-              if (interactive) section.style.pointerEvents = "";
-            },
+            onStart: lock,
+            onComplete: unlock,
+            onReverseComplete: lock,
           });
         });
 
@@ -111,9 +115,14 @@ function Home() {
             duration: 0.6,
             ease: "power2.out",
             stagger: 0.12,
-            scrollTrigger: { trigger: steps[0], start: "top 85%", once: true },
+            scrollTrigger: {
+              trigger: steps[0],
+              start: "top 85%",
+              toggleActions: "play reverse play reverse",
+            },
           });
         }
+
       }, rootRef);
 
       ScrollTrigger.refresh();
