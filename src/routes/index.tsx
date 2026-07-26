@@ -240,7 +240,7 @@ function Home() {
         <div className="rounded-3xl bg-forest-deep text-primary-foreground p-10 md:p-16 grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-end"
              style={{ backgroundColor: "var(--forest-deep)" }}>
           <div>
-            <p className="eyebrow text-primary-foreground/70">Community</p>
+            <p className="eyebrow text-primary-foreground/70">New to BC</p>
             <h2 className="mt-3 font-serif text-3xl md:text-4xl">
               Real stories, real neighborhoods, real people in BC.
             </h2>
