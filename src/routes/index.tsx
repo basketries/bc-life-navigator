@@ -39,10 +39,11 @@ function Home() {
             <p className="eyebrow inline-flex items-center gap-2">
               <Sparkles className="h-3 w-3" /> Your BC life journey platform
             </p>
-            <h1 className="mt-5 text-5xl md:text-6xl leading-[1.02] text-foreground">
-              Helping You{" "}
+            <h1 className="mt-5 text-5xl md:text-6xl leading-[1.08] text-foreground">
+              Helping You<br />
               <span className="italic text-primary">Settle</span>, Grow &amp;{" "}
-              <span className="italic text-accent">Invest</span> in British Columbia.
+              <span className="italic text-accent">Invest</span><br />
+              in British Columbia.
             </h1>
             <p className="mt-6 text-lg text-muted-foreground max-w-xl">
               Whether you are new to BC, relocating, buying your first home, planning your
