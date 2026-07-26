@@ -1,4 +1,5 @@
 import logo from "@/assets/settleinbc-logo.png.asset.json";
+import wordmark from "@/assets/settleinbc-wordmark.png.asset.json";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -20,9 +21,7 @@ export function Header() {
       <div className="container-page flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
           <img src={logo.url} alt="SettleInBC logo" className="h-9 w-9 object-contain" />
-          <span className="font-serif text-lg tracking-tight text-foreground">
-            SettleIn<span className="text-accent">BC</span>
-          </span>
+          <img src={wordmark.url} alt="SettleInBC" className="h-6 object-contain" />
         </Link>
         <nav className="hidden md:flex items-center gap-7 text-sm">
           {nav.map((n) => (

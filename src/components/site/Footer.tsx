@@ -1,4 +1,5 @@
 import logo from "@/assets/settleinbc-logo.png.asset.json";
+import wordmark from "@/assets/settleinbc-wordmark.png.asset.json";
 import { Link } from "@tanstack/react-router";
 
 export function Footer() {
@@ -8,9 +9,7 @@ export function Footer() {
         <div className="md:col-span-1">
           <div className="flex items-center gap-2">
             <img src={logo.url} alt="SettleInBC logo" className="h-9 w-9 object-contain" />
-            <span className="font-serif text-lg tracking-tight">
-              SettleIn<span className="text-accent">BC</span>
-            </span>
+            <img src={wordmark.url} alt="SettleInBC" className="h-6 object-contain" />
           </div>
           <p className="mt-4 text-sm text-muted-foreground max-w-xs">
             Helping you settle, grow &amp; invest in British Columbia — with education,
