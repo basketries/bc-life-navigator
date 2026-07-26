@@ -49,16 +49,56 @@ function Home() {
       gsap.registerPlugin(ScrollTrigger);
 
       ctx = gsap.context(() => {
-        // One-time slide + fade reveal per section, alternating direction.
         const sections = gsap.utils.toArray<HTMLElement>("[data-reveal]");
+
         sections.forEach((section) => {
           const dir = section.dataset.reveal === "right" ? 1 : -1;
+          const layers = gsap.utils.toArray<HTMLElement>(
+            "[data-parallax]",
+            section,
+          );
+          const interactive = section.hasAttribute("data-interactive");
+
+          const trigger = {
+            trigger: section,
+            start: "top 85%",
+            once: true,
+          } as const;
+
+          if (layers.length) {
+            // Layered depth: image and text travel different distances,
+            // with a slight timing offset so they separate then converge.
+            const tl = gsap.timeline({ scrollTrigger: trigger });
+            layers.forEach((layer) => {
+              const isImage = layer.dataset.parallax === "image";
+              tl.from(
+                layer,
+                {
+                  opacity: 0,
+                  x: (isImage ? 60 : 32) * dir,
+                  scale: 0.92,
+                  duration: 0.9,
+                  ease: "power2.out",
+                  clearProps: "transform",
+                },
+                isImage ? 0 : 0.15,
+              );
+            });
+            return;
+          }
+
+          if (interactive) section.style.pointerEvents = "none";
           gsap.from(section, {
             opacity: 0,
-            x: 60 * dir,
-            duration: 0.8,
+            x: 48 * dir,
+            scale: 0.92,
+            duration: 0.9,
             ease: "power2.out",
-            scrollTrigger: { trigger: section, start: "top 80%", once: true },
+            clearProps: "transform",
+            scrollTrigger: trigger,
+            onComplete: () => {
+              if (interactive) section.style.pointerEvents = "";
+            },
           });
         });
 
@@ -74,26 +114,6 @@ function Home() {
             scrollTrigger: { trigger: steps[0], start: "top 85%", once: true },
           });
         }
-
-        // Subtle layered horizontal parallax on image/text pairs.
-        const layers = gsap.utils.toArray<HTMLElement>("[data-parallax]");
-        layers.forEach((layer) => {
-          const depth = layer.dataset.parallax === "image" ? 1 : -1;
-          gsap.fromTo(
-            layer,
-            { xPercent: -1.5 * depth },
-            {
-              xPercent: 1.5 * depth,
-              ease: "none",
-              scrollTrigger: {
-                trigger: layer.closest("section") ?? layer,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true,
-              },
-            },
-          );
-        });
       }, rootRef);
 
       ScrollTrigger.refresh();
@@ -186,10 +206,10 @@ function Home() {
         </div>
       </section>
 
-      <div data-reveal="left">
+      <div data-reveal="left" data-interactive>
         <JourneyPicker />
       </div>
-      <div data-reveal="right">
+      <div data-reveal="right" data-interactive>
         <ServiceGrid />
       </div>
 
@@ -348,7 +368,7 @@ function Home() {
         </div>
       </section>
 
-      <div data-reveal="left">
+      <div data-reveal="left" data-interactive>
         <Newsletter />
       </div>
     </div>
