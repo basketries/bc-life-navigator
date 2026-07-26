@@ -134,7 +134,7 @@ function Home() {
                 alt="Snow-capped coastal mountains above a calm ocean inlet in British Columbia"
                 width={1280}
                 height={1600}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover scale-110 will-change-transform"
               />
             </div>
             <div className="absolute -bottom-6 -left-6 hidden md:block rounded-2xl border border-border bg-card p-4 shadow-md w-64">
