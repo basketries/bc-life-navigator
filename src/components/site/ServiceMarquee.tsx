@@ -36,8 +36,8 @@ export function ServiceMarquee({
     import("gsap").then(({ default: gsap }) => {
       if (cancelled) return;
 
-      // Half the track is a duplicate of the first half; wrap over that width.
-      let loopWidth = track.scrollWidth / 2;
+      // The track renders 3 copies; wrap over one copy's width.
+      let loopWidth = track.scrollWidth / 3;
       let x = 0;
       let direction = -1; // -1 = drifting left
       let dragging = false;
@@ -71,7 +71,7 @@ export function ServiceMarquee({
       };
 
       const measure = () => {
-        loopWidth = track.scrollWidth / 2;
+        loopWidth = track.scrollWidth / 3;
         apply();
       };
 
@@ -176,7 +176,7 @@ export function ServiceMarquee({
     );
   }
 
-  const doubled = [...items, ...items];
+  const doubled = [...items, ...items, ...items];
 
   return (
     <div
