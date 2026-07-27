@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { ArrowRight, Sparkles, Compass, Users, MapPin } from "lucide-react";
 import heroImg from "@/assets/hero-bc-landscape.jpg";
 import familyImg from "@/assets/hero-bc.jpg";
@@ -7,6 +7,8 @@ import communityImg from "@/assets/community-bc.jpg";
 import { JourneyPicker } from "@/components/site/JourneyPicker";
 import { ServiceGrid } from "@/components/site/ServiceGrid";
 import { Newsletter } from "@/components/site/Newsletter";
+import { useScrollRevealGroup } from "@/hooks/useScrollReveal";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
