@@ -78,11 +78,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SettleInBC — Helping You Settle, Grow & Invest in British Columbia" },
+      { title: "SettleInBC — Settle, Grow & Invest in British Columbia" },
       {
         name: "description",
         content:
-          "SettleInBC helps newcomers, families, and future planners settle, grow, and invest in British Columbia through education, trusted guidance, and community.",
+          "Trusted guidance, local knowledge, and practical resources for newcomers, families, and future planners in British Columbia.",
       },
       { name: "author", content: "SettleInBC" },
       { property: "og:site_name", content: "SettleInBC" },
@@ -90,6 +90,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       // TODO: replace public/og-image.jpg with a real branded 1200x630 image.
       { property: "og:image", content: "https://settleinbc.com/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "SettleInBC — Settle, Grow & Invest in British Columbia" },
+      { name: "twitter:title", content: "SettleInBC — Settle, Grow & Invest in British Columbia" },
+      { property: "og:description", content: "Trusted guidance, local knowledge, and practical resources for newcomers, families, and future planners in British Columbia." },
+      { name: "twitter:description", content: "Trusted guidance, local knowledge, and practical resources for newcomers, families, and future planners in British Columbia." },
+      { name: "twitter:image", content: "https://settleinbc.com/og-image.jpg" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

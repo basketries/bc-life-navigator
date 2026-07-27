@@ -19,11 +19,11 @@ export const Route = createFileRoute("/")({
         content:
           "Trusted guidance, local knowledge, and practical resources for newcomers, families, and future planners in British Columbia.",
       },
-      { property: "og:title", content: "SettleInBC — Your BC Life Journey Platform" },
+      { property: "og:title", content: "SettleInBC — Settle, Grow & Invest in British Columbia" },
       {
         property: "og:description",
         content:
-          "Education, resources, and community for people building their future in British Columbia.",
+          "Trusted guidance, local knowledge, and practical resources for newcomers, families, and future planners in British Columbia.",
       },
       { property: "og:url", content: "https://settleinbc.com/" },
     ],
