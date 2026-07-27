@@ -48,12 +48,12 @@ export function ServiceGrid() {
         </p>
       </div>
 
-      <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {SERVICES.map((s) => (
+      <ServiceMarquee
+        items={SERVICES.map((s) => (
           <Link
             key={s.to}
             to={s.to}
-            className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:shadow-sm"
+            className="group flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:shadow-sm"
           >
             <div className="flex items-start justify-between">
               <span className="text-2xl">{s.icon}</span>
@@ -63,7 +63,8 @@ export function ServiceGrid() {
             <p className="mt-2 text-sm text-muted-foreground">{s.tagline}</p>
           </Link>
         ))}
-      </div>
+      />
     </section>
   );
 }
+
