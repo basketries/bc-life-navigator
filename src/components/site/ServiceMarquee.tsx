@@ -64,7 +64,7 @@ export function ServiceMarquee({
             inertia *= 0.94;
             if (Math.abs(inertia) <= 1) inertia = 0;
           } else if (!paused) {
-            x -= direction * speed * dt * -1;
+            x -= direction * speed * dt;
           }
           apply();
         }
