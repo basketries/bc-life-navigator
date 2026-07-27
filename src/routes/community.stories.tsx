@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
+import { RevealGroup } from "@/components/site/RevealGroup";
 
 export const Route = createFileRoute("/community/stories")({
   head: () => ({
@@ -13,7 +14,7 @@ export const Route = createFileRoute("/community/stories")({
     links: [{ rel: "canonical", href: "/community/stories" }],
   }),
   component: () => (
-    <>
+    <RevealGroup>
       <PageHero
         eyebrow="Stories"
         title="The people who make BC feel like home."
@@ -31,6 +32,6 @@ export const Route = createFileRoute("/community/stories")({
           </article>
         ))}
       </section>
-    </>
+    </RevealGroup>
   ),
 });

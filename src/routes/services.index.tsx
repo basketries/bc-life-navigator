@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
 import { ServiceGrid } from "@/components/site/ServiceGrid";
+import { RevealGroup } from "@/components/site/RevealGroup";
 
 export const Route = createFileRoute("/services/")({
   head: () => ({
@@ -18,13 +19,13 @@ export const Route = createFileRoute("/services/")({
     links: [{ rel: "canonical", href: "/services" }],
   }),
   component: () => (
-    <>
+    <RevealGroup>
       <PageHero
         eyebrow="Services"
         title="Goal-based guidance for every step of life in BC."
         description="Choose the outcome that fits where you are today. Each path starts with education and connects you to trusted professionals only when you're ready."
       />
       <ServiceGrid />
-    </>
+    </RevealGroup>
   ),
 });

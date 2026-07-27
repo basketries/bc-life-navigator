@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
 import { PlayCircle } from "lucide-react";
+import { RevealGroup } from "@/components/site/RevealGroup";
 
 export const Route = createFileRoute("/resources/videos")({
   head: () => ({
@@ -14,7 +15,7 @@ export const Route = createFileRoute("/resources/videos")({
     links: [{ rel: "canonical", href: "/resources/videos" }],
   }),
   component: () => (
-    <>
+    <RevealGroup>
       <PageHero eyebrow="Videos" title="Videos" description="Explainers and interviews with BC-focused experts." />
       <section className="container-page my-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => (
@@ -29,6 +30,6 @@ export const Route = createFileRoute("/resources/videos")({
           </article>
         ))}
       </section>
-    </>
+    </RevealGroup>
   ),
 });

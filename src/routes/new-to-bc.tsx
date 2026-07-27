@@ -19,6 +19,7 @@ import heroImg from "@/assets/newcomers-bc.jpg";
 import neighbourhoodImg from "@/assets/neighbourhood-bc.jpg";
 import landscapeImg from "@/assets/bc-coastal-forest.jpg";
 import {
+import { RevealGroup } from "@/components/site/RevealGroup";
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -114,7 +115,7 @@ const FAQS = [
 
 function NewToBC() {
   return (
-    <>
+    <RevealGroup>
       {/* HERO */}
       <section className="border-b border-border bg-secondary/30">
         <div className="container-page py-16 md:py-24 grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
@@ -346,7 +347,7 @@ function NewToBC() {
           </div>
         </div>
       </section>
-    </>
+    </RevealGroup>
   );
 }
 

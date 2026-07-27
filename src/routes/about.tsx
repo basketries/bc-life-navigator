@@ -14,6 +14,7 @@ import heroImg from "@/assets/about-bc-lifestyle.jpg";
 import landscapeImg from "@/assets/bc-valley.jpg";
 import communityImg from "@/assets/about-guidance.jpg";
 import { Newsletter } from "@/components/site/Newsletter";
+import { RevealGroup } from "@/components/site/RevealGroup";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -114,7 +115,7 @@ const WHY_BC = [
 
 function About() {
   return (
-    <>
+    <RevealGroup>
       {/* HERO */}
       <section className="border-b border-border bg-secondary/30">
         <div className="container-page py-16 md:py-24 grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
@@ -325,6 +326,6 @@ function About() {
       </section>
 
       <Newsletter />
-    </>
+    </RevealGroup>
   );
 }

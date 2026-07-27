@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
+import { RevealGroup } from "@/components/site/RevealGroup";
 
 export const Route = createFileRoute("/resources/articles")({
   head: () => ({
@@ -13,7 +14,7 @@ export const Route = createFileRoute("/resources/articles")({
     links: [{ rel: "canonical", href: "/resources/articles" }],
   }),
   component: () => (
-    <>
+    <RevealGroup>
       <PageHero eyebrow="Articles" title="Articles" description="Short, focused reads on life in British Columbia." />
       <section className="container-page my-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => (
@@ -27,6 +28,6 @@ export const Route = createFileRoute("/resources/articles")({
           </article>
         ))}
       </section>
-    </>
+    </RevealGroup>
   ),
 });

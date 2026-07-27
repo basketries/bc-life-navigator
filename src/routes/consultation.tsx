@@ -5,6 +5,7 @@ import { Calendar, Check } from "lucide-react";
 import { useState } from "react";
 import { calendlyUrl, type ConsultationTypeId } from "@/lib/calendly";
 import { useSubmitLead } from "@/lib/leads/client";
+import { RevealGroup } from "@/components/site/RevealGroup";
 
 
 const TYPES = [
@@ -61,7 +62,7 @@ function Consultation() {
   const [reqError, setReqError] = useState<string | null>(null);
 
   return (
-    <>
+    <RevealGroup>
       <PageHero
         eyebrow="Consultations"
         title="Book a real conversation about your BC journey."
@@ -186,7 +187,7 @@ function Consultation() {
           </div>
         </div>
       </section>
-    </>
+    </RevealGroup>
   );
 }
 

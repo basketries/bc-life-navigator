@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
 import { Newsletter } from "@/components/site/Newsletter";
 import { CalendarDays } from "lucide-react";
+import { RevealGroup } from "@/components/site/RevealGroup";
 
 // Toggle to true once real events exist.
 const HAS_EVENTS = false;
@@ -24,7 +25,7 @@ export const Route = createFileRoute("/community/events")({
 
 function Events() {
   return (
-    <>
+    <RevealGroup>
       <PageHero
         eyebrow="Events"
         title="Meet SettleInBC in person, across British Columbia."
@@ -65,6 +66,6 @@ function Events() {
           </div>
         </section>
       )}
-    </>
+    </RevealGroup>
   );
 }

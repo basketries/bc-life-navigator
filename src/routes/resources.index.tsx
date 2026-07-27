@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
 import { Newsletter } from "@/components/site/Newsletter";
 import { BookOpen, FileText, PlayCircle, Calculator } from "lucide-react";
+import { RevealGroup } from "@/components/site/RevealGroup";
 
 export const Route = createFileRoute("/resources/")({
   head: () => ({
@@ -63,7 +64,7 @@ const PILLARS = [
 
 function Resources() {
   return (
-    <>
+    <RevealGroup>
       <PageHero
         eyebrow="Content Hub"
         title="Learn about BC — at your own pace."
@@ -121,6 +122,6 @@ function Resources() {
       </section>
 
       <Newsletter />
-    </>
+    </RevealGroup>
   );
 }

@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
+import { RevealGroup } from "@/components/site/RevealGroup";
 
 function ResourceList({ title, kind }: { title: string; kind: string }) {
   return (
-    <>
+    <RevealGroup>
       <PageHero
         eyebrow={kind}
         title={title}
@@ -25,7 +26,7 @@ function ResourceList({ title, kind }: { title: string; kind: string }) {
           </article>
         ))}
       </section>
-    </>
+    </RevealGroup>
   );
 }
 
