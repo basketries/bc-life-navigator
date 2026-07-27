@@ -37,7 +37,8 @@ export function ServiceMarquee({
       if (cancelled) return;
 
       // The track renders 3 copies; wrap over one copy's width.
-      let loopWidth = track.scrollWidth / 3;
+      const GAP = 16;
+      let loopWidth = (track.scrollWidth + GAP) / 3;
       let x = 0;
       let direction = -1; // -1 = drifting left
       let dragging = false;
@@ -71,7 +72,7 @@ export function ServiceMarquee({
       };
 
       const measure = () => {
-        loopWidth = track.scrollWidth / 3;
+        loopWidth = (track.scrollWidth + GAP) / 3;
         apply();
       };
 
