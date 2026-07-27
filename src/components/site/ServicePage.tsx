@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { PageHero } from "./PageHero";
 import { Check, ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
+import { RevealGroup } from "@/components/site/RevealGroup";
 
 export function ServicePage({
   eyebrow,
@@ -19,7 +20,7 @@ export function ServicePage({
   footnote?: ReactNode;
 }) {
   return (
-    <>
+    <RevealGroup>
       <PageHero eyebrow={eyebrow} title={title} description={description}>
         <div className="flex flex-wrap gap-3">
           <Link
@@ -65,6 +66,6 @@ export function ServicePage({
           ))}
         </div>
       </section>
-    </>
+    </RevealGroup>
   );
 }

@@ -3,6 +3,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { Mail, MessageCircle, Calendar } from "lucide-react";
 import { useState } from "react";
 import { useSubmitLead } from "@/lib/leads/client";
+import { RevealGroup } from "@/components/site/RevealGroup";
 
 
 export const Route = createFileRoute("/contact")({
@@ -28,7 +29,7 @@ function Contact() {
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
   return (
-    <>
+    <RevealGroup>
       <PageHero
         eyebrow="Contact"
         title="Talk to a real person about your BC journey."
@@ -114,7 +115,7 @@ function Contact() {
       </section>
 
       <style>{`.input{height:2.75rem;border-radius:.5rem;border:1px solid var(--color-input);background:var(--color-background);padding:0 .75rem;font-size:.9rem;width:100%}.input:focus{outline:2px solid var(--color-ring);outline-offset:2px}`}</style>
-    </>
+    </RevealGroup>
   );
 }
 

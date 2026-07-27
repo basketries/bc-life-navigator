@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
 import communityImg from "@/assets/community-market-bc.jpg";
+import { RevealGroup } from "@/components/site/RevealGroup";
 
 export const Route = createFileRoute("/community/")({
   head: () => ({
@@ -22,7 +23,7 @@ export const Route = createFileRoute("/community/")({
 
 function CommunityIndex() {
   return (
-    <>
+    <RevealGroup>
       <PageHero
         eyebrow="New to BC"
         title="You&rsquo;re not just moving to BC — you&rsquo;re joining it."
@@ -85,6 +86,6 @@ function CommunityIndex() {
           Visit BCVoice.ca
         </a>
       </section>
-    </>
+    </RevealGroup>
   );
 }

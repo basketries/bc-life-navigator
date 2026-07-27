@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
 import { JourneyPicker } from "@/components/site/JourneyPicker";
+import { RevealGroup } from "@/components/site/RevealGroup";
 
 export const Route = createFileRoute("/journey")({
   head: () => ({
@@ -18,13 +19,13 @@ export const Route = createFileRoute("/journey")({
     links: [{ rel: "canonical", href: "/journey" }],
   }),
   component: () => (
-    <>
+    <RevealGroup>
       <PageHero
         eyebrow="Your journey"
         title="Where are you in your BC story?"
         description="Choose what fits you best. We'll build a starting point around your situation — no pressure, no sales pitch."
       />
       <JourneyPicker />
-    </>
+    </RevealGroup>
   ),
 });
