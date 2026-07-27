@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
+import { ServiceMarquee } from "./ServiceMarquee";
+
 
 export const SERVICES = [
   {
