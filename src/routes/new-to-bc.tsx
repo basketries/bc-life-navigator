@@ -19,12 +19,13 @@ import heroImg from "@/assets/newcomers-bc.jpg";
 import neighbourhoodImg from "@/assets/neighbourhood-bc.jpg";
 import landscapeImg from "@/assets/bc-coastal-forest.jpg";
 import {
-import { RevealGroup } from "@/components/site/RevealGroup";
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { RevealGroup } from "@/components/site/RevealGroup";
+
 
 export const Route = createFileRoute("/new-to-bc")({
   head: () => ({
