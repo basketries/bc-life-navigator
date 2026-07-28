@@ -171,8 +171,25 @@ export function Newsletter({
   );
 }
 
-function inputCls(compact: boolean) {
-  return compact
-    ? "h-11 rounded-lg border border-input bg-background px-3 text-sm"
-    : "h-12 rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/60 px-4 focus:outline-none focus:ring-2 focus:ring-primary-foreground/40";
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+function inputCls(compact: boolean, invalid = false) {
+  const base = compact
+    ? "h-11 rounded-lg border bg-background px-3 text-sm"
+    : "h-12 rounded-lg bg-primary-foreground/10 border text-primary-foreground placeholder:text-primary-foreground/60 px-4 focus:outline-none focus:ring-2 focus:ring-primary-foreground/40";
+  const border = invalid
+    ? compact
+      ? "border-destructive"
+      : "border-destructive-foreground/70"
+    : compact
+      ? "border-input"
+      : "border-primary-foreground/20";
+  return `${base} ${border} w-full`;
 }
+
+function errCls(compact: boolean) {
+  return compact
+    ? "text-xs text-destructive"
+    : "text-xs text-primary-foreground/90 font-medium";
+}
+
