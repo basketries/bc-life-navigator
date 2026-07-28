@@ -54,6 +54,14 @@ export function Footer() {
         />
       </div>
       <div className="border-t border-border">
+        <div className="container-page pt-6 text-xs text-muted-foreground">
+          <p>
+            SettleInBC is an independent information platform. Mortgage, real estate, and
+            financial professionals referred through this site are independently licensed in
+            British Columbia.
+          </p>
+        </div>
+      </div>
         <div className="container-page py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} SettleInBC. All rights reserved.</p>
           <p>
