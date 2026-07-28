@@ -61,15 +61,33 @@ export function Newsletter({
         </div>
         <form
           className="grid gap-3"
+          noValidate
           onSubmit={async (e) => {
             e.preventDefault();
             const fd = new FormData(e.currentTarget);
+            const name = String(fd.get("name") || "").trim();
+            const email = String(fd.get("email") || "").trim();
+
+            const errs: { name?: string; email?: string } = {};
+            if (!name) errs.name = "Please enter your name.";
+            else if (name.length > 100) errs.name = "Name must be under 100 characters.";
+            if (!email) errs.email = "Please enter your email address.";
+            else if (!EMAIL_RE.test(email)) errs.email = "Please enter a valid email address.";
+            else if (email.length > 255) errs.email = "Email must be under 255 characters.";
+
+            setFieldErrors(errs);
+            if (Object.keys(errs).length > 0) {
+              setState("idle");
+              setError(null);
+              return;
+            }
+
             setState("sending");
             setError(null);
             const res = await submit({
               source: "newsletter",
-              name: String(fd.get("name") || ""),
-              email: String(fd.get("email") || ""),
+              name,
+              email,
               consent: { marketing: true },
             });
             if (res.ok) setState("done");
@@ -79,6 +97,7 @@ export function Newsletter({
             }
           }}
         >
+
           {state === "done" ? (
             <p
               className={
