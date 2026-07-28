@@ -110,20 +110,43 @@ export function Newsletter({
             </p>
           ) : (
             <>
-              <input
-                required
-                name="name"
-                type="text"
-                placeholder="Your name"
-                className={inputCls(compact)}
-              />
-              <input
-                required
-                name="email"
-                type="email"
-                placeholder="Email address"
-                className={inputCls(compact)}
-              />
+              <div className="grid gap-1">
+                <input
+                  required
+                  name="name"
+                  type="text"
+                  placeholder="Your name"
+                  aria-label="Your name"
+                  aria-invalid={!!fieldErrors.name}
+                  aria-describedby={fieldErrors.name ? "newsletter-name-error" : undefined}
+                  onChange={() => setFieldErrors((p) => ({ ...p, name: undefined }))}
+                  className={inputCls(compact, !!fieldErrors.name)}
+                />
+                {fieldErrors.name && (
+                  <p id="newsletter-name-error" role="alert" className={errCls(compact)}>
+                    {fieldErrors.name}
+                  </p>
+                )}
+              </div>
+              <div className="grid gap-1">
+                <input
+                  required
+                  name="email"
+                  type="email"
+                  placeholder="Email address"
+                  aria-label="Email address"
+                  aria-invalid={!!fieldErrors.email}
+                  aria-describedby={fieldErrors.email ? "newsletter-email-error" : undefined}
+                  onChange={() => setFieldErrors((p) => ({ ...p, email: undefined }))}
+                  className={inputCls(compact, !!fieldErrors.email)}
+                />
+                {fieldErrors.email && (
+                  <p id="newsletter-email-error" role="alert" className={errCls(compact)}>
+                    {fieldErrors.email}
+                  </p>
+                )}
+              </div>
+
               <button
                 type="submit"
                 disabled={state === "sending"}
