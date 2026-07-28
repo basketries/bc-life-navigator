@@ -30,6 +30,11 @@ export function Footer() {
         <FooterCol
           title="Explore"
           links={[
+            { to: "/cities", label: "City Guides" },
+            { to: "/cities/vancouver", label: "Vancouver" },
+            { to: "/cities/victoria", label: "Victoria" },
+            { to: "/cities/kelowna", label: "Kelowna" },
+            { to: "/cities/surrey", label: "Surrey" },
             { to: "/resources", label: "Resources" },
             { to: "/resources/guides", label: "Guides" },
             { to: "/resources/articles", label: "Articles" },

@@ -19,6 +19,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
 import { Route as CommunityIndexRouteImport } from './routes/community.index'
+import { Route as CitiesIndexRouteImport } from './routes/cities.index'
 import { Route as ServicesProtectYourFamilyRouteImport } from './routes/services.protect-your-family'
 import { Route as ServicesPlanYourFutureRouteImport } from './routes/services.plan-your-future'
 import { Route as ServicesFinanceYourHomeRouteImport } from './routes/services.finance-your-home'
@@ -29,6 +30,7 @@ import { Route as ResourcesGuidesRouteImport } from './routes/resources.guides'
 import { Route as ResourcesArticlesRouteImport } from './routes/resources.articles'
 import { Route as CommunityStoriesRouteImport } from './routes/community.stories'
 import { Route as CommunityEventsRouteImport } from './routes/community.events'
+import { Route as CitiesCitySlugRouteImport } from './routes/cities.$citySlug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -78,6 +80,11 @@ const ResourcesIndexRoute = ResourcesIndexRouteImport.update({
 const CommunityIndexRoute = CommunityIndexRouteImport.update({
   id: '/community/',
   path: '/community/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CitiesIndexRoute = CitiesIndexRouteImport.update({
+  id: '/cities/',
+  path: '/cities/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesProtectYourFamilyRoute =
@@ -131,6 +138,11 @@ const CommunityEventsRoute = CommunityEventsRouteImport.update({
   path: '/community/events',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CitiesCitySlugRoute = CitiesCitySlugRouteImport.update({
+  id: '/cities/$citySlug',
+  path: '/cities/$citySlug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -140,6 +152,7 @@ export interface FileRoutesByFullPath {
   '/journey': typeof JourneyRoute
   '/new-to-bc': typeof NewToBcRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/cities/$citySlug': typeof CitiesCitySlugRoute
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
   '/resources/articles': typeof ResourcesArticlesRoute
@@ -150,6 +163,7 @@ export interface FileRoutesByFullPath {
   '/services/finance-your-home': typeof ServicesFinanceYourHomeRoute
   '/services/plan-your-future': typeof ServicesPlanYourFutureRoute
   '/services/protect-your-family': typeof ServicesProtectYourFamilyRoute
+  '/cities/': typeof CitiesIndexRoute
   '/community/': typeof CommunityIndexRoute
   '/resources/': typeof ResourcesIndexRoute
   '/services/': typeof ServicesIndexRoute
@@ -162,6 +176,7 @@ export interface FileRoutesByTo {
   '/journey': typeof JourneyRoute
   '/new-to-bc': typeof NewToBcRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/cities/$citySlug': typeof CitiesCitySlugRoute
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
   '/resources/articles': typeof ResourcesArticlesRoute
@@ -172,6 +187,7 @@ export interface FileRoutesByTo {
   '/services/finance-your-home': typeof ServicesFinanceYourHomeRoute
   '/services/plan-your-future': typeof ServicesPlanYourFutureRoute
   '/services/protect-your-family': typeof ServicesProtectYourFamilyRoute
+  '/cities': typeof CitiesIndexRoute
   '/community': typeof CommunityIndexRoute
   '/resources': typeof ResourcesIndexRoute
   '/services': typeof ServicesIndexRoute
@@ -185,6 +201,7 @@ export interface FileRoutesById {
   '/journey': typeof JourneyRoute
   '/new-to-bc': typeof NewToBcRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/cities/$citySlug': typeof CitiesCitySlugRoute
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
   '/resources/articles': typeof ResourcesArticlesRoute
@@ -195,6 +212,7 @@ export interface FileRoutesById {
   '/services/finance-your-home': typeof ServicesFinanceYourHomeRoute
   '/services/plan-your-future': typeof ServicesPlanYourFutureRoute
   '/services/protect-your-family': typeof ServicesProtectYourFamilyRoute
+  '/cities/': typeof CitiesIndexRoute
   '/community/': typeof CommunityIndexRoute
   '/resources/': typeof ResourcesIndexRoute
   '/services/': typeof ServicesIndexRoute
@@ -209,6 +227,7 @@ export interface FileRouteTypes {
     | '/journey'
     | '/new-to-bc'
     | '/sitemap.xml'
+    | '/cities/$citySlug'
     | '/community/events'
     | '/community/stories'
     | '/resources/articles'
@@ -219,6 +238,7 @@ export interface FileRouteTypes {
     | '/services/finance-your-home'
     | '/services/plan-your-future'
     | '/services/protect-your-family'
+    | '/cities/'
     | '/community/'
     | '/resources/'
     | '/services/'
@@ -231,6 +251,7 @@ export interface FileRouteTypes {
     | '/journey'
     | '/new-to-bc'
     | '/sitemap.xml'
+    | '/cities/$citySlug'
     | '/community/events'
     | '/community/stories'
     | '/resources/articles'
@@ -241,6 +262,7 @@ export interface FileRouteTypes {
     | '/services/finance-your-home'
     | '/services/plan-your-future'
     | '/services/protect-your-family'
+    | '/cities'
     | '/community'
     | '/resources'
     | '/services'
@@ -253,6 +275,7 @@ export interface FileRouteTypes {
     | '/journey'
     | '/new-to-bc'
     | '/sitemap.xml'
+    | '/cities/$citySlug'
     | '/community/events'
     | '/community/stories'
     | '/resources/articles'
@@ -263,6 +286,7 @@ export interface FileRouteTypes {
     | '/services/finance-your-home'
     | '/services/plan-your-future'
     | '/services/protect-your-family'
+    | '/cities/'
     | '/community/'
     | '/resources/'
     | '/services/'
@@ -276,6 +300,7 @@ export interface RootRouteChildren {
   JourneyRoute: typeof JourneyRoute
   NewToBcRoute: typeof NewToBcRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  CitiesCitySlugRoute: typeof CitiesCitySlugRoute
   CommunityEventsRoute: typeof CommunityEventsRoute
   CommunityStoriesRoute: typeof CommunityStoriesRoute
   ResourcesArticlesRoute: typeof ResourcesArticlesRoute
@@ -286,6 +311,7 @@ export interface RootRouteChildren {
   ServicesFinanceYourHomeRoute: typeof ServicesFinanceYourHomeRoute
   ServicesPlanYourFutureRoute: typeof ServicesPlanYourFutureRoute
   ServicesProtectYourFamilyRoute: typeof ServicesProtectYourFamilyRoute
+  CitiesIndexRoute: typeof CitiesIndexRoute
   CommunityIndexRoute: typeof CommunityIndexRoute
   ResourcesIndexRoute: typeof ResourcesIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
@@ -363,6 +389,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommunityIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cities/': {
+      id: '/cities/'
+      path: '/cities'
+      fullPath: '/cities/'
+      preLoaderRoute: typeof CitiesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/protect-your-family': {
       id: '/services/protect-your-family'
       path: '/services/protect-your-family'
@@ -433,6 +466,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommunityEventsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cities/$citySlug': {
+      id: '/cities/$citySlug'
+      path: '/cities/$citySlug'
+      fullPath: '/cities/$citySlug'
+      preLoaderRoute: typeof CitiesCitySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -444,6 +484,7 @@ const rootRouteChildren: RootRouteChildren = {
   JourneyRoute: JourneyRoute,
   NewToBcRoute: NewToBcRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  CitiesCitySlugRoute: CitiesCitySlugRoute,
   CommunityEventsRoute: CommunityEventsRoute,
   CommunityStoriesRoute: CommunityStoriesRoute,
   ResourcesArticlesRoute: ResourcesArticlesRoute,
@@ -454,6 +495,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesFinanceYourHomeRoute: ServicesFinanceYourHomeRoute,
   ServicesPlanYourFutureRoute: ServicesPlanYourFutureRoute,
   ServicesProtectYourFamilyRoute: ServicesProtectYourFamilyRoute,
+  CitiesIndexRoute: CitiesIndexRoute,
   CommunityIndexRoute: CommunityIndexRoute,
   ResourcesIndexRoute: ResourcesIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
