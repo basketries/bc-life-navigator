@@ -113,6 +113,9 @@ export function JourneyPicker() {
                     timeline: (fd.get("timeline") as Timeline) || undefined,
                     locationInterest: String(fd.get("location") || "") || undefined,
                   },
+                  engagement: {
+                    message: String(fd.get("message") || "") || undefined,
+                  },
                 });
                 if (res.ok) {
                   setState("idle");
@@ -125,7 +128,7 @@ export function JourneyPicker() {
             >
               <input required name="name" placeholder="Your name" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
               <input required name="email" type="email" placeholder="Email" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
-              <input name="phone" placeholder="Phone (optional)" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
+              <input required name="phone" placeholder="Phone" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
               <input name="location" placeholder="Area of BC you're interested in" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
               <select name="timeline" defaultValue="" className="h-11 rounded-lg border border-input bg-background px-3 text-sm md:col-span-2">
                 <option value="" disabled>What's your timeline?</option>
@@ -133,6 +136,13 @@ export function JourneyPicker() {
                   <option key={t.id} value={t.id}>{t.label}</option>
                 ))}
               </select>
+              <textarea
+                required
+                name="message"
+                rows={3}
+                placeholder="Tell us more about what you're looking for"
+                className="md:col-span-2 rounded-lg border border-input bg-background px-3 py-2 text-sm resize-none"
+              />
               <button
                 disabled={state === "sending"}
                 className="md:col-span-2 h-11 rounded-full bg-primary text-primary-foreground text-sm font-medium disabled:opacity-60"
