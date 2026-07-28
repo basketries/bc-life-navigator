@@ -118,8 +118,16 @@ const hubspotAdapter: LeadAdapter = {
         },
       );
       if (!res.ok) {
+        if (res.status === 404) {
+          return {
+            ok: false,
+            provider: "hubspot",
+            error: `HubSpot could not find form ${formGuid} (from ${guidVar}) in portal ${portalId}. Verify the formId/portalId in the form's embed code.`,
+          };
+        }
         return { ok: false, provider: "hubspot", error: `${res.status} ${await res.text()}` };
       }
+
       return { ok: true, provider: "hubspot" };
     } catch (e) {
       return { ok: false, provider: "hubspot", error: (e as Error).message };
