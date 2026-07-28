@@ -13,17 +13,20 @@ import { useScrollRevealGroup } from "@/hooks/useScrollReveal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "SettleInBC — Settle, Grow & Invest in British Columbia" },
+      { title: "SettleInBC — Settle, Grow & Invest in British Columbia | 2026 Guide" },
       {
         name: "description",
         content:
-          "Trusted guidance, local knowledge, and practical resources for newcomers, families, and future planners in British Columbia.",
+          "Trusted guidance for newcomers, families, and future planners moving to BC. Compare 18 cities, get 2026 cost-of-living data, and connect with independently licensed local professionals.",
       },
-      { property: "og:title", content: "SettleInBC — Settle, Grow & Invest in British Columbia" },
+      {
+        property: "og:title",
+        content: "SettleInBC — Settle, Grow & Invest in British Columbia | 2026 Guide",
+      },
       {
         property: "og:description",
         content:
-          "Trusted guidance, local knowledge, and practical resources for newcomers, families, and future planners in British Columbia.",
+          "Trusted guidance for newcomers, families, and future planners moving to BC. Compare 18 cities, get 2026 cost-of-living data, and connect with independently licensed local professionals.",
       },
       { property: "og:url", content: "https://settleinbc.com/" },
     ],

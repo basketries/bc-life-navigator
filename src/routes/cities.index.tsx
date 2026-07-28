@@ -7,16 +7,20 @@ import { primaryCities, secondaryCities, type City } from "@/data/cities";
 export const Route = createFileRoute("/cities/")({
   head: () => ({
     meta: [
-      { title: "BC City Guides — Where to Settle | SettleInBC" },
+      { title: "Compare 18 BC Cities & Towns — Cost of Living, Climate & Neighbourhoods 2026" },
       {
         name: "description",
         content:
-          "Compare 18 British Columbia cities and towns — neighbourhoods, climate, commuting, and who each community suits best.",
+          "Side-by-side comparison of British Columbia's best places to live: rent, groceries, transit, and who each community suits.",
       },
-      { property: "og:title", content: "BC City Guides" },
+      {
+        property: "og:title",
+        content: "Compare 18 BC Cities & Towns — Cost of Living, Climate & Neighbourhoods 2026",
+      },
       {
         property: "og:description",
-        content: "Explore British Columbia city guides and find the community that fits your life.",
+        content:
+          "Side-by-side comparison of British Columbia's best places to live: rent, groceries, transit, and who each community suits.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://settleinbc.com/cities" },

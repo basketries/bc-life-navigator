@@ -396,7 +396,7 @@ export const cities: City[] = [
     region: "Fraser Valley",
     tagline: "Farmland, space, and the Fraser Valley's most attainable city living.",
     overview:
-      "Abbotsford is the largest city in the Fraser Valley, surrounded by berry fields, dairy farms, and mountain views. It offers considerably more house for the money than Metro Vancouver, along with a university, a regional airport, and a strong agricultural and manufacturing economy. Newcomer communities, particularly South Asian families, are long established here.",
+      "Abbotsford suits families and first-time buyers who want Fraser Valley space without leaving Metro Vancouver's job market entirely out of reach. As BC's largest municipality by land area, it offers detached homes and larger lots at prices well below Surrey or Langley, drawing young families, agricultural workers, and a large South Asian community with deep roots in the city.\n\nAs of 2026, average rent sits around $1,795-1,835/month, with one-bedrooms averaging roughly $1,500-1,580 and typical listings ranging from $1,250 to $2,800 depending on size and neighbourhood. That makes Abbotsford one of the more attainable cities in the Fraser Valley, though prices have softened over the past year alongside a broader regional rent pullback.\n\nAbbotsford is well served by local bus routes and the Fraser Valley Express connecting to Langley, with highway access to Highway 1 for those commuting toward Metro Vancouver — though that commute runs 60-90 minutes each way and is a serious daily consideration, not a footnote. Most residents drive for day-to-day errands; the city is walkable and bike-friendly in pockets (Mill Lake Park, the downtown core) but spread out overall.\n\nCharacter-wise, Abbotsford blends agricultural heritage with growing suburban development. Clearbrook and Mill Lake offer more affordable rental stock, Sevenoaks and High Street give it real shopping and dining density, and the surrounding farmland (plus events like the Abbotsford Air Show) give it a distinct identity apart from being \"just a Vancouver suburb.\" It suits people prioritizing home size and community over a short downtown commute.",
     bestFor: ["Families", "First-time buyers", "Newcomers to Canada", "Trades and agriculture workers"],
     climate:
       "Warmer summers and colder winters than the coast, with heavy autumn rain and occasional snow that sticks for several days.",
@@ -438,7 +438,7 @@ export const cities: City[] = [
     region: "Vancouver Island",
     tagline: "The island's harbour city — ferry-connected, affordable, outdoors-first.",
     overview:
-      "Nanaimo is Vancouver Island's second city and its main gateway to the mainland, with two ferry terminals and a floatplane harbour. It offers island living at a lower cost than Victoria, with lakes, ocean, and mountain biking minutes from town. Growth has been steady as remote workers and retirees discover it.",
+      "Nanaimo suits remote workers, retirees, and anyone drawn to island living without Victoria's price tag. Known as the \"Harbour City,\" it's Vancouver Island's second-largest urban centre and the main gateway between the island and the mainland via BC Ferries.\n\nAverage rent runs about $1,895-2,105/month as of 2026, with one-bedrooms typically $1,700-1,845 and neighbourhoods like the Hospital Area, Rosehill, and Stephenson Point offering the more affordable end of the market. Overall cost of living, including groceries and transport, tends to land in the low-to-mid $2,000s per month for a single person — noticeably below Vancouver or Victoria.\n\nLocal transit connects neighbourhoods reasonably well, but Nanaimo is still a car-dependent city for most day-to-day life. The bigger commute consideration is the ferry: getting to the mainland means a scheduled BC Ferries crossing (Departure Bay or Duke Point), which shapes life here more than any bus route — this suits people who don't need a daily mainland commute.\n\nNanaimo's character mixes a working coal-mining and harbour history with a growing arts and food scene downtown. Vancouver Island University adds a youthful, educational presence, while the waterfront, seawall, and nearby beaches make outdoor recreation a daily-life feature rather than a weekend trip. It draws people who want a genuine small-city pace, ocean views, and slower traffic — trading some job-market depth and direct mainland access for quality of life.",
     bestFor: ["Remote workers", "Retirees", "Families", "Boaters and mountain bikers"],
     climate:
       "Mild and drier than the west coast of the island, with comfortable summers and wet, largely snow-free winters.",
@@ -482,7 +482,7 @@ export const cities: City[] = [
     region: "Interior",
     tagline: "Sunny river valleys and a practical interior hub.",
     overview:
-      "Kamloops sits where the North and South Thompson rivers meet, ringed by dry grassland hills. It is a transport, health care, and education hub for the interior, anchored by Thompson Rivers University.",
+      "Kamloops suits people who want sunshine, space, and a lower cost of living in BC's interior, without the coastal price premium. As the province's first \"Bee City\" and a hub for Thompson Rivers University, it draws students, families, and outdoor-recreation-focused professionals to a drier, sunnier climate than the coast.\n\nAverage rent as of 2026 sits around $1,811/month, with one-bedrooms averaging about $1,645-1,790 and the most affordable pockets — Juniper Ridge, North Shore, Kamloops Indian Reserve No. 1 — starting near $1,595. That's roughly 7% below the national average rent, and materially below anywhere in Metro Vancouver.\n\nKamloops runs its own public transit system connecting the university, downtown, and residential areas across the North Shore and Sahali, but like most interior cities it leans car-dependent overall — most residents drive for daily errands and cross-town trips. There's no realistic daily commute to Metro Vancouver; Kamloops functions as a self-contained regional hub rather than a Vancouver-adjacent suburb.\n\nIts character splits between a busy downtown core with dining, cultural venues like the Kamloops Museum, and services, and a more spread-out residential landscape framed by grasslands and the Thompson River valley. Landmarks like the BC Wildlife Park and Kamloops Heritage Railway reflect a city proud of its ranching and railway roots. It suits people prioritizing affordability, sunshine, and a slower pace over coastal access — particularly families, students, and retirees.",
     bestFor: ["Families", "Students", "Health care workers", "Outdoor enthusiasts"],
     climate:
       "Semi-arid with hot, dry summers, cold but sunny winters, and very little rainfall year-round.",
@@ -502,7 +502,7 @@ export const cities: City[] = [
     region: "Fraser Valley",
     tagline: "Mountain-framed farmland with room to grow.",
     overview:
-      "Chilliwack is a fast-growing Fraser Valley city surrounded by farms and hemmed in by dramatic peaks. It attracts families priced out of Metro Vancouver who are willing to trade commute time for space.",
+      "Chilliwack suits families and first-time buyers chasing the most space for their money in the Fraser Valley, provided they're comfortable trading a shorter commute for it. It's the furthest-east Fraser Valley city still loosely tied to the Metro Vancouver housing market, framed by mountains on nearly every side.\n\nAverage rent is around $1,650/month as of 2026 — about 15% below the national average and among the most affordable rents in the Fraser Valley corridor. One-bedroom apartments typically run $1,300-1,700. Housing purchase prices are similarly favourable: benchmark detached home prices sit roughly a third lower than Metro Vancouver's.\n\nThe commute is the honest trade-off here. Chilliwack is about 100km from downtown Vancouver, and a drive via Highway 1 typically runs 90 minutes to 2+ hours each way in traffic. There's no SkyTrain or West Coast Express station in Chilliwack itself — some residents drive to Mission to catch the West Coast Express commuter rail, and BC Transit's Fraser Valley Express (Route 66) links to Abbotsford and Langley, but frequency is low and it suits occasional trips more than a daily downtown job. Most of Chilliwack is genuinely car-dependent.\n\nCharacter-wise, it's a family-oriented city with strong schools, active youth sports, and a mountain-and-farmland backdrop that's hard to match closer to the city. Sardis, Vedder, and Promontory are the go-to family neighbourhoods, with newer housing stock and walkable amenities. It suits households who can work remotely, commute only occasionally, or are simply prioritizing house size and community over proximity to Vancouver.",
     bestFor: ["Families", "First-time buyers", "Retirees", "Hikers"],
     climate:
       "Warm summers, mild wet winters, and among the highest rainfall in the valley thanks to the surrounding mountains.",
@@ -522,7 +522,7 @@ export const cities: City[] = [
     region: "Northern BC",
     tagline: "Northern BC's service and education capital.",
     overview:
-      "Prince George is the largest city in northern British Columbia and the region's hub for health care, education, and resource industries. Housing is among the most attainable in the province and wilderness is immediate.",
+      "Prince George suits people looking for Northern BC's most affordable major city and a genuine regional hub — not a bedroom community, but a self-contained economic and educational centre in its own right. As the largest city in northern BC, it anchors healthcare, post-secondary education (University of Northern BC), and forestry/resource-sector employment for a wide surrounding region.\n\nIt's consistently BC's most affordable rental market of meaningful size: average rent sits around $1,495/month as of 2026, with one-bedroom units often available closer to $1,000-1,200 depending on the source and neighbourhood — dramatically below Metro Vancouver's roughly $2,500+ average one-bedroom.\n\nThere's no mainland commute consideration here the way there is in the Fraser Valley — Prince George is roughly 8 hours' drive from Vancouver and functions independently. Locally, the city relies on BC Transit bus service and is largely car-oriented, typical of a mid-sized northern city built around road access rather than density.\n\nCharacter-wise, Prince George blends a working resource-industry economy (forestry, mining services) with a growing services, healthcare, and education sector. It offers real four-season outdoor access — skiing, hiking, and river recreation are close by — along with lower costs across nearly every category, from rent to groceries to vehicle costs. It suits people prioritizing affordability and a full-service regional city over coastal or Lower Mainland proximity: young families, healthcare and resource-sector workers, and anyone stretching a fixed income further.",
     bestFor: ["Trades workers", "Health care professionals", "Students", "First-time buyers"],
     climate:
       "Continental with cold, snowy winters that run long and short, pleasantly warm summers.",
@@ -542,7 +542,7 @@ export const cities: City[] = [
     region: "Okanagan",
     tagline: "Three lakes, a ski hill, and a relaxed north Okanagan pace.",
     overview:
-      "Vernon sits at the top of the Okanagan valley between Kalamalka, Okanagan, and Swan lakes. It offers Okanagan lifestyle with a smaller-town feel and Silver Star Mountain twenty minutes away.",
+      "Vernon suits people drawn to the Okanagan's lake-and-mountain lifestyle at a gentler price than Kelowna. Sitting between three lakes (Okanagan, Kalamalka, and Swan) with Silver Star ski resort nearby, it offers year-round outdoor recreation with a smaller-city pace.\n\nAverage rent runs around $1,850/month as of 2026, with one-bedrooms typically $1,600-1,690 and the most affordable neighbourhoods — East Hill, Vernon City Centre, Alexis Park — starting under $2,000. That's roughly 5% below the national average rent, and generally less than nearby Kelowna for comparable space.\n\nVernon is about 440km from Vancouver — there's no realistic daily commute to the coast, and it functions as an independent North Okanagan hub rather than a satellite city. Locally, it's a car-dependent city; public transit exists but most day-to-day movement (getting to the lakes, Silver Star, or surrounding communities like Coldstream and Lake Country) assumes a vehicle.\n\nCharacter-wise, Vernon splits its identity between a working downtown core and a lifestyle built around water and mountains — three lakes for boating and swimming in summer, Silver Star for skiing in winter, and a genuinely four-season recreation calendar. It's less tourist-driven and less expensive than Kelowna, drawing retirees, families, and remote workers who want Okanagan scenery without Okanagan's peak-season price surges. It suits people prioritizing lifestyle and value over urban amenities or job-market depth.",
     bestFor: ["Retirees", "Families", "Remote workers", "Skiers"],
     climate:
       "Four distinct seasons: hot dry summers, colourful autumns, and moderate snowy winters.",
@@ -562,7 +562,7 @@ export const cities: City[] = [
     region: "Kootenays",
     tagline: "A heritage mountain town with an outsized arts scene.",
     overview:
-      "Nelson is a small Kootenay city on Kootenay Lake known for its preserved Victorian main street, independent culture, and powder skiing at Whitewater. It is remote by BC standards and fiercely community-minded.",
+      "Nelson suits people drawn to a heritage mountain town with an outsized arts and culture scene relative to its size — this is West Kootenay living, not Okanagan or Lower Mainland living, and it draws a distinct crowd because of it.\n\nAverage rent runs around $1,800-1,900/month as of 2026 for rental housing broadly, which is a meaningful cost given Nelson's small size (population under 12,000) — housing here is more expensive than the Canada average despite the remote, small-town setting, largely due to limited supply and high demand from lifestyle migrants.\n\nNelson sits in the West Kootenays, roughly 6-7 hours from Vancouver by road — there is no commuting to the coast; Nelson is its own self-contained community and functions as the commercial hub (alongside Castlegar and Trail) for the region. Locally, it's compact and walkable in the downtown core, with public transit available but limited; a car remains useful for anything outside town.\n\nCharacter-wise, Nelson is known for its extensive collection of heritage buildings dating to the 1886 silver rush, a genuinely disproportionate concentration of artists, musicians, and makers for a town its size, and a strong outdoor-recreation culture (Kootenay Lake, nearby ski hills, backcountry access). It suits remote workers, retirees, and creatives who want a real community and mountain scenery, and are willing to trade job-market depth and big-city amenities for it — Nelson is a destination people move to deliberately, not a fallback.",
     bestFor: ["Artists and creatives", "Remote workers", "Skiers", "Small-town seekers"],
     climate:
       "Mountain climate with snowy winters, warm dry summers, and mild shoulder seasons in the valley bottom.",
@@ -582,7 +582,7 @@ export const cities: City[] = [
     region: "Okanagan",
     tagline: "Between two lakes, surrounded by wineries.",
     overview:
-      "Penticton sits on a narrow strip of land between Okanagan and Skaha lakes in the south Okanagan wine country. It is a summer destination that has become a year-round home for retirees and remote workers.",
+      "Penticton suits people who want Okanagan wine country and two lakes to choose from, at a somewhat gentler price than Kelowna during most of the year — though summer tourist season is intense and worth factoring in.\n\nAverage rent for a one-bedroom sits roughly $1,200-1,400/month as of 2026 depending on source and location, with overall cost of living for a single person landing around $2,000-2,250/month including rent. That's generally more affordable than Kelowna, though the rental market is tight — Penticton has recorded vacancy rates below 1% in recent years, so move-in timelines can be a genuine challenge.\n\nPenticton sits between Okanagan Lake and Skaha Lake, with no realistic daily commute to Vancouver (it's roughly a 4-hour drive) — like most Okanagan cities, it functions as its own economic hub built around tourism, agriculture, and wine. Locally, it's a car-dependent city, though the compact downtown and lakeside areas are walkable.\n\nCharacter-wise, Penticton is defined by its wineries (dozens within a short drive), its two-lake setting ideal for water sports, and a cultural calendar of festivals and events that swells the population every summer. It suits retirees, remote workers, and anyone prioritizing lake access and wine country over urban amenities — with the caveat that rental competition is real, so people moving here should expect to search seriously, not casually.",
     bestFor: ["Retirees", "Remote workers", "Cyclists", "Wine and food lovers"],
     climate:
       "One of Canada's warmest and driest — long hot summers, minimal rainfall, and short mild winters.",
@@ -602,7 +602,7 @@ export const cities: City[] = [
     region: "Sea to Sky",
     tagline: "The outdoor recreation capital, halfway to Whistler.",
     overview:
-      "Squamish sits between Vancouver and Whistler beneath the Stawamus Chief, with world-class climbing, mountain biking, and windsurfing. Once a mill town, it is now a fast-growing community of commuters and remote workers.",
+      "Squamish suits outdoor-recreation-focused professionals and families who want to be near Vancouver's job market without living in it, and who can tolerate the Sea-to-Sky commute in exchange for genuinely exceptional access to hiking, climbing, and skiing.\n\nAverage rent runs high for a smaller city — roughly $1,600-2,300/month for a one-bedroom as of 2026, depending on source, with the mid-point closer to $1,650-1,700. That reflects Squamish's position as an increasingly desirable, land-constrained community between two much more expensive markets (Vancouver and Whistler), rather than a genuinely low-cost alternative.\n\nSquamish sits about 45-64km north of Vancouver along the Sea-to-Sky Highway, with a typical drive of 45-60 minutes in good conditions — longer, and more weather-dependent, in winter. There's no SkyTrain or rail link; commuting to Vancouver means driving the Sea-to-Sky corridor, which is scenic but exposed to weather delays and highway congestion at peak times. Within Squamish itself, the town is increasingly walkable and bike-friendly, with local transit covering short trips.\n\nCharacter-wise, Squamish has branded itself (accurately) as Canada's Outdoor Recreation Capital — the Stawamus Chief for climbing, extensive mountain biking and hiking trail networks, and windsurfing on Howe Sound, alongside a growing brewery and arts scene. It suits people who prioritize outdoor access and a growing small-town amenity base, and who either work remotely, commute to Vancouver only occasionally, or have flexibility around the daily drive.",
     bestFor: ["Outdoor enthusiasts", "Young families", "Remote workers", "Vancouver commuters"],
     climate:
       "Coastal and wet with strong valley winds, cool summers, and winters that stay mostly above freezing at sea level.",
@@ -622,7 +622,7 @@ export const cities: City[] = [
     region: "Metro Vancouver",
     tagline: "Where Metro Vancouver meets horse country.",
     overview:
-      "Langley combines a growing town centre with farmland, wineries, and equestrian acreages. SkyTrain expansion from Surrey is reshaping how connected it feels to the rest of the region.",
+      "Langley suits families and first-time buyers who want Metro Vancouver access with meaningfully more space and lower prices — and whose timeline aligns well with the Surrey-Langley SkyTrain extension, targeted for 2029, which will materially change the calculus here.\n\nAverage rent sits around $2,192/month as of 2026, with one-bedrooms averaging roughly $1,950-2,000 and more affordable pockets like Aldergrove ($1,775) and Douglas ($1,995). Rents have actually softened over the past year — down modestly year-over-year — making Langley one of the more negotiable markets in Metro Vancouver right now, even as it remains meaningfully cheaper than Vancouver proper for comparable space.\n\nToday, Langley is largely car-dependent; most residents drive for work and errands, and a monthly transit pass covering the zone runs roughly $151. That will change with the SkyTrain extension: once it opens, Langley will gain direct rapid-transit access to Surrey and onward to Vancouver, which is already shaping where new development and demand are concentrating (particularly Willoughby, Langley's master-planned community closest to the coming line).\n\nCharacter-wise, Langley blends suburban new-build communities with a genuine rural edge — horse country, farms, and u-pick berry operations sit just outside newer neighbourhoods. It suits buyers and renters prioritizing home size, family amenities, and long-term value ahead of the SkyTrain extension over an immediate short commute today.",
     bestFor: ["Families", "First-time buyers", "Commuters", "Acreage seekers"],
     climate:
       "Slightly warmer summers and cooler winters than Vancouver, with wet autumns and occasional lasting snow.",
@@ -643,3 +643,102 @@ export const secondaryCities = cities.filter((c) => c.tier === "secondary");
 export function getCityBySlug(slug: string): City | undefined {
   return cities.find((c) => c.slug === slug);
 }
+
+export interface CitySeo {
+  title: string;
+  description: string;
+}
+
+/** Exact per-city title tags and meta descriptions. */
+export const citySeo: Record<string, CitySeo> = {
+  vancouver: {
+    title: "Moving to Vancouver, BC in 2026? Cost of Living & Neighbourhood Guide",
+    description:
+      "Vancouver rent averages $2,089/mo in 2026. See groceries, transit costs, and the best neighbourhoods for newcomers and professionals.",
+  },
+  victoria: {
+    title: "Living in Victoria, BC 2026 — Cost of Living & Best Areas",
+    description:
+      "Victoria rent runs ~$2,000-2,010/mo. See why retirees and remote workers love BC's walkable capital, with 2026 cost data.",
+  },
+  kelowna: {
+    title: "Kelowna, BC Cost of Living 2026 — Rent & Relocation Guide",
+    description:
+      "Kelowna rent averages $2,000/mo in 2026. See groceries, transit costs, and why families and remote workers are moving here.",
+  },
+  surrey: {
+    title: "Moving to Surrey, BC 2026 — Rent & Family Relocation Guide",
+    description:
+      "Surrey is Metro Vancouver's fastest-growing city. See 2026 rent (~$1,750 1BR), cost of living, and top family neighbourhoods.",
+  },
+  burnaby: {
+    title: "Living in Burnaby, BC 2026 — Cost of Living & Transit Guide",
+    description:
+      "Burnaby rent averages ~$2,200/mo (1BR) in 2026. See why it's Metro Vancouver's practical, transit-rich middle ground.",
+  },
+  richmond: {
+    title: "Moving to Richmond, BC 2026 — Cost of Living Guide",
+    description:
+      "Richmond rent averages $2,541/mo in 2026. See why it's one of Canada's most multicultural, newcomer-friendly cities.",
+  },
+  coquitlam: {
+    title: "Living in Coquitlam, BC 2026 — Family Relocation Guide",
+    description:
+      "Coquitlam rent averages $2,459/mo in 2026. See why families and first-time buyers choose this SkyTrain-connected suburb.",
+  },
+  "north-vancouver": {
+    title: "North Vancouver, BC Cost of Living 2026 — Rent & Guide",
+    description:
+      "North Vancouver rent averages $2,955/mo, among Canada's highest. See 2026 costs and why outdoor lovers pay the premium.",
+  },
+  abbotsford: {
+    title: "Moving to Abbotsford, BC 2026 — Affordable Family Guide",
+    description:
+      "Abbotsford rent averages $1,795/mo in 2026, the Fraser Valley's most attainable city living. See full cost breakdown.",
+  },
+  nanaimo: {
+    title: "Living in Nanaimo, BC 2026 — Cost of Living Guide",
+    description:
+      "Nanaimo rent averages $1,895/mo in 2026. See why Vancouver Island's harbour city suits remote workers and retirees.",
+  },
+  kamloops: {
+    title: "Moving to Kamloops, BC 2026 — Interior BC Relocation Guide",
+    description:
+      "Kamloops rent averages $1,811/mo in 2026. See cost of living in this sunny, practical interior hub.",
+  },
+  chilliwack: {
+    title: "Living in Chilliwack, BC 2026 — Cost of Living Guide",
+    description:
+      "Chilliwack rent averages $1,650/mo in 2026. See why this mountain-framed Fraser Valley city offers room to grow.",
+  },
+  "prince-george": {
+    title: "Moving to Prince George, BC 2026 — Northern BC Guide",
+    description:
+      "Prince George rent averages $1,495/mo in 2026, among BC's most affordable. Northern BC's service and education hub.",
+  },
+  vernon: {
+    title: "Living in Vernon, BC 2026 — Okanagan Relocation Guide",
+    description:
+      "Vernon rent averages $1,850/mo in 2026. Three lakes, a ski hill, and a relaxed north Okanagan pace.",
+  },
+  nelson: {
+    title: "Moving to Nelson, BC 2026 — Kootenay Cost of Living Guide",
+    description:
+      "Nelson, BC cost of living 2026: a heritage mountain town with an outsized arts scene in the West Kootenays.",
+  },
+  penticton: {
+    title: "Living in Penticton, BC 2026 — Okanagan Guide",
+    description:
+      "Penticton, BC cost of living 2026: between two lakes, surrounded by wineries, in the South Okanagan.",
+  },
+  squamish: {
+    title: "Moving to Squamish, BC 2026 — Sea-to-Sky Guide",
+    description:
+      "Squamish, BC cost of living 2026: the outdoor recreation capital, halfway between Vancouver and Whistler.",
+  },
+  langley: {
+    title: "Living in Langley, BC 2026 — Cost of Living Guide",
+    description:
+      "Langley rent averages $2,192/mo in 2026. Where Metro Vancouver meets horse country — full cost breakdown inside.",
+  },
+};

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CityPage } from "@/components/site/CityPage";
-import { getCityBySlug } from "@/data/cities";
+import { getCityBySlug, citySeo } from "@/data/cities";
 import { PageHero } from "@/components/site/PageHero";
 import { RevealGroup } from "@/components/site/RevealGroup";
 
@@ -16,14 +16,17 @@ export const Route = createFileRoute("/cities/$citySlug")({
         ],
       };
     }
-    const title = `Living in ${city.name}, BC — City Guide | SettleInBC`;
-    const description = `${city.tagline} Explore ${city.name} neighbourhoods, climate, commuting, and what life in ${city.region} is really like.`;
+    const seo = citySeo[city.slug];
+    const title = seo?.title ?? `Living in ${city.name}, BC — City Guide | SettleInBC`;
+    const description =
+      seo?.description ??
+      `${city.tagline} Explore ${city.name} neighbourhoods, climate, commuting, and what life in ${city.region} is really like.`;
     return {
       meta: [
         { title },
         { name: "description", content: description },
-        { property: "og:title", content: `Living in ${city.name}, BC` },
-        { property: "og:description", content: city.tagline },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
         { property: "og:type", content: "article" },
         { property: "og:url", content: url },
         { name: "twitter:card", content: "summary_large_image" },

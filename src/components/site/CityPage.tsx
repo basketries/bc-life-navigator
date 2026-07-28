@@ -46,8 +46,12 @@ export function CityPage({ city }: { city: City }) {
             Getting to know {city.name}.
           </h2>
         </div>
-        <div>
-          <p className="text-lg text-muted-foreground">{city.overview}</p>
+        <div className="space-y-4">
+          {city.overview.split("\n\n").map((para) => (
+            <p key={para.slice(0, 40)} className="text-lg text-muted-foreground">
+              {para}
+            </p>
+          ))}
         </div>
       </section>
 
