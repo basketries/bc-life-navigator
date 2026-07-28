@@ -154,6 +154,35 @@ export function Newsletter({
                 )}
               </div>
 
+              <div className="grid gap-1">
+                <label
+                  className={
+                    compact
+                      ? "flex items-start gap-2 text-sm text-muted-foreground"
+                      : "flex items-start gap-2 text-sm text-primary-foreground/90"
+                  }
+                >
+                  <input
+                    name="consent"
+                    type="checkbox"
+                    aria-invalid={!!fieldErrors.consent}
+                    aria-describedby={fieldErrors.consent ? "newsletter-consent-error" : undefined}
+                    onChange={() => setFieldErrors((p) => ({ ...p, consent: undefined }))}
+                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-current accent-accent"
+                  />
+                  <span>
+                    I agree to receive emails from SettleInBC and understand I can unsubscribe at
+                    any time.
+                  </span>
+                </label>
+                {fieldErrors.consent && (
+                  <p id="newsletter-consent-error" role="alert" className={errCls(compact)}>
+                    {fieldErrors.consent}
+                  </p>
+                )}
+              </div>
+
+
               <button
                 type="submit"
                 disabled={state === "sending"}
