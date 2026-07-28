@@ -32,6 +32,8 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/resources/videos", changefreq: "weekly", priority: "0.7" },
           { path: "/resources/cost-of-living-calculator", changefreq: "monthly", priority: "0.8" },
           { path: "/resources/neighbourhood-quiz", changefreq: "monthly", priority: "0.8" },
+          { path: "/resources/moving-cost-estimator", changefreq: "monthly", priority: "0.8" },
+          { path: "/resources/relocation-checklist", changefreq: "monthly", priority: "0.8" },
           { path: "/new-to-bc", changefreq: "monthly", priority: "0.9" },
           { path: "/community", changefreq: "weekly", priority: "0.7" },
           { path: "/community/events", changefreq: "weekly", priority: "0.7" },

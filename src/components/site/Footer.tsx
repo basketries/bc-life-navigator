@@ -38,6 +38,8 @@ export function Footer() {
             { to: "/resources", label: "Resources" },
             { to: "/resources/guides", label: "Guides" },
             { to: "/resources/articles", label: "Articles" },
+            { to: "/resources/relocation-checklist", label: "Relocation Checklist" },
+            { to: "/resources/moving-cost-estimator", label: "Moving Cost Estimator" },
             { to: "/new-to-bc", label: "New to BC" },
             { to: "/community/events", label: "Events" },
           ]}

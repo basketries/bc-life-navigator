@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
 import { Newsletter } from "@/components/site/Newsletter";
-import { BookOpen, FileText, PlayCircle, Calculator, Compass } from "lucide-react";
+import { BookOpen, FileText, PlayCircle, Calculator, Compass, Truck, ListChecks } from "lucide-react";
 import { RevealGroup } from "@/components/site/RevealGroup";
 
 export const Route = createFileRoute("/resources/")({
@@ -31,6 +31,8 @@ const CATS = [
   { to: "/resources/videos", icon: PlayCircle, title: "Videos", desc: "Explainers and interviews with BC-focused experts." },
   { to: "/resources/cost-of-living-calculator", icon: Calculator, title: "Cost of Living Calculator", desc: "Estimate monthly costs by city and household size before you commit." },
   { to: "/resources/neighbourhood-quiz", icon: Compass, title: "Where Should You Live?", desc: "A five-question quiz that matches you to BC communities worth exploring." },
+  { to: "/resources/moving-cost-estimator", icon: Truck, title: "Moving Cost Estimator", desc: "Estimate movers, storage, temporary housing, and setup costs for your move." },
+  { to: "/resources/relocation-checklist", icon: ListChecks, title: "Relocation Checklist", desc: "An interactive, phase-by-phase checklist from three months out to settled in." },
 ];
 
 const PILLARS = [
@@ -72,7 +74,7 @@ function Resources() {
         description="Our growing library of guides, articles, videos, and calculators is built to help you understand before you decide."
       />
 
-      <section className="container-page my-16 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+      <section className="container-page my-16 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {CATS.map((c) => (
           <Link
             key={c.title}
