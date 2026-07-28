@@ -8,7 +8,8 @@ export type LeadSource =
   | "newsletter"
   | "event_registration"
   | "contact_form"
-  | "resource_download";
+  | "resource_download"
+  | "cost_calculator";
 
 export type VisitorGoal =
   | "newcomer"
