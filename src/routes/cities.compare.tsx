@@ -17,6 +17,7 @@ import {
   primaryCities,
   secondaryCities,
   getCityBySlug,
+  COST_SOURCE_NOTE,
   type City,
 } from "@/data/cities";
 
@@ -121,10 +122,13 @@ function CostCell({ city }: { city: City }) {
   if (!c) return <ComingSoon />;
   return (
     <ul className="space-y-1">
-      <li>Housing: {c.housing}</li>
-      <li>Groceries: {c.groceries}</li>
-      <li>Transit: {c.transit}</li>
-      {!isTbd(c.notes) && <li className="text-muted-foreground/80">{c.notes}</li>}
+      <li>1BR Rent: {c.housing}</li>
+      <li>Monthly Groceries (single person): {c.groceries}</li>
+      <li>Transit Pass (monthly): {c.transit}</li>
+      {c.notes && !isTbd(c.notes) && (
+        <li className="text-muted-foreground/80">{c.notes}</li>
+      )}
+      <li className="pt-1 text-xs text-muted-foreground/80">{COST_SOURCE_NOTE}</li>
     </ul>
   );
 }
