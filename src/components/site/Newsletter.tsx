@@ -13,6 +13,9 @@ export function Newsletter({
   const submit = useSubmitLead();
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string }>({});
+
+
 
   return (
     <section
