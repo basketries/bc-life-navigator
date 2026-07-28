@@ -61,7 +61,6 @@ export function Footer() {
             British Columbia.
           </p>
         </div>
-      </div>
         <div className="container-page py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} SettleInBC. All rights reserved.</p>
           <p>
