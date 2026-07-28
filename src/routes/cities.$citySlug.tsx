@@ -16,8 +16,11 @@ export const Route = createFileRoute("/cities/$citySlug")({
         ],
       };
     }
-    const title = `Living in ${city.name}, BC — City Guide | SettleInBC`;
-    const description = `${city.tagline} Explore ${city.name} neighbourhoods, climate, commuting, and what life in ${city.region} is really like.`;
+    const seo = citySeo[city.slug];
+    const title = seo?.title ?? `Living in ${city.name}, BC — City Guide | SettleInBC`;
+    const description =
+      seo?.description ??
+      `${city.tagline} Explore ${city.name} neighbourhoods, climate, commuting, and what life in ${city.region} is really like.`;
     return {
       meta: [
         { title },
