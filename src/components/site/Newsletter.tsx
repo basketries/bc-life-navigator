@@ -13,6 +13,9 @@ export function Newsletter({
   const submit = useSubmitLead();
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string }>({});
+
+
 
   return (
     <section
@@ -58,15 +61,33 @@ export function Newsletter({
         </div>
         <form
           className="grid gap-3"
+          noValidate
           onSubmit={async (e) => {
             e.preventDefault();
             const fd = new FormData(e.currentTarget);
+            const name = String(fd.get("name") || "").trim();
+            const email = String(fd.get("email") || "").trim();
+
+            const errs: { name?: string; email?: string } = {};
+            if (!name) errs.name = "Please enter your name.";
+            else if (name.length > 100) errs.name = "Name must be under 100 characters.";
+            if (!email) errs.email = "Please enter your email address.";
+            else if (!EMAIL_RE.test(email)) errs.email = "Please enter a valid email address.";
+            else if (email.length > 255) errs.email = "Email must be under 255 characters.";
+
+            setFieldErrors(errs);
+            if (Object.keys(errs).length > 0) {
+              setState("idle");
+              setError(null);
+              return;
+            }
+
             setState("sending");
             setError(null);
             const res = await submit({
               source: "newsletter",
-              name: String(fd.get("name") || ""),
-              email: String(fd.get("email") || ""),
+              name,
+              email,
               consent: { marketing: true },
             });
             if (res.ok) setState("done");
@@ -76,6 +97,7 @@ export function Newsletter({
             }
           }}
         >
+
           {state === "done" ? (
             <p
               className={
@@ -88,20 +110,43 @@ export function Newsletter({
             </p>
           ) : (
             <>
-              <input
-                required
-                name="name"
-                type="text"
-                placeholder="Your name"
-                className={inputCls(compact)}
-              />
-              <input
-                required
-                name="email"
-                type="email"
-                placeholder="Email address"
-                className={inputCls(compact)}
-              />
+              <div className="grid gap-1">
+                <input
+                  required
+                  name="name"
+                  type="text"
+                  placeholder="Your name"
+                  aria-label="Your name"
+                  aria-invalid={!!fieldErrors.name}
+                  aria-describedby={fieldErrors.name ? "newsletter-name-error" : undefined}
+                  onChange={() => setFieldErrors((p) => ({ ...p, name: undefined }))}
+                  className={inputCls(compact, !!fieldErrors.name)}
+                />
+                {fieldErrors.name && (
+                  <p id="newsletter-name-error" role="alert" className={errCls(compact)}>
+                    {fieldErrors.name}
+                  </p>
+                )}
+              </div>
+              <div className="grid gap-1">
+                <input
+                  required
+                  name="email"
+                  type="email"
+                  placeholder="Email address"
+                  aria-label="Email address"
+                  aria-invalid={!!fieldErrors.email}
+                  aria-describedby={fieldErrors.email ? "newsletter-email-error" : undefined}
+                  onChange={() => setFieldErrors((p) => ({ ...p, email: undefined }))}
+                  className={inputCls(compact, !!fieldErrors.email)}
+                />
+                {fieldErrors.email && (
+                  <p id="newsletter-email-error" role="alert" className={errCls(compact)}>
+                    {fieldErrors.email}
+                  </p>
+                )}
+              </div>
+
               <button
                 type="submit"
                 disabled={state === "sending"}
@@ -126,8 +171,25 @@ export function Newsletter({
   );
 }
 
-function inputCls(compact: boolean) {
-  return compact
-    ? "h-11 rounded-lg border border-input bg-background px-3 text-sm"
-    : "h-12 rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/60 px-4 focus:outline-none focus:ring-2 focus:ring-primary-foreground/40";
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+function inputCls(compact: boolean, invalid = false) {
+  const base = compact
+    ? "h-11 rounded-lg border bg-background px-3 text-sm"
+    : "h-12 rounded-lg bg-primary-foreground/10 border text-primary-foreground placeholder:text-primary-foreground/60 px-4 focus:outline-none focus:ring-2 focus:ring-primary-foreground/40";
+  const border = invalid
+    ? compact
+      ? "border-destructive"
+      : "border-destructive-foreground/70"
+    : compact
+      ? "border-input"
+      : "border-primary-foreground/20";
+  return `${base} ${border} w-full`;
 }
+
+function errCls(compact: boolean) {
+  return compact
+    ? "text-xs text-destructive"
+    : "text-xs text-primary-foreground/90 font-medium";
+}
+
