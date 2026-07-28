@@ -9,7 +9,8 @@ export type LeadSource =
   | "event_registration"
   | "contact_form"
   | "resource_download"
-  | "cost_calculator";
+  | "cost_calculator"
+  | "neighbourhood_quiz";
 
 export type VisitorGoal =
   | "newcomer"
