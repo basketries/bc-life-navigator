@@ -59,24 +59,41 @@ const hubspotAdapter: LeadAdapter = {
   name: "hubspot",
   async submit(lead) {
     const portalId = process.env.HUBSPOT_PORTAL_ID;
-    const formGuid = process.env.HUBSPOT_FORM_GUID;
+    const isNewsletter = lead.context.source === "newsletter";
+    const formGuid = isNewsletter
+      ? process.env.HUBSPOT_NEWSLETTER_FORM_GUID
+      : process.env.HUBSPOT_FORM_GUID;
     if (!portalId || !formGuid) {
-      return { ok: false, provider: "hubspot", error: "HUBSPOT_PORTAL_ID/HUBSPOT_FORM_GUID not set" };
+      return {
+        ok: false,
+        provider: "hubspot",
+        error: isNewsletter
+          ? "HUBSPOT_PORTAL_ID/HUBSPOT_NEWSLETTER_FORM_GUID not set"
+          : "HUBSPOT_PORTAL_ID/HUBSPOT_FORM_GUID not set",
+      };
     }
-    const fields = [
-      { name: "email", value: lead.email },
-      { name: "firstname", value: lead.name ?? "" },
-      { name: "phone", value: lead.phone ?? "" },
-      { name: "visitor_goal", value: lead.journey?.goal ?? "" },
-      { name: "timeline", value: lead.journey?.timeline ?? "" },
-      { name: "location_interest", value: lead.journey?.locationInterest ?? "" },
-      { name: "service_interest", value: (lead.journey?.serviceInterests ?? []).join(",") },
-      { name: "resource_downloaded", value: lead.engagement?.resourceDownloaded ?? "" },
-      { name: "event_registered", value: lead.engagement?.eventRegistered ?? "" },
-      { name: "consultation_requested", value: lead.engagement?.consultationRequested ?? "" },
-      { name: "message", value: lead.engagement?.message ?? "" },
-      { name: "lead_source", value: lead.context.source },
-    ].filter((f) => f.value !== "");
+    const fields = (
+      isNewsletter
+        ? [
+            { name: "email", value: lead.email },
+            { name: "firstname", value: lead.name ?? "" },
+          ]
+        : [
+            { name: "email", value: lead.email },
+            { name: "firstname", value: lead.name ?? "" },
+            { name: "phone", value: lead.phone ?? "" },
+            { name: "visitor_goal", value: lead.journey?.goal ?? "" },
+            { name: "timeline", value: lead.journey?.timeline ?? "" },
+            { name: "location_interest", value: lead.journey?.locationInterest ?? "" },
+            { name: "service_interest", value: (lead.journey?.serviceInterests ?? []).join(",") },
+            { name: "resource_downloaded", value: lead.engagement?.resourceDownloaded ?? "" },
+            { name: "event_registered", value: lead.engagement?.eventRegistered ?? "" },
+            { name: "consultation_requested", value: lead.engagement?.consultationRequested ?? "" },
+            { name: "message", value: lead.engagement?.message ?? "" },
+            { name: "lead_source", value: lead.context.source },
+          ]
+    ).filter((f) => f.value !== "");
+
 
     try {
       const res = await fetch(

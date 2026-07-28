@@ -27,7 +27,10 @@ export function EventRegistration({
           name: String(fd.get("name") || ""),
           email: String(fd.get("email") || ""),
           phone: String(fd.get("phone") || "") || undefined,
-          engagement: { eventRegistered: eventId },
+          engagement: {
+            eventRegistered: eventId,
+            message: String(fd.get("message") || "") || undefined,
+          },
         });
         if (res.ok) setState("done");
         else {
@@ -53,7 +56,8 @@ export function EventRegistration({
           )}
           <input required name="name" placeholder="Your name" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
           <input required name="email" type="email" placeholder="Email" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
-          <input name="phone" placeholder="Phone (optional)" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
+          <input required name="phone" placeholder="Phone" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
+          <textarea required name="message" rows={3} placeholder="Tell us more about what you'd like to know." className="rounded-lg border border-input bg-background px-3 py-2 text-sm resize-none" />
           <button
             disabled={state === "sending"}
             className="h-11 rounded-full bg-primary text-primary-foreground text-sm font-medium disabled:opacity-60"

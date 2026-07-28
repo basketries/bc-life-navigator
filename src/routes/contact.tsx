@@ -95,8 +95,8 @@ function Contact() {
                 <Field label="Email">
                   <input required name="email" type="email" className="input" />
                 </Field>
-                <Field label="Phone (optional)">
-                  <input name="phone" className="input" />
+                <Field label="Phone">
+                  <input required name="phone" className="input" />
                 </Field>
               </div>
               <Field label="How can we help?">

@@ -172,8 +172,8 @@ function Consultation() {
                     <input required name="name" placeholder="Your name" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
                     <input required name="email" type="email" placeholder="Email" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
                   </div>
-                  <input name="phone" placeholder="Phone (optional)" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
-                  <textarea name="message" rows={3} placeholder="Anything we should know?" className="rounded-lg border border-input bg-background px-3 py-2 text-sm resize-none" />
+                  <input required name="phone" placeholder="Phone" className="h-11 rounded-lg border border-input bg-background px-3 text-sm" />
+                  <textarea required name="message" rows={3} placeholder="Tell us more about what you'd like to know." className="rounded-lg border border-input bg-background px-3 py-2 text-sm resize-none" />
                   <button
                     disabled={reqState === "sending"}
                     className="h-11 rounded-full bg-secondary text-secondary-foreground text-sm font-medium disabled:opacity-60"
