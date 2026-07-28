@@ -24,12 +24,8 @@ export interface City {
   costOfLiving: CostOfLiving | null;
 }
 
-const TBD: CostOfLiving = {
-  housing: "TBD",
-  groceries: "TBD",
-  transit: "TBD",
-  notes: "TBD",
-};
+export const COST_SOURCE_NOTE =
+  "Sources: Zumper, Rentals.ca, TransLink, BC Transit, Statistics Canada — as of July 2026.";
 
 export const cities: City[] = [
   {
@@ -72,7 +68,12 @@ export const cities: City[] = [
           "Quieter south-side neighbourhood near the Canada Line and the airport, favoured by families and commuters to Richmond.",
       },
     ],
-    costOfLiving: { ...TBD },
+    costOfLiving: {
+      housing: "$2,089",
+      groceries: "$913",
+      transit: "$117.20 (TransLink 1-zone)",
+      notes: "",
+    },
   },
   {
     slug: "victoria",
@@ -114,7 +115,12 @@ export const cities: City[] = [
           "Between downtown and the ferry terminal, mixing apartments, heritage homes, and ocean-side paths.",
       },
     ],
-    costOfLiving: { ...TBD },
+    costOfLiving: {
+      housing: "$1,995–2,010",
+      groceries: "$390–430",
+      transit: "$85–95 (BC Transit)",
+      notes: "",
+    },
   },
   {
     slug: "kelowna",
@@ -156,7 +162,12 @@ export const cities: City[] = [
           "Hillside master-planned neighbourhoods with lake views and a longer drive into town.",
       },
     ],
-    costOfLiving: { ...TBD },
+    costOfLiving: {
+      housing: "$2,000",
+      groceries: "$370–410",
+      transit: "$80 (30-day adult pass)",
+      notes: "",
+    },
   },
   {
     slug: "surrey",
@@ -198,7 +209,12 @@ export const cities: City[] = [
           "The dense, rapidly redeveloping downtown around SFU Surrey and the SkyTrain terminus.",
       },
     ],
-    costOfLiving: { ...TBD },
+    costOfLiving: {
+      housing: "$1,750",
+      groceries: "$380–420",
+      transit: "$117.20–$161.35",
+      notes: "",
+    },
   },
   {
     slug: "burnaby",
@@ -240,7 +256,12 @@ export const cities: City[] = [
           "Diverse and comparatively attainable south Burnaby neighbourhood on the Expo Line.",
       },
     ],
-    costOfLiving: { ...TBD },
+    costOfLiving: {
+      housing: "$2,200",
+      groceries: "$400–450",
+      transit: "$117.20–$161.35",
+      notes: "",
+    },
   },
   {
     slug: "richmond",
@@ -277,7 +298,12 @@ export const cities: City[] = [
           "East Richmond community closest to New Westminster, with newer, more attainable family housing.",
       },
     ],
-    costOfLiving: { ...TBD },
+    costOfLiving: {
+      housing: "$2,541",
+      groceries: "$400–450",
+      transit: "$117.20–$161.35",
+      notes: "",
+    },
   },
   {
     slug: "coquitlam",
@@ -314,7 +340,12 @@ export const cities: City[] = [
           "Established, walkable, and mid-century in feel, popular with young families renovating.",
       },
     ],
-    costOfLiving: { ...TBD },
+    costOfLiving: {
+      housing: "$2,459",
+      groceries: "$380–420",
+      transit: "$117.20–$161.35",
+      notes: "",
+    },
   },
   {
     slug: "north-vancouver",
@@ -351,7 +382,12 @@ export const cities: City[] = [
           "Upscale and quiet, built around a compact shopping street with strong schools nearby.",
       },
     ],
-    costOfLiving: { ...TBD },
+    costOfLiving: {
+      housing: "$2,955",
+      groceries: "$430–480",
+      transit: "$117.20–$188 (1–2 zone)",
+      notes: "",
+    },
   },
   {
     slug: "abbotsford",
@@ -388,7 +424,12 @@ export const cities: City[] = [
           "A tiny heritage village pocket surrounded by farmland at the base of Sumas Mountain.",
       },
     ],
-    costOfLiving: { ...TBD },
+    costOfLiving: {
+      housing: "$1,795",
+      groceries: "$350–390",
+      transit: "$65–80 (Fraser Valley Transit)",
+      notes: "",
+    },
   },
   {
     slug: "nanaimo",
@@ -425,7 +466,12 @@ export const cities: City[] = [
           "Central and attainable, next to Vancouver Island University and Colliery Dam Park.",
       },
     ],
-    costOfLiving: { ...TBD },
+    costOfLiving: {
+      housing: "$1,785",
+      groceries: "$360–400",
+      transit: "$65–75",
+      notes: "",
+    },
   },
 
   // Secondary tier
@@ -442,7 +488,12 @@ export const cities: City[] = [
       "Semi-arid with hot, dry summers, cold but sunny winters, and very little rainfall year-round.",
     commuteNotes: "",
     neighbourhoods: [],
-    costOfLiving: null,
+    costOfLiving: {
+      housing: "$1,645",
+      groceries: "$340–380",
+      transit: "$65–75",
+      notes: "",
+    },
   },
   {
     slug: "chilliwack",
@@ -457,7 +508,12 @@ export const cities: City[] = [
       "Warm summers, mild wet winters, and among the highest rainfall in the valley thanks to the surrounding mountains.",
     commuteNotes: "",
     neighbourhoods: [],
-    costOfLiving: null,
+    costOfLiving: {
+      housing: "$1,650",
+      groceries: "$340–380",
+      transit: "$60–75",
+      notes: "",
+    },
   },
   {
     slug: "prince-george",
@@ -472,7 +528,12 @@ export const cities: City[] = [
       "Continental with cold, snowy winters that run long and short, pleasantly warm summers.",
     commuteNotes: "",
     neighbourhoods: [],
-    costOfLiving: null,
+    costOfLiving: {
+      housing: "$1,495",
+      groceries: "$340–390",
+      transit: "$60–70",
+      notes: "",
+    },
   },
   {
     slug: "vernon",
@@ -487,7 +548,12 @@ export const cities: City[] = [
       "Four distinct seasons: hot dry summers, colourful autumns, and moderate snowy winters.",
     commuteNotes: "",
     neighbourhoods: [],
-    costOfLiving: null,
+    costOfLiving: {
+      housing: "$1,600–1,690",
+      groceries: "$350–390",
+      transit: "$60–70",
+      notes: "",
+    },
   },
   {
     slug: "nelson",
@@ -502,7 +568,12 @@ export const cities: City[] = [
       "Mountain climate with snowy winters, warm dry summers, and mild shoulder seasons in the valley bottom.",
     commuteNotes: "",
     neighbourhoods: [],
-    costOfLiving: null,
+    costOfLiving: {
+      housing: "$1,700–2,000 est.",
+      groceries: "$350–390",
+      transit: "$55–65",
+      notes: "Rental data for Nelson is limited; the 1BR figure is an estimate.",
+    },
   },
   {
     slug: "penticton",
@@ -517,7 +588,12 @@ export const cities: City[] = [
       "One of Canada's warmest and driest — long hot summers, minimal rainfall, and short mild winters.",
     commuteNotes: "",
     neighbourhoods: [],
-    costOfLiving: null,
+    costOfLiving: {
+      housing: "$1,400–1,750",
+      groceries: "$350–390",
+      transit: "$55–65",
+      notes: "The 1BR range for Penticton is not yet independently verified.",
+    },
   },
   {
     slug: "squamish",
@@ -532,7 +608,12 @@ export const cities: City[] = [
       "Coastal and wet with strong valley winds, cool summers, and winters that stay mostly above freezing at sea level.",
     commuteNotes: "",
     neighbourhoods: [],
-    costOfLiving: null,
+    costOfLiving: {
+      housing: "$1,800–2,250",
+      groceries: "$400–440",
+      transit: "$60–70",
+      notes: "The 1BR range for Squamish is not yet independently verified.",
+    },
   },
   {
     slug: "langley",
@@ -547,7 +628,12 @@ export const cities: City[] = [
       "Slightly warmer summers and cooler winters than Vancouver, with wet autumns and occasional lasting snow.",
     commuteNotes: "",
     neighbourhoods: [],
-    costOfLiving: null,
+    costOfLiving: {
+      housing: "$1,950",
+      groceries: "$370–400",
+      transit: "$117.20–$161.35",
+      notes: "",
+    },
   },
 ];
 
