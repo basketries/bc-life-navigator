@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CityPage } from "@/components/site/CityPage";
-import { getCityBySlug } from "@/data/cities";
+import { getCityBySlug, citySeo } from "@/data/cities";
 import { PageHero } from "@/components/site/PageHero";
 import { RevealGroup } from "@/components/site/RevealGroup";
 
