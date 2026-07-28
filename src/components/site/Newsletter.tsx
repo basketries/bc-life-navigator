@@ -13,7 +13,11 @@ export function Newsletter({
   const submit = useSubmitLead();
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
-  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string }>({});
+  const [fieldErrors, setFieldErrors] = useState<{
+    name?: string;
+    email?: string;
+    consent?: string;
+  }>({});
 
 
 
@@ -67,13 +71,15 @@ export function Newsletter({
             const fd = new FormData(e.currentTarget);
             const name = String(fd.get("name") || "").trim();
             const email = String(fd.get("email") || "").trim();
+            const consent = fd.get("consent") === "on";
 
-            const errs: { name?: string; email?: string } = {};
+            const errs: { name?: string; email?: string; consent?: string } = {};
             if (!name) errs.name = "Please enter your name.";
             else if (name.length > 100) errs.name = "Name must be under 100 characters.";
             if (!email) errs.email = "Please enter your email address.";
             else if (!EMAIL_RE.test(email)) errs.email = "Please enter a valid email address.";
             else if (email.length > 255) errs.email = "Email must be under 255 characters.";
+            if (!consent) errs.consent = "Please agree to receive emails to subscribe.";
 
             setFieldErrors(errs);
             if (Object.keys(errs).length > 0) {
@@ -88,8 +94,9 @@ export function Newsletter({
               source: "newsletter",
               name,
               email,
-              consent: { marketing: true },
+              consent: { marketing: consent },
             });
+
             if (res.ok) setState("done");
             else {
               setError(res.error ?? "Something went wrong.");
@@ -146,6 +153,35 @@ export function Newsletter({
                   </p>
                 )}
               </div>
+
+              <div className="grid gap-1">
+                <label
+                  className={
+                    compact
+                      ? "flex items-start gap-2 text-sm text-muted-foreground"
+                      : "flex items-start gap-2 text-sm text-primary-foreground/90"
+                  }
+                >
+                  <input
+                    name="consent"
+                    type="checkbox"
+                    aria-invalid={!!fieldErrors.consent}
+                    aria-describedby={fieldErrors.consent ? "newsletter-consent-error" : undefined}
+                    onChange={() => setFieldErrors((p) => ({ ...p, consent: undefined }))}
+                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-current accent-accent"
+                  />
+                  <span>
+                    I agree to receive emails from SettleInBC and understand I can unsubscribe at
+                    any time.
+                  </span>
+                </label>
+                {fieldErrors.consent && (
+                  <p id="newsletter-consent-error" role="alert" className={errCls(compact)}>
+                    {fieldErrors.consent}
+                  </p>
+                )}
+              </div>
+
 
               <button
                 type="submit"
