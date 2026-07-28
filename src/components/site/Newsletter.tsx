@@ -71,13 +71,15 @@ export function Newsletter({
             const fd = new FormData(e.currentTarget);
             const name = String(fd.get("name") || "").trim();
             const email = String(fd.get("email") || "").trim();
+            const consent = fd.get("consent") === "on";
 
-            const errs: { name?: string; email?: string } = {};
+            const errs: { name?: string; email?: string; consent?: string } = {};
             if (!name) errs.name = "Please enter your name.";
             else if (name.length > 100) errs.name = "Name must be under 100 characters.";
             if (!email) errs.email = "Please enter your email address.";
             else if (!EMAIL_RE.test(email)) errs.email = "Please enter a valid email address.";
             else if (email.length > 255) errs.email = "Email must be under 255 characters.";
+            if (!consent) errs.consent = "Please agree to receive emails to subscribe.";
 
             setFieldErrors(errs);
             if (Object.keys(errs).length > 0) {
@@ -92,8 +94,9 @@ export function Newsletter({
               source: "newsletter",
               name,
               email,
-              consent: { marketing: true },
+              consent: { marketing: consent },
             });
+
             if (res.ok) setState("done");
             else {
               setError(res.error ?? "Something went wrong.");
