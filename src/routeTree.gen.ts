@@ -29,6 +29,7 @@ import { Route as ResourcesGuidesRouteImport } from './routes/resources.guides'
 import { Route as ResourcesArticlesRouteImport } from './routes/resources.articles'
 import { Route as CommunityStoriesRouteImport } from './routes/community.stories'
 import { Route as CommunityEventsRouteImport } from './routes/community.events'
+import { Route as CitiesCitySlugRouteImport } from './routes/cities.$citySlug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -131,6 +132,11 @@ const CommunityEventsRoute = CommunityEventsRouteImport.update({
   path: '/community/events',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CitiesCitySlugRoute = CitiesCitySlugRouteImport.update({
+  id: '/cities/$citySlug',
+  path: '/cities/$citySlug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -140,6 +146,7 @@ export interface FileRoutesByFullPath {
   '/journey': typeof JourneyRoute
   '/new-to-bc': typeof NewToBcRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/cities/$citySlug': typeof CitiesCitySlugRoute
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
   '/resources/articles': typeof ResourcesArticlesRoute
@@ -162,6 +169,7 @@ export interface FileRoutesByTo {
   '/journey': typeof JourneyRoute
   '/new-to-bc': typeof NewToBcRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/cities/$citySlug': typeof CitiesCitySlugRoute
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
   '/resources/articles': typeof ResourcesArticlesRoute
@@ -185,6 +193,7 @@ export interface FileRoutesById {
   '/journey': typeof JourneyRoute
   '/new-to-bc': typeof NewToBcRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/cities/$citySlug': typeof CitiesCitySlugRoute
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
   '/resources/articles': typeof ResourcesArticlesRoute
@@ -209,6 +218,7 @@ export interface FileRouteTypes {
     | '/journey'
     | '/new-to-bc'
     | '/sitemap.xml'
+    | '/cities/$citySlug'
     | '/community/events'
     | '/community/stories'
     | '/resources/articles'
@@ -231,6 +241,7 @@ export interface FileRouteTypes {
     | '/journey'
     | '/new-to-bc'
     | '/sitemap.xml'
+    | '/cities/$citySlug'
     | '/community/events'
     | '/community/stories'
     | '/resources/articles'
@@ -253,6 +264,7 @@ export interface FileRouteTypes {
     | '/journey'
     | '/new-to-bc'
     | '/sitemap.xml'
+    | '/cities/$citySlug'
     | '/community/events'
     | '/community/stories'
     | '/resources/articles'
@@ -276,6 +288,7 @@ export interface RootRouteChildren {
   JourneyRoute: typeof JourneyRoute
   NewToBcRoute: typeof NewToBcRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  CitiesCitySlugRoute: typeof CitiesCitySlugRoute
   CommunityEventsRoute: typeof CommunityEventsRoute
   CommunityStoriesRoute: typeof CommunityStoriesRoute
   ResourcesArticlesRoute: typeof ResourcesArticlesRoute
@@ -433,6 +446,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommunityEventsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cities/$citySlug': {
+      id: '/cities/$citySlug'
+      path: '/cities/$citySlug'
+      fullPath: '/cities/$citySlug'
+      preLoaderRoute: typeof CitiesCitySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -444,6 +464,7 @@ const rootRouteChildren: RootRouteChildren = {
   JourneyRoute: JourneyRoute,
   NewToBcRoute: NewToBcRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  CitiesCitySlugRoute: CitiesCitySlugRoute,
   CommunityEventsRoute: CommunityEventsRoute,
   CommunityStoriesRoute: CommunityStoriesRoute,
   ResourcesArticlesRoute: ResourcesArticlesRoute,
