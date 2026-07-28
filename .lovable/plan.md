@@ -1,24 +1,36 @@
-## Goal
+## What's happening
 
-Replace the static 5-card grid under "Guidance for every step of your life in BC." with an endless, seamlessly looping horizontal row of service cards that drifts on its own and can also be dragged or swiped in either direction. Applied everywhere `ServiceGrid` renders (homepage and `/services`).
+The newsletter submit reaches your server and calls HubSpot, but HubSpot replies `404 Resource not found`.
 
-## Behaviour
+Confirmed from the code and settings:
+- `src/lib/leads/adapters.ts` sends newsletter leads to
+  `https://api.hsforms.com/submissions/v3/integration/submit/{HUBSPOT_PORTAL_ID}/{HUBSPOT_NEWSLETTER_FORM_GUID}`
+- All three secrets (`HUBSPOT_PORTAL_ID`, `HUBSPOT_FORM_GUID`, `HUBSPOT_NEWSLETTER_FORM_GUID`) exist, so the "not set" branch isn't the cause.
 
-- Cards scroll continuously right-to-left in a seamless loop with no visible start or end.
-- Auto-drift pauses on hover (desktop) and while dragging/touching.
-- Drag or swipe moves the row; releasing resumes the drift in the direction the user flicked.
-- Cards stay fully clickable — a drag past a small threshold suppresses the click so a swipe never navigates by accident.
-- Soft fade masks on the left and right edges so cards fade out rather than being cut off.
-- Under `prefers-reduced-motion`, no auto-drift: the row becomes a plain horizontal scroll strip with snap, still swipeable.
+A 404 from that endpoint means only one thing: HubSpot cannot find a form with that GUID inside that portal. The most likely causes, in order:
 
-## Implementation
+1. `HUBSPOT_NEWSLETTER_FORM_GUID` is not an actual form GUID (e.g. it's a form *name*, a page ID, or an ID copied from the wrong part of the HubSpot URL).
+2. The GUID belongs to a different HubSpot portal than `HUBSPOT_PORTAL_ID` (343477324 based on your tracking script).
+3. Stray whitespace / quotes pasted into the secret value.
 
-- Update `src/components/site/ServiceGrid.tsx`: keep the heading block and the `SERVICES` data unchanged; swap the grid `div` for a new looping track component.
-- Add `src/components/site/ServiceMarquee.tsx` — renders the card list duplicated enough times to fill the viewport, and uses GSAP's `horizontalLoop`-style approach (already available since gsap is a dependency) with `Draggable` + `InertiaPlugin`-free inertia via a simple velocity handoff, so no new packages are needed.
-- Card markup and styling are reused as-is, extracted into a small `ServiceCard` in the same file, with a fixed card width (approx. 300px, responsive) so the loop measures correctly.
-- The section already sits inside a `data-interactive` reveal wrapper on the homepage, so the existing scroll-reveal entrance still runs and the pointer lock still applies until it settles; the marquee starts only after mount.
-- Cleanup on unmount (kill tween, Draggable instance, resize listener); recalculate loop width on resize.
+Note the other four forms use `HUBSPOT_FORM_GUID` and would fail the same way if that one were wrong — so this is specific to the newsletter GUID.
 
-## Not changing
+## Plan
 
-Content, copy, routes, form/CRM logic, or any other section's animations.
+1. **Harden the adapter** (`src/lib/leads/adapters.ts`)
+   - Trim whitespace on portal ID and form GUID before building the URL.
+   - Validate the GUID looks like a UUID (`8-4-4-4-12`); if not, return a clear error like `HUBSPOT_NEWSLETTER_FORM_GUID is not a valid form GUID` instead of firing a doomed request.
+   - On a 404, return a friendlier diagnostic naming which env var was used and the portal it was tried against (no secret values leaked — GUIDs are not secrets, portal ID is public in your tracking script).
+
+2. **Add a one-off verification step**
+   Run a server-side check that submits a probe to both GUIDs and reports which resolves, so we know definitively whether it's the newsletter GUID alone or the portal ID.
+
+3. **You re-copy the GUID** (needed if step 2 confirms the GUID is wrong)
+   In HubSpot: Marketing → Forms → open the newsletter form → *Share* / *Embed code*. The embed snippet contains `formId: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"` — that value is the GUID. Also confirm `portalId` in that same snippet matches `343477324`. I'll update the secret with what you paste.
+
+4. **Graceful UX fallback** (optional, say if you want it)
+   Right now a CRM failure surfaces as an error to the visitor. I can make the newsletter show a success state while logging the CRM failure server-side, so a misconfigured form never blocks a signup.
+
+## Technical notes
+
+Only `src/lib/leads/adapters.ts` changes. No routing, provider-selection, form UI, or page content is touched. The dual-form routing logic (newsletter → newsletter GUID, everything else → main GUID) stays exactly as is.

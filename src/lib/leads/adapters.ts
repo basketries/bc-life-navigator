@@ -55,23 +55,30 @@ function webhookAdapter(name: string, urlEnv: string): LeadAdapter {
 
 // ---------- HubSpot Forms API ----------
 // No secret required. Configure HUBSPOT_PORTAL_ID and HUBSPOT_FORM_GUID.
+const GUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 const hubspotAdapter: LeadAdapter = {
   name: "hubspot",
   async submit(lead) {
-    const portalId = process.env.HUBSPOT_PORTAL_ID;
+    const portalId = (process.env.HUBSPOT_PORTAL_ID ?? "").trim().replace(/^["']|["']$/g, "");
     const isNewsletter = lead.context.source === "newsletter";
-    const formGuid = isNewsletter
-      ? process.env.HUBSPOT_NEWSLETTER_FORM_GUID
-      : process.env.HUBSPOT_FORM_GUID;
+    const guidVar = isNewsletter ? "HUBSPOT_NEWSLETTER_FORM_GUID" : "HUBSPOT_FORM_GUID";
+    const formGuid = (process.env[guidVar] ?? "").trim().replace(/^["']|["']$/g, "");
     if (!portalId || !formGuid) {
       return {
         ok: false,
         provider: "hubspot",
-        error: isNewsletter
-          ? "HUBSPOT_PORTAL_ID/HUBSPOT_NEWSLETTER_FORM_GUID not set"
-          : "HUBSPOT_PORTAL_ID/HUBSPOT_FORM_GUID not set",
+        error: `HUBSPOT_PORTAL_ID/${guidVar} not set`,
       };
     }
+    if (!GUID_RE.test(formGuid)) {
+      return {
+        ok: false,
+        provider: "hubspot",
+        error: `${guidVar} is not a valid HubSpot form GUID (expected xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)`,
+      };
+    }
+
     const fields = (
       isNewsletter
         ? [
@@ -111,8 +118,16 @@ const hubspotAdapter: LeadAdapter = {
         },
       );
       if (!res.ok) {
+        if (res.status === 404) {
+          return {
+            ok: false,
+            provider: "hubspot",
+            error: `HubSpot could not find form ${formGuid} (from ${guidVar}) in portal ${portalId}. Verify the formId/portalId in the form's embed code.`,
+          };
+        }
         return { ok: false, provider: "hubspot", error: `${res.status} ${await res.text()}` };
       }
+
       return { ok: true, provider: "hubspot" };
     } catch (e) {
       return { ok: false, provider: "hubspot", error: (e as Error).message };
