@@ -643,3 +643,102 @@ export const secondaryCities = cities.filter((c) => c.tier === "secondary");
 export function getCityBySlug(slug: string): City | undefined {
   return cities.find((c) => c.slug === slug);
 }
+
+export interface CitySeo {
+  title: string;
+  description: string;
+}
+
+/** Exact per-city title tags and meta descriptions. */
+export const citySeo: Record<string, CitySeo> = {
+  vancouver: {
+    title: "Moving to Vancouver, BC in 2026? Cost of Living & Neighbourhood Guide",
+    description:
+      "Vancouver rent averages $2,089/mo in 2026. See groceries, transit costs, and the best neighbourhoods for newcomers and professionals.",
+  },
+  victoria: {
+    title: "Living in Victoria, BC 2026 — Cost of Living & Best Areas",
+    description:
+      "Victoria rent runs ~$2,000-2,010/mo. See why retirees and remote workers love BC's walkable capital, with 2026 cost data.",
+  },
+  kelowna: {
+    title: "Kelowna, BC Cost of Living 2026 — Rent & Relocation Guide",
+    description:
+      "Kelowna rent averages $2,000/mo in 2026. See groceries, transit costs, and why families and remote workers are moving here.",
+  },
+  surrey: {
+    title: "Moving to Surrey, BC 2026 — Rent & Family Relocation Guide",
+    description:
+      "Surrey is Metro Vancouver's fastest-growing city. See 2026 rent (~$1,750 1BR), cost of living, and top family neighbourhoods.",
+  },
+  burnaby: {
+    title: "Living in Burnaby, BC 2026 — Cost of Living & Transit Guide",
+    description:
+      "Burnaby rent averages ~$2,200/mo (1BR) in 2026. See why it's Metro Vancouver's practical, transit-rich middle ground.",
+  },
+  richmond: {
+    title: "Moving to Richmond, BC 2026 — Cost of Living Guide",
+    description:
+      "Richmond rent averages $2,541/mo in 2026. See why it's one of Canada's most multicultural, newcomer-friendly cities.",
+  },
+  coquitlam: {
+    title: "Living in Coquitlam, BC 2026 — Family Relocation Guide",
+    description:
+      "Coquitlam rent averages $2,459/mo in 2026. See why families and first-time buyers choose this SkyTrain-connected suburb.",
+  },
+  "north-vancouver": {
+    title: "North Vancouver, BC Cost of Living 2026 — Rent & Guide",
+    description:
+      "North Vancouver rent averages $2,955/mo, among Canada's highest. See 2026 costs and why outdoor lovers pay the premium.",
+  },
+  abbotsford: {
+    title: "Moving to Abbotsford, BC 2026 — Affordable Family Guide",
+    description:
+      "Abbotsford rent averages $1,795/mo in 2026, the Fraser Valley's most attainable city living. See full cost breakdown.",
+  },
+  nanaimo: {
+    title: "Living in Nanaimo, BC 2026 — Cost of Living Guide",
+    description:
+      "Nanaimo rent averages $1,895/mo in 2026. See why Vancouver Island's harbour city suits remote workers and retirees.",
+  },
+  kamloops: {
+    title: "Moving to Kamloops, BC 2026 — Interior BC Relocation Guide",
+    description:
+      "Kamloops rent averages $1,811/mo in 2026. See cost of living in this sunny, practical interior hub.",
+  },
+  chilliwack: {
+    title: "Living in Chilliwack, BC 2026 — Cost of Living Guide",
+    description:
+      "Chilliwack rent averages $1,650/mo in 2026. See why this mountain-framed Fraser Valley city offers room to grow.",
+  },
+  "prince-george": {
+    title: "Moving to Prince George, BC 2026 — Northern BC Guide",
+    description:
+      "Prince George rent averages $1,495/mo in 2026, among BC's most affordable. Northern BC's service and education hub.",
+  },
+  vernon: {
+    title: "Living in Vernon, BC 2026 — Okanagan Relocation Guide",
+    description:
+      "Vernon rent averages $1,850/mo in 2026. Three lakes, a ski hill, and a relaxed north Okanagan pace.",
+  },
+  nelson: {
+    title: "Moving to Nelson, BC 2026 — Kootenay Cost of Living Guide",
+    description:
+      "Nelson, BC cost of living 2026: a heritage mountain town with an outsized arts scene in the West Kootenays.",
+  },
+  penticton: {
+    title: "Living in Penticton, BC 2026 — Okanagan Guide",
+    description:
+      "Penticton, BC cost of living 2026: between two lakes, surrounded by wineries, in the South Okanagan.",
+  },
+  squamish: {
+    title: "Moving to Squamish, BC 2026 — Sea-to-Sky Guide",
+    description:
+      "Squamish, BC cost of living 2026: the outdoor recreation capital, halfway between Vancouver and Whistler.",
+  },
+  langley: {
+    title: "Living in Langley, BC 2026 — Cost of Living Guide",
+    description:
+      "Langley rent averages $2,192/mo in 2026. Where Metro Vancouver meets horse country — full cost breakdown inside.",
+  },
+};
