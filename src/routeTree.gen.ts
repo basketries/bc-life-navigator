@@ -30,6 +30,7 @@ import { Route as ResourcesGuidesRouteImport } from './routes/resources.guides'
 import { Route as ResourcesArticlesRouteImport } from './routes/resources.articles'
 import { Route as CommunityStoriesRouteImport } from './routes/community.stories'
 import { Route as CommunityEventsRouteImport } from './routes/community.events'
+import { Route as CitiesCompareRouteImport } from './routes/cities.compare'
 import { Route as CitiesCitySlugRouteImport } from './routes/cities.$citySlug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -138,6 +139,11 @@ const CommunityEventsRoute = CommunityEventsRouteImport.update({
   path: '/community/events',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CitiesCompareRoute = CitiesCompareRouteImport.update({
+  id: '/cities/compare',
+  path: '/cities/compare',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CitiesCitySlugRoute = CitiesCitySlugRouteImport.update({
   id: '/cities/$citySlug',
   path: '/cities/$citySlug',
@@ -153,6 +159,7 @@ export interface FileRoutesByFullPath {
   '/new-to-bc': typeof NewToBcRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/cities/$citySlug': typeof CitiesCitySlugRoute
+  '/cities/compare': typeof CitiesCompareRoute
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
   '/resources/articles': typeof ResourcesArticlesRoute
@@ -177,6 +184,7 @@ export interface FileRoutesByTo {
   '/new-to-bc': typeof NewToBcRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/cities/$citySlug': typeof CitiesCitySlugRoute
+  '/cities/compare': typeof CitiesCompareRoute
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
   '/resources/articles': typeof ResourcesArticlesRoute
@@ -202,6 +210,7 @@ export interface FileRoutesById {
   '/new-to-bc': typeof NewToBcRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/cities/$citySlug': typeof CitiesCitySlugRoute
+  '/cities/compare': typeof CitiesCompareRoute
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
   '/resources/articles': typeof ResourcesArticlesRoute
@@ -228,6 +237,7 @@ export interface FileRouteTypes {
     | '/new-to-bc'
     | '/sitemap.xml'
     | '/cities/$citySlug'
+    | '/cities/compare'
     | '/community/events'
     | '/community/stories'
     | '/resources/articles'
@@ -252,6 +262,7 @@ export interface FileRouteTypes {
     | '/new-to-bc'
     | '/sitemap.xml'
     | '/cities/$citySlug'
+    | '/cities/compare'
     | '/community/events'
     | '/community/stories'
     | '/resources/articles'
@@ -276,6 +287,7 @@ export interface FileRouteTypes {
     | '/new-to-bc'
     | '/sitemap.xml'
     | '/cities/$citySlug'
+    | '/cities/compare'
     | '/community/events'
     | '/community/stories'
     | '/resources/articles'
@@ -301,6 +313,7 @@ export interface RootRouteChildren {
   NewToBcRoute: typeof NewToBcRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CitiesCitySlugRoute: typeof CitiesCitySlugRoute
+  CitiesCompareRoute: typeof CitiesCompareRoute
   CommunityEventsRoute: typeof CommunityEventsRoute
   CommunityStoriesRoute: typeof CommunityStoriesRoute
   ResourcesArticlesRoute: typeof ResourcesArticlesRoute
@@ -466,6 +479,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommunityEventsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cities/compare': {
+      id: '/cities/compare'
+      path: '/cities/compare'
+      fullPath: '/cities/compare'
+      preLoaderRoute: typeof CitiesCompareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cities/$citySlug': {
       id: '/cities/$citySlug'
       path: '/cities/$citySlug'
@@ -485,6 +505,7 @@ const rootRouteChildren: RootRouteChildren = {
   NewToBcRoute: NewToBcRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   CitiesCitySlugRoute: CitiesCitySlugRoute,
+  CitiesCompareRoute: CitiesCompareRoute,
   CommunityEventsRoute: CommunityEventsRoute,
   CommunityStoriesRoute: CommunityStoriesRoute,
   ResourcesArticlesRoute: ResourcesArticlesRoute,
