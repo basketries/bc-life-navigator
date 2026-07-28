@@ -111,9 +111,9 @@ export function CityPage({ city }: { city: City }) {
           <>
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               {[
-                { label: "Housing", value: cost.housing },
-                { label: "Groceries", value: cost.groceries },
-                { label: "Transit", value: cost.transit },
+                { label: "1BR Rent", value: cost.housing },
+                { label: "Monthly Groceries (single person)", value: cost.groceries },
+                { label: "Transit Pass (monthly)", value: cost.transit },
               ].map((row) => (
                 <div key={row.label} className="rounded-2xl border border-border bg-card p-6">
                   <p className="text-sm text-muted-foreground">{row.label}</p>
@@ -121,9 +121,10 @@ export function CityPage({ city }: { city: City }) {
                 </div>
               ))}
             </div>
-            {!isTbd(cost.notes) && (
+            {cost.notes && !isTbd(cost.notes) && (
               <p className="mt-4 text-sm text-muted-foreground">{cost.notes}</p>
             )}
+            <p className="mt-3 text-xs text-muted-foreground/80">{COST_SOURCE_NOTE}</p>
           </>
         ) : (
           <div className="mt-8 rounded-2xl border border-dashed border-border bg-secondary/30 p-8">
