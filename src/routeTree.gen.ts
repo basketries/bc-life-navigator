@@ -27,6 +27,7 @@ import { Route as ServicesBuyYourHomeRouteImport } from './routes/services.buy-y
 import { Route as ServicesBuildWealthRouteImport } from './routes/services.build-wealth'
 import { Route as ResourcesVideosRouteImport } from './routes/resources.videos'
 import { Route as ResourcesGuidesRouteImport } from './routes/resources.guides'
+import { Route as ResourcesCostOfLivingCalculatorRouteImport } from './routes/resources.cost-of-living-calculator'
 import { Route as ResourcesArticlesRouteImport } from './routes/resources.articles'
 import { Route as CommunityStoriesRouteImport } from './routes/community.stories'
 import { Route as CommunityEventsRouteImport } from './routes/community.events'
@@ -124,6 +125,12 @@ const ResourcesGuidesRoute = ResourcesGuidesRouteImport.update({
   path: '/resources/guides',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResourcesCostOfLivingCalculatorRoute =
+  ResourcesCostOfLivingCalculatorRouteImport.update({
+    id: '/resources/cost-of-living-calculator',
+    path: '/resources/cost-of-living-calculator',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ResourcesArticlesRoute = ResourcesArticlesRouteImport.update({
   id: '/resources/articles',
   path: '/resources/articles',
@@ -163,6 +170,7 @@ export interface FileRoutesByFullPath {
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
   '/resources/articles': typeof ResourcesArticlesRoute
+  '/resources/cost-of-living-calculator': typeof ResourcesCostOfLivingCalculatorRoute
   '/resources/guides': typeof ResourcesGuidesRoute
   '/resources/videos': typeof ResourcesVideosRoute
   '/services/build-wealth': typeof ServicesBuildWealthRoute
@@ -188,6 +196,7 @@ export interface FileRoutesByTo {
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
   '/resources/articles': typeof ResourcesArticlesRoute
+  '/resources/cost-of-living-calculator': typeof ResourcesCostOfLivingCalculatorRoute
   '/resources/guides': typeof ResourcesGuidesRoute
   '/resources/videos': typeof ResourcesVideosRoute
   '/services/build-wealth': typeof ServicesBuildWealthRoute
@@ -214,6 +223,7 @@ export interface FileRoutesById {
   '/community/events': typeof CommunityEventsRoute
   '/community/stories': typeof CommunityStoriesRoute
   '/resources/articles': typeof ResourcesArticlesRoute
+  '/resources/cost-of-living-calculator': typeof ResourcesCostOfLivingCalculatorRoute
   '/resources/guides': typeof ResourcesGuidesRoute
   '/resources/videos': typeof ResourcesVideosRoute
   '/services/build-wealth': typeof ServicesBuildWealthRoute
@@ -241,6 +251,7 @@ export interface FileRouteTypes {
     | '/community/events'
     | '/community/stories'
     | '/resources/articles'
+    | '/resources/cost-of-living-calculator'
     | '/resources/guides'
     | '/resources/videos'
     | '/services/build-wealth'
@@ -266,6 +277,7 @@ export interface FileRouteTypes {
     | '/community/events'
     | '/community/stories'
     | '/resources/articles'
+    | '/resources/cost-of-living-calculator'
     | '/resources/guides'
     | '/resources/videos'
     | '/services/build-wealth'
@@ -291,6 +303,7 @@ export interface FileRouteTypes {
     | '/community/events'
     | '/community/stories'
     | '/resources/articles'
+    | '/resources/cost-of-living-calculator'
     | '/resources/guides'
     | '/resources/videos'
     | '/services/build-wealth'
@@ -317,6 +330,7 @@ export interface RootRouteChildren {
   CommunityEventsRoute: typeof CommunityEventsRoute
   CommunityStoriesRoute: typeof CommunityStoriesRoute
   ResourcesArticlesRoute: typeof ResourcesArticlesRoute
+  ResourcesCostOfLivingCalculatorRoute: typeof ResourcesCostOfLivingCalculatorRoute
   ResourcesGuidesRoute: typeof ResourcesGuidesRoute
   ResourcesVideosRoute: typeof ResourcesVideosRoute
   ServicesBuildWealthRoute: typeof ServicesBuildWealthRoute
@@ -458,6 +472,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesGuidesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resources/cost-of-living-calculator': {
+      id: '/resources/cost-of-living-calculator'
+      path: '/resources/cost-of-living-calculator'
+      fullPath: '/resources/cost-of-living-calculator'
+      preLoaderRoute: typeof ResourcesCostOfLivingCalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resources/articles': {
       id: '/resources/articles'
       path: '/resources/articles'
@@ -509,6 +530,7 @@ const rootRouteChildren: RootRouteChildren = {
   CommunityEventsRoute: CommunityEventsRoute,
   CommunityStoriesRoute: CommunityStoriesRoute,
   ResourcesArticlesRoute: ResourcesArticlesRoute,
+  ResourcesCostOfLivingCalculatorRoute: ResourcesCostOfLivingCalculatorRoute,
   ResourcesGuidesRoute: ResourcesGuidesRoute,
   ResourcesVideosRoute: ResourcesVideosRoute,
   ServicesBuildWealthRoute: ServicesBuildWealthRoute,

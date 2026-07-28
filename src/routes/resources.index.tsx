@@ -29,7 +29,7 @@ const CATS = [
   { to: "/resources/guides", icon: BookOpen, title: "Guides", desc: "Step-by-step playbooks for moving, buying, and planning in BC." },
   { to: "/resources/articles", icon: FileText, title: "Articles", desc: "Short reads on life, home, money, and community in BC." },
   { to: "/resources/videos", icon: PlayCircle, title: "Videos", desc: "Explainers and interviews with BC-focused experts." },
-  { to: "/resources", icon: Calculator, title: "Calculators", desc: "Simple tools to run the numbers before big decisions." },
+  { to: "/resources/cost-of-living-calculator", icon: Calculator, title: "Cost of Living Calculator", desc: "Estimate monthly costs by city and household size before you commit." },
 ];
 
 const PILLARS = [
