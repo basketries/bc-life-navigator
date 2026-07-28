@@ -26,7 +26,9 @@ import { Route as ServicesFinanceYourHomeRouteImport } from './routes/services.f
 import { Route as ServicesBuyYourHomeRouteImport } from './routes/services.buy-your-home'
 import { Route as ServicesBuildWealthRouteImport } from './routes/services.build-wealth'
 import { Route as ResourcesVideosRouteImport } from './routes/resources.videos'
+import { Route as ResourcesRelocationChecklistRouteImport } from './routes/resources.relocation-checklist'
 import { Route as ResourcesNeighbourhoodQuizRouteImport } from './routes/resources.neighbourhood-quiz'
+import { Route as ResourcesMovingCostEstimatorRouteImport } from './routes/resources.moving-cost-estimator'
 import { Route as ResourcesGuidesRouteImport } from './routes/resources.guides'
 import { Route as ResourcesCostOfLivingCalculatorRouteImport } from './routes/resources.cost-of-living-calculator'
 import { Route as ResourcesArticlesRouteImport } from './routes/resources.articles'
@@ -121,10 +123,22 @@ const ResourcesVideosRoute = ResourcesVideosRouteImport.update({
   path: '/resources/videos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResourcesRelocationChecklistRoute =
+  ResourcesRelocationChecklistRouteImport.update({
+    id: '/resources/relocation-checklist',
+    path: '/resources/relocation-checklist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ResourcesNeighbourhoodQuizRoute =
   ResourcesNeighbourhoodQuizRouteImport.update({
     id: '/resources/neighbourhood-quiz',
     path: '/resources/neighbourhood-quiz',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ResourcesMovingCostEstimatorRoute =
+  ResourcesMovingCostEstimatorRouteImport.update({
+    id: '/resources/moving-cost-estimator',
+    path: '/resources/moving-cost-estimator',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ResourcesGuidesRoute = ResourcesGuidesRouteImport.update({
@@ -179,7 +193,9 @@ export interface FileRoutesByFullPath {
   '/resources/articles': typeof ResourcesArticlesRoute
   '/resources/cost-of-living-calculator': typeof ResourcesCostOfLivingCalculatorRoute
   '/resources/guides': typeof ResourcesGuidesRoute
+  '/resources/moving-cost-estimator': typeof ResourcesMovingCostEstimatorRoute
   '/resources/neighbourhood-quiz': typeof ResourcesNeighbourhoodQuizRoute
+  '/resources/relocation-checklist': typeof ResourcesRelocationChecklistRoute
   '/resources/videos': typeof ResourcesVideosRoute
   '/services/build-wealth': typeof ServicesBuildWealthRoute
   '/services/buy-your-home': typeof ServicesBuyYourHomeRoute
@@ -206,7 +222,9 @@ export interface FileRoutesByTo {
   '/resources/articles': typeof ResourcesArticlesRoute
   '/resources/cost-of-living-calculator': typeof ResourcesCostOfLivingCalculatorRoute
   '/resources/guides': typeof ResourcesGuidesRoute
+  '/resources/moving-cost-estimator': typeof ResourcesMovingCostEstimatorRoute
   '/resources/neighbourhood-quiz': typeof ResourcesNeighbourhoodQuizRoute
+  '/resources/relocation-checklist': typeof ResourcesRelocationChecklistRoute
   '/resources/videos': typeof ResourcesVideosRoute
   '/services/build-wealth': typeof ServicesBuildWealthRoute
   '/services/buy-your-home': typeof ServicesBuyYourHomeRoute
@@ -234,7 +252,9 @@ export interface FileRoutesById {
   '/resources/articles': typeof ResourcesArticlesRoute
   '/resources/cost-of-living-calculator': typeof ResourcesCostOfLivingCalculatorRoute
   '/resources/guides': typeof ResourcesGuidesRoute
+  '/resources/moving-cost-estimator': typeof ResourcesMovingCostEstimatorRoute
   '/resources/neighbourhood-quiz': typeof ResourcesNeighbourhoodQuizRoute
+  '/resources/relocation-checklist': typeof ResourcesRelocationChecklistRoute
   '/resources/videos': typeof ResourcesVideosRoute
   '/services/build-wealth': typeof ServicesBuildWealthRoute
   '/services/buy-your-home': typeof ServicesBuyYourHomeRoute
@@ -263,7 +283,9 @@ export interface FileRouteTypes {
     | '/resources/articles'
     | '/resources/cost-of-living-calculator'
     | '/resources/guides'
+    | '/resources/moving-cost-estimator'
     | '/resources/neighbourhood-quiz'
+    | '/resources/relocation-checklist'
     | '/resources/videos'
     | '/services/build-wealth'
     | '/services/buy-your-home'
@@ -290,7 +312,9 @@ export interface FileRouteTypes {
     | '/resources/articles'
     | '/resources/cost-of-living-calculator'
     | '/resources/guides'
+    | '/resources/moving-cost-estimator'
     | '/resources/neighbourhood-quiz'
+    | '/resources/relocation-checklist'
     | '/resources/videos'
     | '/services/build-wealth'
     | '/services/buy-your-home'
@@ -317,7 +341,9 @@ export interface FileRouteTypes {
     | '/resources/articles'
     | '/resources/cost-of-living-calculator'
     | '/resources/guides'
+    | '/resources/moving-cost-estimator'
     | '/resources/neighbourhood-quiz'
+    | '/resources/relocation-checklist'
     | '/resources/videos'
     | '/services/build-wealth'
     | '/services/buy-your-home'
@@ -345,7 +371,9 @@ export interface RootRouteChildren {
   ResourcesArticlesRoute: typeof ResourcesArticlesRoute
   ResourcesCostOfLivingCalculatorRoute: typeof ResourcesCostOfLivingCalculatorRoute
   ResourcesGuidesRoute: typeof ResourcesGuidesRoute
+  ResourcesMovingCostEstimatorRoute: typeof ResourcesMovingCostEstimatorRoute
   ResourcesNeighbourhoodQuizRoute: typeof ResourcesNeighbourhoodQuizRoute
+  ResourcesRelocationChecklistRoute: typeof ResourcesRelocationChecklistRoute
   ResourcesVideosRoute: typeof ResourcesVideosRoute
   ServicesBuildWealthRoute: typeof ServicesBuildWealthRoute
   ServicesBuyYourHomeRoute: typeof ServicesBuyYourHomeRoute
@@ -479,11 +507,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesVideosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resources/relocation-checklist': {
+      id: '/resources/relocation-checklist'
+      path: '/resources/relocation-checklist'
+      fullPath: '/resources/relocation-checklist'
+      preLoaderRoute: typeof ResourcesRelocationChecklistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resources/neighbourhood-quiz': {
       id: '/resources/neighbourhood-quiz'
       path: '/resources/neighbourhood-quiz'
       fullPath: '/resources/neighbourhood-quiz'
       preLoaderRoute: typeof ResourcesNeighbourhoodQuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources/moving-cost-estimator': {
+      id: '/resources/moving-cost-estimator'
+      path: '/resources/moving-cost-estimator'
+      fullPath: '/resources/moving-cost-estimator'
+      preLoaderRoute: typeof ResourcesMovingCostEstimatorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources/guides': {
@@ -553,7 +595,9 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesArticlesRoute: ResourcesArticlesRoute,
   ResourcesCostOfLivingCalculatorRoute: ResourcesCostOfLivingCalculatorRoute,
   ResourcesGuidesRoute: ResourcesGuidesRoute,
+  ResourcesMovingCostEstimatorRoute: ResourcesMovingCostEstimatorRoute,
   ResourcesNeighbourhoodQuizRoute: ResourcesNeighbourhoodQuizRoute,
+  ResourcesRelocationChecklistRoute: ResourcesRelocationChecklistRoute,
   ResourcesVideosRoute: ResourcesVideosRoute,
   ServicesBuildWealthRoute: ServicesBuildWealthRoute,
   ServicesBuyYourHomeRoute: ServicesBuyYourHomeRoute,

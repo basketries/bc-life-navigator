@@ -10,7 +10,9 @@ export type LeadSource =
   | "contact_form"
   | "resource_download"
   | "cost_calculator"
-  | "neighbourhood_quiz";
+  | "neighbourhood_quiz"
+  | "moving_cost_estimator"
+  | "relocation_checklist";
 
 export type VisitorGoal =
   | "newcomer"
