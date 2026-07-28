@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check, MapPin } from "lucide-react";
 import { PageHero } from "./PageHero";
 import { RevealGroup } from "@/components/site/RevealGroup";
-import type { City } from "@/data/cities";
+import { COST_SOURCE_NOTE, type City } from "@/data/cities";
 
 function isTbd(value: string) {
   return value.trim().toUpperCase() === "TBD";
