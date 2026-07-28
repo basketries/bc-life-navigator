@@ -19,6 +19,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
 import { Route as CommunityIndexRouteImport } from './routes/community.index'
+import { Route as CitiesIndexRouteImport } from './routes/cities.index'
 import { Route as ServicesProtectYourFamilyRouteImport } from './routes/services.protect-your-family'
 import { Route as ServicesPlanYourFutureRouteImport } from './routes/services.plan-your-future'
 import { Route as ServicesFinanceYourHomeRouteImport } from './routes/services.finance-your-home'
@@ -79,6 +80,11 @@ const ResourcesIndexRoute = ResourcesIndexRouteImport.update({
 const CommunityIndexRoute = CommunityIndexRouteImport.update({
   id: '/community/',
   path: '/community/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CitiesIndexRoute = CitiesIndexRouteImport.update({
+  id: '/cities/',
+  path: '/cities/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesProtectYourFamilyRoute =
@@ -157,6 +163,7 @@ export interface FileRoutesByFullPath {
   '/services/finance-your-home': typeof ServicesFinanceYourHomeRoute
   '/services/plan-your-future': typeof ServicesPlanYourFutureRoute
   '/services/protect-your-family': typeof ServicesProtectYourFamilyRoute
+  '/cities/': typeof CitiesIndexRoute
   '/community/': typeof CommunityIndexRoute
   '/resources/': typeof ResourcesIndexRoute
   '/services/': typeof ServicesIndexRoute
@@ -180,6 +187,7 @@ export interface FileRoutesByTo {
   '/services/finance-your-home': typeof ServicesFinanceYourHomeRoute
   '/services/plan-your-future': typeof ServicesPlanYourFutureRoute
   '/services/protect-your-family': typeof ServicesProtectYourFamilyRoute
+  '/cities': typeof CitiesIndexRoute
   '/community': typeof CommunityIndexRoute
   '/resources': typeof ResourcesIndexRoute
   '/services': typeof ServicesIndexRoute
@@ -204,6 +212,7 @@ export interface FileRoutesById {
   '/services/finance-your-home': typeof ServicesFinanceYourHomeRoute
   '/services/plan-your-future': typeof ServicesPlanYourFutureRoute
   '/services/protect-your-family': typeof ServicesProtectYourFamilyRoute
+  '/cities/': typeof CitiesIndexRoute
   '/community/': typeof CommunityIndexRoute
   '/resources/': typeof ResourcesIndexRoute
   '/services/': typeof ServicesIndexRoute
@@ -229,6 +238,7 @@ export interface FileRouteTypes {
     | '/services/finance-your-home'
     | '/services/plan-your-future'
     | '/services/protect-your-family'
+    | '/cities/'
     | '/community/'
     | '/resources/'
     | '/services/'
@@ -252,6 +262,7 @@ export interface FileRouteTypes {
     | '/services/finance-your-home'
     | '/services/plan-your-future'
     | '/services/protect-your-family'
+    | '/cities'
     | '/community'
     | '/resources'
     | '/services'
@@ -275,6 +286,7 @@ export interface FileRouteTypes {
     | '/services/finance-your-home'
     | '/services/plan-your-future'
     | '/services/protect-your-family'
+    | '/cities/'
     | '/community/'
     | '/resources/'
     | '/services/'
@@ -299,6 +311,7 @@ export interface RootRouteChildren {
   ServicesFinanceYourHomeRoute: typeof ServicesFinanceYourHomeRoute
   ServicesPlanYourFutureRoute: typeof ServicesPlanYourFutureRoute
   ServicesProtectYourFamilyRoute: typeof ServicesProtectYourFamilyRoute
+  CitiesIndexRoute: typeof CitiesIndexRoute
   CommunityIndexRoute: typeof CommunityIndexRoute
   ResourcesIndexRoute: typeof ResourcesIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
@@ -374,6 +387,13 @@ declare module '@tanstack/react-router' {
       path: '/community'
       fullPath: '/community/'
       preLoaderRoute: typeof CommunityIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cities/': {
+      id: '/cities/'
+      path: '/cities'
+      fullPath: '/cities/'
+      preLoaderRoute: typeof CitiesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/protect-your-family': {
@@ -475,6 +495,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesFinanceYourHomeRoute: ServicesFinanceYourHomeRoute,
   ServicesPlanYourFutureRoute: ServicesPlanYourFutureRoute,
   ServicesProtectYourFamilyRoute: ServicesProtectYourFamilyRoute,
+  CitiesIndexRoute: CitiesIndexRoute,
   CommunityIndexRoute: CommunityIndexRoute,
   ResourcesIndexRoute: ResourcesIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
