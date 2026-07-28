@@ -25,8 +25,8 @@ export const Route = createFileRoute("/cities/$citySlug")({
       meta: [
         { title },
         { name: "description", content: description },
-        { property: "og:title", content: `Living in ${city.name}, BC` },
-        { property: "og:description", content: city.tagline },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
         { property: "og:type", content: "article" },
         { property: "og:url", content: url },
         { name: "twitter:card", content: "summary_large_image" },
