@@ -110,6 +110,10 @@ function Row({
   );
 }
 
+function ComingSoon() {
+  return <span className="italic text-muted-foreground/80">Coming soon</span>;
+}
+
 function CostCell({ city }: { city: City }) {
   const c = costLine(city);
   if (!c) return null;
