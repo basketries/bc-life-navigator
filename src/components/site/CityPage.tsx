@@ -108,6 +108,11 @@ export function CityPage({ city }: { city: City }) {
         <section className="container-page my-20">
           <p className="eyebrow">Cost of living</p>
           <h2 className="mt-3 text-3xl text-foreground">What it costs to live here.</h2>
+          {cost.updated && (
+            <p className="mt-2 text-xs text-muted-foreground/80">
+              Last updated: {cost.updated}
+            </p>
+          )}
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             {[
               { label: "Housing (rent)", value: cost.housing },

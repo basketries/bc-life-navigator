@@ -8,6 +8,8 @@ export interface CostOfLiving {
   groceries: string;
   transit: string;
   notes: string;
+  /** Month/year the estimate was last refreshed, e.g. "July 2026". */
+  updated?: string;
 }
 
 export interface City {
@@ -75,6 +77,7 @@ export const cities: City[] = [
         "TransLink monthly pass, zone-based — see translink.ca for current fares",
       notes:
         "Estimated from market reports, July 2026. BC's most expensive rental market. Figures are indicative — check current listings for accuracy.",
+      updated: "July 2026",
     },
   },
   {
@@ -123,6 +126,7 @@ export const cities: City[] = [
       transit: "BC Transit monthly pass — see bctransit.com for current fares",
       notes:
         "Estimated from market reports, July 2026. Figures are indicative — check current listings for accuracy.",
+      updated: "July 2026",
     },
   },
   {
@@ -171,6 +175,7 @@ export const cities: City[] = [
       transit: "BC Transit monthly pass — see bctransit.com for current fares",
       notes:
         "Estimated from market reports, mid-2026. High vacancy rate currently gives renters more negotiating room. Figures are indicative.",
+      updated: "July 2026",
     },
   },
   {
@@ -220,6 +225,7 @@ export const cities: City[] = [
         "TransLink monthly pass, zone-based — see translink.ca for current fares",
       notes:
         "Estimated from market reports, July 2026. The most affordable option within Metro Vancouver. Figures are indicative.",
+      updated: "July 2026",
     },
   },
   {
@@ -269,6 +275,7 @@ export const cities: City[] = [
         "TransLink monthly pass, zone-based — see translink.ca for current fares",
       notes:
         "Estimated from market reports, July 2026. Figures are indicative — check current listings for accuracy.",
+      updated: "July 2026",
     },
   },
   {
@@ -313,6 +320,7 @@ export const cities: City[] = [
         "TransLink monthly pass, zone-based — see translink.ca for current fares",
       notes:
         "Estimated from market reports, July 2026. Among the most expensive rental markets in Canada. Figures are indicative.",
+      updated: "July 2026",
     },
   },
   {
@@ -357,6 +365,7 @@ export const cities: City[] = [
         "TransLink monthly pass, zone-based — see translink.ca for current fares",
       notes:
         "Estimated from Rentals.ca/Urbanation report, July 2026. Figures are indicative — check current listings for accuracy.",
+      updated: "July 2026",
     },
   },
   {
@@ -401,6 +410,7 @@ export const cities: City[] = [
         "TransLink monthly pass, zone-based — see translink.ca for current fares",
       notes:
         "Estimated from Rentals.ca/Urbanation report, July 2026. Currently Canada's most expensive rental market by this measure. Figures are indicative.",
+      updated: "July 2026",
     },
   },
   {
@@ -444,6 +454,7 @@ export const cities: City[] = [
       transit: "BC Transit monthly pass — see bctransit.com for current fares",
       notes:
         "Estimated from market reports, March-June 2026. More affordable than Metro Vancouver core cities. Figures are indicative.",
+      updated: "June 2026",
     },
   },
   {
@@ -487,6 +498,7 @@ export const cities: City[] = [
       transit: "BC Transit monthly pass — see bctransit.com for current fares",
       notes:
         "Estimated from market reports, June 2026. Figures are indicative — check current listings for accuracy.",
+      updated: "June 2026",
     },
   },
 
@@ -509,6 +521,7 @@ export const cities: City[] = [
       groceries: "$340–380",
       transit: "$65–75",
       notes: "",
+      updated: "July 2026",
     },
   },
   {
@@ -529,6 +542,7 @@ export const cities: City[] = [
       groceries: "$340–380",
       transit: "$60–75",
       notes: "",
+      updated: "July 2026",
     },
   },
   {
@@ -549,6 +563,7 @@ export const cities: City[] = [
       groceries: "$340–390",
       transit: "$60–70",
       notes: "",
+      updated: "July 2026",
     },
   },
   {
@@ -569,6 +584,7 @@ export const cities: City[] = [
       groceries: "$350–390",
       transit: "$60–70",
       notes: "",
+      updated: "July 2026",
     },
   },
   {
@@ -589,6 +605,7 @@ export const cities: City[] = [
       groceries: "$350–390",
       transit: "$55–65",
       notes: "Rental data for Nelson is limited; the 1BR figure is an estimate.",
+      updated: "July 2026",
     },
   },
   {
@@ -609,6 +626,7 @@ export const cities: City[] = [
       groceries: "$350–390",
       transit: "$55–65",
       notes: "The 1BR range for Penticton is not yet independently verified.",
+      updated: "July 2026",
     },
   },
   {
@@ -629,6 +647,7 @@ export const cities: City[] = [
       groceries: "$400–440",
       transit: "$60–70",
       notes: "The 1BR range for Squamish is not yet independently verified.",
+      updated: "July 2026",
     },
   },
   {
@@ -649,6 +668,7 @@ export const cities: City[] = [
       groceries: "$370–400",
       transit: "$117.20–$161.35",
       notes: "",
+      updated: "July 2026",
     },
   },
 ];
