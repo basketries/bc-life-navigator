@@ -4,17 +4,13 @@ import { PageHero } from "./PageHero";
 import { RevealGroup } from "@/components/site/RevealGroup";
 import { COST_SOURCE_NOTE, type City } from "@/data/cities";
 
-function isTbd(value: string) {
-  return value.trim().toUpperCase() === "TBD";
-}
+const COST_GUIDANCE_NOTE =
+  "Estimates based on market reports, updated periodically — for guidance only";
 
 export function CityPage({ city }: { city: City }) {
   const cost = city.costOfLiving;
-  const costReady =
-    cost !== null &&
-    !isTbd(cost.housing) &&
-    !isTbd(cost.groceries) &&
-    !isTbd(cost.transit);
+
+
 
   return (
     <RevealGroup>
@@ -108,40 +104,30 @@ export function CityPage({ city }: { city: City }) {
         </div>
       </section>
 
-      <section className="container-page my-20">
-        <p className="eyebrow">Cost of living</p>
-        <h2 className="mt-3 text-3xl text-foreground">What it costs to live here.</h2>
-        {costReady && cost ? (
-          <>
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              {[
-                { label: "1BR Rent", value: cost.housing },
-                { label: "Monthly Groceries (single person)", value: cost.groceries },
-                { label: "Transit Pass (monthly)", value: cost.transit },
-              ].map((row) => (
-                <div key={row.label} className="rounded-2xl border border-border bg-card p-6">
-                  <p className="text-sm text-muted-foreground">{row.label}</p>
-                  <p className="mt-2 text-lg text-foreground">{row.value}</p>
-                </div>
-              ))}
-            </div>
-            {cost.notes && !isTbd(cost.notes) && (
-              <p className="mt-4 text-sm text-muted-foreground">{cost.notes}</p>
-            )}
-            <p className="mt-3 text-xs text-muted-foreground/80">{COST_SOURCE_NOTE}</p>
-          </>
-        ) : (
-          <div className="mt-8 rounded-2xl border border-dashed border-border bg-secondary/30 p-8">
-            <p className="text-sm font-medium text-foreground">Coming soon</p>
-            <p className="mt-2 text-sm text-muted-foreground max-w-xl">
-              We&rsquo;re gathering verified housing, grocery, and transit cost data for{" "}
-              {city.name}. Rather than publish estimates, we&rsquo;ll share numbers once
-              they&rsquo;re sourced. In the meantime, a consultation can help you build a
-              realistic budget.
-            </p>
+      {cost && (
+        <section className="container-page my-20">
+          <p className="eyebrow">Cost of living</p>
+          <h2 className="mt-3 text-3xl text-foreground">What it costs to live here.</h2>
+          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            {[
+              { label: "Housing (rent)", value: cost.housing },
+              { label: "Monthly Groceries (single person)", value: cost.groceries },
+              { label: "Transit Pass (monthly)", value: cost.transit },
+            ].map((row) => (
+              <div key={row.label} className="rounded-2xl border border-border bg-card p-6">
+                <p className="text-sm text-muted-foreground">{row.label}</p>
+                <p className="mt-2 text-lg text-foreground">{row.value}</p>
+              </div>
+            ))}
           </div>
-        )}
-      </section>
+          {cost.notes && (
+            <p className="mt-4 text-sm text-muted-foreground">{cost.notes}</p>
+          )}
+          <p className="mt-3 text-xs text-muted-foreground/80">{COST_GUIDANCE_NOTE}</p>
+          <p className="mt-1 text-xs text-muted-foreground/80">{COST_SOURCE_NOTE}</p>
+        </section>
+      )}
+
 
       <section className="container-page my-20">
         <div className="rounded-3xl border border-border bg-secondary/40 p-10 text-center">

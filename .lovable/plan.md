@@ -1,36 +1,38 @@
-## What's happening
+## Goal
 
-The newsletter submit reaches your server and calls HubSpot, but HubSpot replies `404 Resource not found`.
+Swap the cost-of-living values for the 10 primary-tier cities to the supplied descriptive estimates, drop the now-unused "TBD / Coming soon" fallback UI, and add a short guidance note near displayed figures.
 
-Confirmed from the code and settings:
-- `src/lib/leads/adapters.ts` sends newsletter leads to
-  `https://api.hsforms.com/submissions/v3/integration/submit/{HUBSPOT_PORTAL_ID}/{HUBSPOT_NEWSLETTER_FORM_GUID}`
-- All three secrets (`HUBSPOT_PORTAL_ID`, `HUBSPOT_FORM_GUID`, `HUBSPOT_NEWSLETTER_FORM_GUID`) exist, so the "not set" branch isn't the cause.
+## Current state (verified)
 
-A 404 from that endpoint means only one thing: HubSpot cannot find a form with that GUID inside that portal. The most likely causes, in order:
+- `src/data/cities.ts` already holds numeric cost values for all 18 cities (e.g. Vancouver `housing: "$2,089"`, `groceries: "$913"`, `transit: "$117.20 (TransLink 1-zone)"`). No `"TBD"` strings remain in the data.
+- `COST_SOURCE_NOTE` (line 27) is rendered on city pages and the compare page.
+- `src/components/site/CityPage.tsx` has an `isTbd()` guard plus a "Coming soon" empty-state block (lines 7–9, 114, 133–143).
+- `src/routes/cities.compare.tsx` has the same `isTbd()` guard and a "Coming soon" cell (lines 48, 117).
+- `src/routes/resources.cost-of-living-calculator.tsx` computes estimates from its own baseline table and shows an "Estimated — updated periodically" badge; it does not read city cost data.
 
-1. `HUBSPOT_NEWSLETTER_FORM_GUID` is not an actual form GUID (e.g. it's a form *name*, a page ID, or an ID copied from the wrong part of the HubSpot URL).
-2. The GUID belongs to a different HubSpot portal than `HUBSPOT_PORTAL_ID` (343477324 based on your tracking script).
-3. Stray whitespace / quotes pasted into the secret value.
+## Changes
 
-Note the other four forms use `HUBSPOT_FORM_GUID` and would fail the same way if that one were wrong — so this is specific to the newsletter GUID.
+**1. `src/data/cities.ts`**
 
-## Plan
+Replace `costOfLiving` for Vancouver, Victoria, Kelowna, Surrey, Burnaby, Richmond, Coquitlam, North Vancouver, Abbotsford, Nanaimo with the exact provided `housing` / `groceries` / `transit` / `notes` strings. Object shape unchanged. The other 8 cities keep their current values untouched.
 
-1. **Harden the adapter** (`src/lib/leads/adapters.ts`)
-   - Trim whitespace on portal ID and form GUID before building the URL.
-   - Validate the GUID looks like a UUID (`8-4-4-4-12`); if not, return a clear error like `HUBSPOT_NEWSLETTER_FORM_GUID is not a valid form GUID` instead of firing a doomed request.
-   - On a 404, return a friendlier diagnostic naming which env var was used and the portal it was tried against (no secret values leaked — GUIDs are not secrets, portal ID is public in your tracking script).
+Note: the new values are descriptive sentences rather than single figures, so the compare table cells and city cards will show longer text than today — that is expected given the copy provided.
 
-2. **Add a one-off verification step**
-   Run a server-side check that submits a probe to both GUIDs and reports which resolves, so we know definitively whether it's the newsletter GUID alone or the portal ID.
+**2. `src/components/site/CityPage.tsx`**
 
-3. **You re-copy the GUID** (needed if step 2 confirms the GUID is wrong)
-   In HubSpot: Marketing → Forms → open the newsletter form → *Share* / *Embed code*. The embed snippet contains `formId: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"` — that value is the GUID. Also confirm `portalId` in that same snippet matches `343477324`. I'll update the secret with what you paste.
+- Remove `isTbd()` and the `costReady` conditional; always render the three cost cards plus `notes` when `costOfLiving` is present (keep a simple null guard).
+- Delete the "Coming soon" dashed block.
+- Keep `COST_SOURCE_NOTE`, and add under the cost figures: "Estimates based on market reports, updated periodically — for guidance only".
 
-4. **Graceful UX fallback** (optional, say if you want it)
-   Right now a CRM failure surfaces as an error to the visitor. I can make the newsletter show a success state while logging the CRM failure server-side, so a misconfigured form never blocks a signup.
+**3. `src/routes/cities.compare.tsx`**
 
-## Technical notes
+- Remove `isTbd()` and the "Coming soon" cell fallback; render values directly.
+- Add the same guidance note line alongside `COST_SOURCE_NOTE`.
 
-Only `src/lib/leads/adapters.ts` changes. No routing, provider-selection, form UI, or page content is touched. The dual-form routing logic (newsletter → newsletter GUID, everything else → main GUID) stays exactly as is.
+**4. `src/routes/resources.cost-of-living-calculator.tsx`**
+
+- Replace the "Estimated — updated periodically" badge text with the guidance note wording, and add the note under the estimated monthly total block. No change to the calculation logic, form, or lead submission.
+
+## Out of scope
+
+No routing, form, lead-capture, or other content changes. Finish with a TypeScript check and a build to confirm both pass.
