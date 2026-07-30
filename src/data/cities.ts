@@ -69,10 +69,12 @@ export const cities: City[] = [
       },
     ],
     costOfLiving: {
-      housing: "$2,089",
-      groceries: "$913",
-      transit: "$117.20 (TransLink 1-zone)",
-      notes: "",
+      housing: "1BR ~$2,089/mo, 2BR ~$2,715-3,355/mo, 3BR ~$3,911/mo",
+      groceries: "~$400-450/mo per person",
+      transit:
+        "TransLink monthly pass, zone-based — see translink.ca for current fares",
+      notes:
+        "Estimated from market reports, July 2026. BC's most expensive rental market. Figures are indicative — check current listings for accuracy.",
     },
   },
   {
@@ -116,10 +118,11 @@ export const cities: City[] = [
       },
     ],
     costOfLiving: {
-      housing: "$1,995–2,010",
-      groceries: "$390–430",
-      transit: "$85–95 (BC Transit)",
-      notes: "",
+      housing: "1BR ~$1,995/mo, 2BR ~$2,682/mo, 3BR ~$3,350/mo",
+      groceries: "~$400-450/mo per person",
+      transit: "BC Transit monthly pass — see bctransit.com for current fares",
+      notes:
+        "Estimated from market reports, July 2026. Figures are indicative — check current listings for accuracy.",
     },
   },
   {
@@ -163,10 +166,11 @@ export const cities: City[] = [
       },
     ],
     costOfLiving: {
-      housing: "$2,000",
-      groceries: "$370–410",
-      transit: "$80 (30-day adult pass)",
-      notes: "",
+      housing: "Avg all types ~$2,000/mo; 1BR condo ~$1,650-1,900/mo",
+      groceries: "~$350-420/mo per person",
+      transit: "BC Transit monthly pass — see bctransit.com for current fares",
+      notes:
+        "Estimated from market reports, mid-2026. High vacancy rate currently gives renters more negotiating room. Figures are indicative.",
     },
   },
   {
@@ -210,10 +214,12 @@ export const cities: City[] = [
       },
     ],
     costOfLiving: {
-      housing: "$1,750",
-      groceries: "$380–420",
-      transit: "$117.20–$161.35",
-      notes: "",
+      housing: "1BR ~$1,744/mo, 2BR ~$2,124/mo, 3BR ~$2,830/mo",
+      groceries: "~$350-420/mo per person",
+      transit:
+        "TransLink monthly pass, zone-based — see translink.ca for current fares",
+      notes:
+        "Estimated from market reports, July 2026. The most affordable option within Metro Vancouver. Figures are indicative.",
     },
   },
   {
@@ -257,10 +263,12 @@ export const cities: City[] = [
       },
     ],
     costOfLiving: {
-      housing: "$2,200",
-      groceries: "$400–450",
-      transit: "$117.20–$161.35",
-      notes: "",
+      housing: "1BR ~$2,077/mo",
+      groceries: "~$400-450/mo per person",
+      transit:
+        "TransLink monthly pass, zone-based — see translink.ca for current fares",
+      notes:
+        "Estimated from market reports, July 2026. Figures are indicative — check current listings for accuracy.",
     },
   },
   {
@@ -299,10 +307,12 @@ export const cities: City[] = [
       },
     ],
     costOfLiving: {
-      housing: "$2,541",
-      groceries: "$400–450",
-      transit: "$117.20–$161.35",
-      notes: "",
+      housing: "1BR ~$2,164/mo",
+      groceries: "~$400-450/mo per person",
+      transit:
+        "TransLink monthly pass, zone-based — see translink.ca for current fares",
+      notes:
+        "Estimated from market reports, July 2026. Among the most expensive rental markets in Canada. Figures are indicative.",
     },
   },
   {
@@ -341,10 +351,12 @@ export const cities: City[] = [
       },
     ],
     costOfLiving: {
-      housing: "$2,459",
-      groceries: "$380–420",
-      transit: "$117.20–$161.35",
-      notes: "",
+      housing: "Avg all types ~$2,459/mo",
+      groceries: "~$400-450/mo per person",
+      transit:
+        "TransLink monthly pass, zone-based — see translink.ca for current fares",
+      notes:
+        "Estimated from Rentals.ca/Urbanation report, July 2026. Figures are indicative — check current listings for accuracy.",
     },
   },
   {
@@ -383,10 +395,12 @@ export const cities: City[] = [
       },
     ],
     costOfLiving: {
-      housing: "$2,955",
-      groceries: "$430–480",
-      transit: "$117.20–$188 (1–2 zone)",
-      notes: "",
+      housing: "Avg all types ~$2,926-2,944/mo",
+      groceries: "~$400-450/mo per person",
+      transit:
+        "TransLink monthly pass, zone-based — see translink.ca for current fares",
+      notes:
+        "Estimated from Rentals.ca/Urbanation report, July 2026. Currently Canada's most expensive rental market by this measure. Figures are indicative.",
     },
   },
   {
@@ -425,10 +439,11 @@ export const cities: City[] = [
       },
     ],
     costOfLiving: {
-      housing: "$1,795",
-      groceries: "$350–390",
-      transit: "$65–80 (Fraser Valley Transit)",
-      notes: "",
+      housing: "1BR ~$1,582/mo, 2BR ~$1,997/mo",
+      groceries: "~$350-400/mo per person",
+      transit: "BC Transit monthly pass — see bctransit.com for current fares",
+      notes:
+        "Estimated from market reports, March-June 2026. More affordable than Metro Vancouver core cities. Figures are indicative.",
     },
   },
   {
@@ -467,10 +482,11 @@ export const cities: City[] = [
       },
     ],
     costOfLiving: {
-      housing: "$1,785",
-      groceries: "$360–400",
-      transit: "$65–75",
-      notes: "",
+      housing: "1BR ~$1,785/mo, 2BR ~$2,195/mo",
+      groceries: "~$350-400/mo per person",
+      transit: "BC Transit monthly pass — see bctransit.com for current fares",
+      notes:
+        "Estimated from market reports, June 2026. Figures are indicative — check current listings for accuracy.",
     },
   },
 
