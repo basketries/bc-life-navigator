@@ -14,6 +14,10 @@ import {
 import { Home, ShoppingBasket, Bus, Plug, HeartPulse, Info } from "lucide-react";
 import { GroceryBasisToggle } from "@/components/site/GroceryBasisToggle";
 import {
+  CostComparisonChart,
+  COST_CHART_COLORS,
+} from "@/components/site/CostComparisonChart";
+import {
   FAMILY_GROCERY_MULTIPLIER,
   GROCERY_BASIS_LABEL,
   type GroceryBasis,
