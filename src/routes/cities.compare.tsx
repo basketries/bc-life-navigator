@@ -123,6 +123,11 @@ function CostCell({ city }: { city: City }) {
       <li>Monthly Groceries (single person): {c.groceries}</li>
       <li>Transit Pass (monthly): {c.transit}</li>
       {c.notes && <li className="text-muted-foreground/80">{c.notes}</li>}
+      {c.updated && (
+        <li className="pt-1 text-xs text-muted-foreground/80">
+          Last updated: {c.updated}
+        </li>
+      )}
       <li className="pt-1 text-xs text-muted-foreground/80">{COST_GUIDANCE_NOTE}</li>
       <li className="text-xs text-muted-foreground/80">{COST_SOURCE_NOTE}</li>
     </ul>
