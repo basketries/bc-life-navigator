@@ -208,6 +208,10 @@ function CostOfLivingCalculator() {
               </SelectContent>
             </Select>
           </div>
+          <div className="grid gap-2 md:col-span-2">
+            <span className="text-sm text-muted-foreground">Grocery estimates for</span>
+            <GroceryBasisToggle value={groceryBasis} onChange={setGroceryBasis} />
+          </div>
         </div>
       </section>
 
