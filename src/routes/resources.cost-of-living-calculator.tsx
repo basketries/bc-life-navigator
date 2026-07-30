@@ -12,6 +12,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Home, ShoppingBasket, Bus, Plug, HeartPulse, Info } from "lucide-react";
+import { GroceryBasisToggle } from "@/components/site/GroceryBasisToggle";
+import {
+  FAMILY_GROCERY_MULTIPLIER,
+  GROCERY_BASIS_LABEL,
+  type GroceryBasis,
+} from "@/lib/grocery-basis";
 
 export const Route = createFileRoute("/resources/cost-of-living-calculator")({
   head: () => ({
