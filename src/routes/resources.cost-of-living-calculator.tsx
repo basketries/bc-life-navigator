@@ -253,6 +253,24 @@ function CostOfLivingCalculator() {
           </p>
         </div>
 
+        <div className="mt-4 rounded-2xl border border-border bg-card p-6">
+          <p className="eyebrow">Visual comparison</p>
+          <h3 className="mt-2 text-xl text-foreground">
+            {city.name} vs the BC average
+          </h3>
+          <div className="mt-6">
+            <CostComparisonChart
+              data={chartData}
+              series={[
+                { key: "city", label: city.name, color: COST_CHART_COLORS[0] },
+                { key: "bcAverage", label: "BC average", color: COST_CHART_COLORS[1] },
+              ]}
+              caption="Midpoints of the estimated ranges above, compared with the average across all BC city guides."
+            />
+          </div>
+        </div>
+
+
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           <div className="rounded-2xl border border-border bg-card p-6">
             <HeartPulse className="h-6 w-6 text-primary" />
