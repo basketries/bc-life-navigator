@@ -13,6 +13,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
+  CostComparisonChart,
+  COST_CHART_COLORS,
+} from "@/components/site/CostComparisonChart";
+import { parseCostAmount } from "@/lib/cost-parse";
+import {
   cities,
   primaryCities,
   secondaryCities,
