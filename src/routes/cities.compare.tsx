@@ -13,6 +13,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
+  CostComparisonChart,
+  COST_CHART_COLORS,
+} from "@/components/site/CostComparisonChart";
+import { parseCostAmount } from "@/lib/cost-parse";
+import {
   cities,
   primaryCities,
   secondaryCities,
@@ -49,6 +54,37 @@ const COST_GUIDANCE_NOTE =
 
 function costLine(city: City) {
   return city.costOfLiving;
+}
+
+function CostChartSection({ left, right }: { left: City; right: City }) {
+  const rows = [
+    { category: "Housing", field: "housing" as const },
+    { category: "Groceries", field: "groceries" as const },
+    { category: "Transit", field: "transit" as const },
+  ].map(({ category, field }) => ({
+    category,
+    left: parseCostAmount(left.costOfLiving?.[field]),
+    right: parseCostAmount(right.costOfLiving?.[field]),
+  }));
+
+  return (
+    <div className="mt-14 rounded-3xl border border-border bg-card p-6 md:p-8">
+      <p className="eyebrow">At a glance</p>
+      <h2 className="mt-3 text-2xl text-foreground">
+        {left.name} vs {right.name} — monthly costs.
+      </h2>
+      <div className="mt-6">
+        <CostComparisonChart
+          data={rows}
+          series={[
+            { key: "left", label: left.name, color: COST_CHART_COLORS[0] },
+            { key: "right", label: right.name, color: COST_CHART_COLORS[1] },
+          ]}
+          caption={`Midpoints of the published ranges. ${COST_GUIDANCE_NOTE}.`}
+        />
+      </div>
+    </div>
+  );
 }
 
 function CitySelect({
@@ -200,6 +236,8 @@ function CompareCities() {
             disabledSlug={leftSlug}
           />
         </div>
+
+        {left && right && <CostChartSection left={left} right={right} />}
 
         {left && right && (
           <div className="mt-14">

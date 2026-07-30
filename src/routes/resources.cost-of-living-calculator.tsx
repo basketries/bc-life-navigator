@@ -14,6 +14,10 @@ import {
 import { Home, ShoppingBasket, Bus, Plug, HeartPulse, Info } from "lucide-react";
 import { GroceryBasisToggle } from "@/components/site/GroceryBasisToggle";
 import {
+  CostComparisonChart,
+  COST_CHART_COLORS,
+} from "@/components/site/CostComparisonChart";
+import {
   FAMILY_GROCERY_MULTIPLIER,
   GROCERY_BASIS_LABEL,
   type GroceryBasis,
@@ -147,6 +151,35 @@ function CostOfLivingCalculator() {
     },
   ];
 
+  const avgIdx =
+    sorted.reduce((sum, c) => sum + indexFor(c.region), 0) / (sorted.length || 1);
+  const mid = ([lo, hi]: [number, number], factor: number) =>
+    Math.round(((lo + hi) / 2) * factor);
+  const transitFactor = Math.min(household.multiplier, 2);
+
+  const chartData = [
+    {
+      category: "Housing",
+      city: mid(BASELINE[housingKey], idx),
+      bcAverage: mid(BASELINE[housingKey], avgIdx),
+    },
+    {
+      category: "Groceries",
+      city: mid(BASELINE.groceries, groceryFactor),
+      bcAverage: mid(
+        BASELINE.groceries,
+        avgIdx * (groceryBasis === "family" ? FAMILY_GROCERY_MULTIPLIER : 1),
+      ),
+    },
+    {
+      category: "Transit",
+      city: mid(BASELINE.transit, idx * transitFactor),
+      bcAverage: mid(BASELINE.transit, avgIdx * transitFactor),
+    },
+  ];
+
+
+
   const total = (() => {
     const lo =
       BASELINE[housingKey][0] * idx +
@@ -252,6 +285,24 @@ function CostOfLivingCalculator() {
             building, and lifestyle you choose.
           </p>
         </div>
+
+        <div className="mt-4 rounded-2xl border border-border bg-card p-6">
+          <p className="eyebrow">Visual comparison</p>
+          <h3 className="mt-2 text-xl text-foreground">
+            {city.name} vs the BC average
+          </h3>
+          <div className="mt-6">
+            <CostComparisonChart
+              data={chartData}
+              series={[
+                { key: "city", label: city.name, color: COST_CHART_COLORS[0] },
+                { key: "bcAverage", label: "BC average", color: COST_CHART_COLORS[1] },
+              ]}
+              caption="Midpoints of the estimated ranges above, compared with the average across all BC city guides."
+            />
+          </div>
+        </div>
+
 
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           <div className="rounded-2xl border border-border bg-card p-6">
