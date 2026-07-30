@@ -1,7 +1,14 @@
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check, MapPin } from "lucide-react";
 import { PageHero } from "./PageHero";
 import { RevealGroup } from "@/components/site/RevealGroup";
+import { GroceryBasisToggle } from "@/components/site/GroceryBasisToggle";
+import {
+  GROCERY_BASIS_LABEL,
+  scaleGroceryText,
+  type GroceryBasis,
+} from "@/lib/grocery-basis";
 import { COST_SOURCE_NOTE, type City } from "@/data/cities";
 
 const COST_GUIDANCE_NOTE =
@@ -9,6 +16,7 @@ const COST_GUIDANCE_NOTE =
 
 export function CityPage({ city }: { city: City }) {
   const cost = city.costOfLiving;
+  const [groceryBasis, setGroceryBasis] = useState<GroceryBasis>("single");
 
 
 
@@ -113,10 +121,19 @@ export function CityPage({ city }: { city: City }) {
               Last updated: {cost.updated}
             </p>
           )}
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <span className="text-xs text-muted-foreground">
+              Grocery estimates for:
+            </span>
+            <GroceryBasisToggle value={groceryBasis} onChange={setGroceryBasis} />
+          </div>
+          <div className="mt-6 grid gap-4 sm:grid-cols-3">
             {[
               { label: "Housing (rent)", value: cost.housing },
-              { label: "Monthly Groceries (single person)", value: cost.groceries },
+              {
+                label: `Monthly Groceries (${GROCERY_BASIS_LABEL[groceryBasis].toLowerCase()})`,
+                value: scaleGroceryText(cost.groceries, groceryBasis),
+              },
               { label: "Transit Pass (monthly)", value: cost.transit },
             ].map((row) => (
               <div key={row.label} className="rounded-2xl border border-border bg-card p-6">

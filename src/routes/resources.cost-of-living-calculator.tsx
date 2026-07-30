@@ -12,6 +12,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Home, ShoppingBasket, Bus, Plug, HeartPulse, Info } from "lucide-react";
+import { GroceryBasisToggle } from "@/components/site/GroceryBasisToggle";
+import {
+  FAMILY_GROCERY_MULTIPLIER,
+  GROCERY_BASIS_LABEL,
+  type GroceryBasis,
+} from "@/lib/grocery-basis";
 
 export const Route = createFileRoute("/resources/cost-of-living-calculator")({
   head: () => ({
@@ -98,11 +104,14 @@ function CostOfLivingCalculator() {
   );
   const [citySlug, setCitySlug] = useState(sorted[0]?.slug ?? "vancouver");
   const [householdId, setHouseholdId] = useState<HouseholdId>("single");
+  const [groceryBasis, setGroceryBasis] = useState<GroceryBasis>("single");
 
   const city = sorted.find((c) => c.slug === citySlug) ?? sorted[0];
   const household = HOUSEHOLDS.find((h) => h.id === householdId)!;
 
   const idx = indexFor(city.region);
+  const groceryFactor =
+    idx * (groceryBasis === "family" ? FAMILY_GROCERY_MULTIPLIER : 1);
 
   const housingKey =
     household.bedrooms === "1BR"
@@ -120,9 +129,9 @@ function CostOfLivingCalculator() {
     },
     {
       icon: ShoppingBasket,
-      label: "Groceries",
-      value: range(BASELINE.groceries, idx * household.multiplier),
-      note: "Scales with household size and eating-at-home habits.",
+      label: `Groceries (${GROCERY_BASIS_LABEL[groceryBasis].toLowerCase()})`,
+      value: range(BASELINE.groceries, groceryFactor),
+      note: "Switch the toggle above to see single-person or family-of-four spend.",
     },
     {
       icon: Bus,
@@ -141,12 +150,12 @@ function CostOfLivingCalculator() {
   const total = (() => {
     const lo =
       BASELINE[housingKey][0] * idx +
-      BASELINE.groceries[0] * idx * household.multiplier +
+      BASELINE.groceries[0] * groceryFactor +
       BASELINE.transit[0] * idx * Math.min(household.multiplier, 2) +
       BASELINE.utilities[0] * idx * Math.min(household.multiplier, 1.8);
     const hi =
       BASELINE[housingKey][1] * idx +
-      BASELINE.groceries[1] * idx * household.multiplier +
+      BASELINE.groceries[1] * groceryFactor +
       BASELINE.transit[1] * idx * Math.min(household.multiplier, 2) +
       BASELINE.utilities[1] * idx * Math.min(household.multiplier, 1.8);
     return `${money(lo)} – ${money(hi)}`;
@@ -198,6 +207,10 @@ function CostOfLivingCalculator() {
                 ))}
               </SelectContent>
             </Select>
+          </div>
+          <div className="grid gap-2 md:col-span-2">
+            <span className="text-sm text-muted-foreground">Grocery estimates for</span>
+            <GroceryBasisToggle value={groceryBasis} onChange={setGroceryBasis} />
           </div>
         </div>
       </section>
