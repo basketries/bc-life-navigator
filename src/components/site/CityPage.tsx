@@ -1,7 +1,14 @@
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check, MapPin } from "lucide-react";
 import { PageHero } from "./PageHero";
 import { RevealGroup } from "@/components/site/RevealGroup";
+import { GroceryBasisToggle } from "@/components/site/GroceryBasisToggle";
+import {
+  GROCERY_BASIS_LABEL,
+  scaleGroceryText,
+  type GroceryBasis,
+} from "@/lib/grocery-basis";
 import { COST_SOURCE_NOTE, type City } from "@/data/cities";
 
 const COST_GUIDANCE_NOTE =
@@ -9,6 +16,7 @@ const COST_GUIDANCE_NOTE =
 
 export function CityPage({ city }: { city: City }) {
   const cost = city.costOfLiving;
+  const [groceryBasis, setGroceryBasis] = useState<GroceryBasis>("single");
 
 
 
