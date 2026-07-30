@@ -44,14 +44,11 @@ export const Route = createFileRoute("/cities/compare")({
   component: CompareCities,
 });
 
-function isTbd(value: string) {
-  return value.trim().toUpperCase() === "TBD";
-}
+const COST_GUIDANCE_NOTE =
+  "Estimates based on market reports, updated periodically — for guidance only";
 
 function costLine(city: City) {
-  const c = city.costOfLiving;
-  if (!c || isTbd(c.housing) || isTbd(c.groceries) || isTbd(c.transit)) return null;
-  return c;
+  return city.costOfLiving;
 }
 
 function CitySelect({
@@ -113,22 +110,17 @@ function Row({
   );
 }
 
-function ComingSoon() {
-  return <span className="italic text-muted-foreground/80">Coming soon</span>;
-}
-
 function CostCell({ city }: { city: City }) {
   const c = costLine(city);
-  if (!c) return <ComingSoon />;
+  if (!c) return null;
   return (
     <ul className="space-y-1">
-      <li>1BR Rent: {c.housing}</li>
+      <li>Housing (rent): {c.housing}</li>
       <li>Monthly Groceries (single person): {c.groceries}</li>
       <li>Transit Pass (monthly): {c.transit}</li>
-      {c.notes && !isTbd(c.notes) && (
-        <li className="text-muted-foreground/80">{c.notes}</li>
-      )}
-      <li className="pt-1 text-xs text-muted-foreground/80">{COST_SOURCE_NOTE}</li>
+      {c.notes && <li className="text-muted-foreground/80">{c.notes}</li>}
+      <li className="pt-1 text-xs text-muted-foreground/80">{COST_GUIDANCE_NOTE}</li>
+      <li className="text-xs text-muted-foreground/80">{COST_SOURCE_NOTE}</li>
     </ul>
   );
 }

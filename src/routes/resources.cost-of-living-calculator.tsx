@@ -210,8 +210,8 @@ function CostOfLivingCalculator() {
               {city.name}, {household.label.toLowerCase()}
             </h2>
           </div>
-          <span className="rounded-full border border-border bg-secondary px-4 py-1.5 text-xs uppercase tracking-wider text-muted-foreground">
-            Estimated — updated periodically
+          <span className="rounded-full border border-border bg-secondary px-4 py-1.5 text-xs tracking-wide text-muted-foreground">
+            Estimates based on market reports, updated periodically — for guidance only
           </span>
         </div>
 
