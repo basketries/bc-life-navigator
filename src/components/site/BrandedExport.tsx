@@ -106,12 +106,14 @@ export function BrandedExport({
         link.click();
       } else {
         const { jsPDF } = await import("jspdf");
-        const orientation = canvas.width >= canvas.height ? "landscape" : "portrait";
+        const orientation: "landscape" | "portrait" =
+          canvas.width >= canvas.height ? "landscape" : "portrait";
         const pdf = new jsPDF({
           orientation,
           unit: "px",
           format: [canvas.width, canvas.height],
-poop        });
+        });
+
         pdf.addImage(
           canvas.toDataURL("image/png"),
           "PNG",
