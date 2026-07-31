@@ -73,9 +73,13 @@ function normalizeColors(root: HTMLElement) {
       if (!/color|shadow|fill|stroke|background|outline|border/i.test(prop)) continue;
       const value = computed.getPropertyValue(prop);
       if (!value || !MODERN.test(value)) continue;
+      if (/shadow|image/i.test(prop)) {
+        style.setProperty(prop, "none");
+        continue;
+      }
       const converted = toRgb(value);
       if (converted) style.setProperty(prop, converted);
-      else if (/shadow|image|background$/i.test(prop)) style.setProperty(prop, "none");
+
     }
   };
 
