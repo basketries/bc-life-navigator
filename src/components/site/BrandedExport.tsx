@@ -81,6 +81,16 @@ function patchComputedStyle() {
   };
 }
 
+/** Narrow viewports capture at a low pixel width, so upscale to keep text crisp. */
+const EXPORT_TARGET_WIDTH = 1100;
+const MAX_CAPTURE_SCALE = 3;
+
+function captureScaleFor(width: number) {
+  const dpr = window.devicePixelRatio || 1;
+  const needed = width > 0 ? EXPORT_TARGET_WIDTH / width : 1;
+  return Math.min(MAX_CAPTURE_SCALE, Math.max(2, dpr, needed));
+}
+
 async function captureCanvas(node: HTMLElement) {
   const { default: html2canvas } = await import("html2canvas");
   // html2canvas reads the live document's html/body background colours, which are
@@ -89,18 +99,29 @@ async function captureCanvas(node: HTMLElement) {
   const previous = roots.map((el) => el.style.backgroundColor);
   roots.forEach((el) => (el.style.backgroundColor = "#ffffff"));
   const restoreComputedStyle = patchComputedStyle();
+  // Use the full scrollable box so nothing overflowing the viewport gets clipped.
+  const width = Math.ceil(Math.max(node.scrollWidth, node.getBoundingClientRect().width));
+  const height = Math.ceil(Math.max(node.scrollHeight, node.getBoundingClientRect().height));
   try {
     return await html2canvas(node, {
       backgroundColor: "#ffffff",
-      scale: Math.min(window.devicePixelRatio || 1, 2),
+      scale: captureScaleFor(width),
       useCORS: true,
       logging: false,
+      width,
+      height,
+      windowWidth: Math.max(document.documentElement.clientWidth, width),
+      scrollX: 0,
+      scrollY: 0,
+      x: 0,
+      y: 0,
     });
   } finally {
     restoreComputedStyle();
     roots.forEach((el, i) => (el.style.backgroundColor = previous[i]));
   }
 }
+
 
 function sanitizeFileName(value: string): string {
   return value
@@ -249,12 +270,13 @@ export function BrandedExport({
         )}
       </div>
 
-      <div ref={areaRef} className="rounded-3xl bg-background p-4 md:p-6">
+      <div ref={areaRef} className="overflow-hidden rounded-3xl bg-background p-5 sm:p-6 md:p-8">
         {children}
 
-        <footer className="mt-8 rounded-2xl border border-border bg-card px-6 py-5">
-          <div className="flex flex-wrap items-center justify-between gap-6">
-            <div className="flex items-center gap-3">
+        <footer className="mt-8 rounded-2xl border border-border bg-card px-5 py-5 sm:px-6">
+          <div className="flex flex-wrap items-center justify-between gap-5 sm:gap-6">
+            <div className="flex min-w-0 items-center gap-3">
+
               <img
                 src={logo.url}
                 alt="SettleInBC"
