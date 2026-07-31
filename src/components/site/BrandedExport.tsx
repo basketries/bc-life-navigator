@@ -102,8 +102,27 @@ async function captureCanvas(node: HTMLElement) {
   }
 }
 
+function sanitizeFileName(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
 
+function formatTimestamp(date = new Date()): string {
+  const pad = (n: number) => String(n).padStart(2, "0");
+  const yyyy = date.getFullYear();
+  const mm = pad(date.getMonth() + 1);
+  const dd = pad(date.getDate());
+  const hh = pad(date.getHours());
+  const min = pad(date.getMinutes());
+  return `${yyyy}-${mm}-${dd}-${hh}${min}`;
+}
 
+function generateFileName(base: string): string {
+  const clean = sanitizeFileName(base) || "settleinbc";
+  return `${clean}-${formatTimestamp()}`;
+}
 
 export function BrandedExport({
   children,
