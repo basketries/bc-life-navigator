@@ -76,10 +76,16 @@ function normalizeColors(root: HTMLElement) {
     }
   };
 
-  if (doc.documentElement) fix(doc.documentElement);
-  if (doc.body) fix(doc.body);
+  for (const el of [doc.documentElement, doc.body]) {
+    if (!el) continue;
+    fix(el);
+    // Belt and braces: html2canvas always parses these two backgrounds.
+    el.style.setProperty("background-color", "#ffffff", "important");
+    el.style.setProperty("background-image", "none", "important");
+  }
   fix(root);
   root.querySelectorAll<HTMLElement>("*").forEach(fix);
+
 }
 
 const hyphenate = (s: string) => s.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
