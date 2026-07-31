@@ -29,6 +29,7 @@ function normalizeColors(root: HTMLElement) {
   const doc = root.ownerDocument;
   const win = doc.defaultView;
   if (!win) return;
+  console.log("[export] normalizeColors running", !!doc.defaultView, doc.body && getComputedStyle(doc.body).backgroundColor);
   const canvas = doc.createElement("canvas");
   canvas.width = 1;
   canvas.height = 1;
