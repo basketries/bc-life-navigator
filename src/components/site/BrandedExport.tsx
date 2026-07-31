@@ -6,90 +6,80 @@ import { activeSponsors } from "@/data/sponsors";
 
 const SITE_URL = "https://settleinbc.com";
 
-/**
- * html2canvas cannot parse modern CSS colour functions (oklch/lab/color()).
- * The site's design tokens are oklch, so before capture we resolve every
- * computed colour to an rgb() string on the cloned DOM.
- */
-function normalizeColors(root: HTMLElement) {
-  const doc = root.ownerDocument;
-  const win = doc.defaultView;
-  if (!win) return;
-  const canvas = doc.createElement("canvas");
-  canvas.width = 1;
-  canvas.height = 1;
-  const probe = canvas.getContext("2d", { willReadFrequently: true });
-  const cache = new Map<string, string | null>();
+const MODERN_COLOR = /(oklch|oklab|lch\(|lab\(|color\()/i;
 
-  const toRgb = (value: string): string | null => {
-    if (!value || !/(oklch|oklab|lch\(|lab\(|color\()/i.test(value)) return null;
-    if (cache.has(value)) return cache.get(value)!;
-    let out: string | null = null;
-    if (probe) {
-      try {
-        probe.clearRect(0, 0, 1, 1);
-        probe.fillStyle = "#000000";
-        probe.fillStyle = value;
-        probe.fillRect(0, 0, 1, 1);
-        const [r, g, b, a] = probe.getImageData(0, 0, 1, 1).data;
-        // fillRect composites over transparent black, so recover the source alpha.
-        const alpha = a / 255;
-        out =
-          alpha === 0
-            ? "rgba(0, 0, 0, 0)"
-            : `rgba(${Math.round(r / alpha)}, ${Math.round(g / alpha)}, ${Math.round(
-                b / alpha,
-              )}, ${Number(alpha.toFixed(3))})`;
-      } catch {
-        out = null;
-      }
+const colorCache = new Map<string, string>();
+
+/** Resolve any CSS colour (including oklch/lab) to an rgb()/rgba() string. */
+function resolveColor(value: string): string {
+  const cached = colorCache.get(value);
+  if (cached) return cached;
+  let out = "rgba(0, 0, 0, 0)";
+  try {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1;
+    canvas.height = 1;
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    if (ctx) {
+      ctx.fillStyle = "#000000";
+      ctx.fillStyle = value;
+      ctx.fillRect(0, 0, 1, 1);
+      const [r, g, b, a] = ctx.getImageData(0, 0, 1, 1).data;
+      const alpha = a / 255;
+      out =
+        alpha === 0
+          ? "rgba(0, 0, 0, 0)"
+          : `rgba(${Math.round(r / alpha)}, ${Math.round(g / alpha)}, ${Math.round(
+              b / alpha,
+            )}, ${Number(alpha.toFixed(3))})`;
     }
-    cache.set(value, out);
-    return out;
-  };
-
-  const MODERN = /(oklch|oklab|lch\(|lab\(|color\()/i;
-
-  const fix = (el: Element) => {
-    const style = (el as HTMLElement).style;
-    if (!style) return;
-    const computed = win.getComputedStyle(el);
-    for (let i = 0; i < computed.length; i++) {
-      const prop = computed.item(i);
-      if (!/color|shadow|fill|stroke|background|outline|border/i.test(prop)) continue;
-      const value = computed.getPropertyValue(prop);
-      if (!value || !MODERN.test(value)) continue;
-      if (/shadow|image/i.test(prop)) {
-        style.setProperty(prop, "none");
-        continue;
-      }
-      const converted = toRgb(value);
-      if (converted) style.setProperty(prop, converted);
-
-    }
-  };
-
-  for (const el of [doc.documentElement, doc.body]) {
-    if (!el) continue;
-    fix(el);
-    // Belt and braces: html2canvas always parses these two backgrounds.
-    el.style.setProperty("background-color", "#ffffff", "important");
-    el.style.setProperty("background-image", "none", "important");
+  } catch {
+    out = "rgba(0, 0, 0, 0)";
   }
-  fix(root);
-  root.querySelectorAll("*").forEach(fix);
-  const leftovers: string[] = [];
-  [root, ...Array.from(root.querySelectorAll("*"))].forEach((el) => {
-    const cs = window.getComputedStyle(el);
-    for (let i = 0; i < cs.length; i++) {
-      const p2 = cs.item(i);
-      const v = cs.getPropertyValue(p2);
-      if (!p2.startsWith("--") && MODERN.test(v)) leftovers.push(`${el.tagName}.${p2}=${v}`);
-    }
-  });
-  console.log("[export] leftovers", leftovers.slice(0, 12), leftovers.length);
+  colorCache.set(value, out);
+  return out;
 }
 
+/** Rewrite any modern colour function found anywhere inside a computed value. */
+function sanitizeValue(value: string): string {
+  if (!value || !MODERN_COLOR.test(value)) return value;
+  // Gradients / shadows can nest colours; drop what we can't safely convert.
+  const single = value.trim();
+  if (/^(oklch|oklab|lch|lab|color)\(/i.test(single) && single.endsWith(")")) {
+    return resolveColor(single);
+  }
+  return value.replace(
+    /(oklch|oklab|lch|lab|color)\([^()]*\)/gi,
+    (match) => resolveColor(match),
+  );
+}
+
+/**
+ * html2canvas cannot parse modern CSS colour functions (oklch/lab/color()), which
+ * every design token in this project uses. During capture we intercept
+ * window.getComputedStyle and hand html2canvas rgb() equivalents instead.
+ */
+function patchComputedStyle() {
+  const original = window.getComputedStyle.bind(window);
+  const patched = (el: Element, pseudo?: string | null) => {
+    const declaration = original(el, pseudo ?? undefined);
+    return new Proxy(declaration, {
+      get(target, prop, receiver) {
+        if (prop === "getPropertyValue") {
+          return (name: string) => sanitizeValue(target.getPropertyValue(name));
+        }
+        const value = Reflect.get(target, prop, target);
+        if (typeof value === "function") return value.bind(target);
+        if (typeof value === "string") return sanitizeValue(value);
+        return value;
+      },
+    }) as CSSStyleDeclaration;
+  };
+  window.getComputedStyle = patched as typeof window.getComputedStyle;
+  return () => {
+    window.getComputedStyle = original as typeof window.getComputedStyle;
+  };
+}
 
 async function captureCanvas(node: HTMLElement) {
   const { default: html2canvas } = await import("html2canvas");
@@ -98,18 +88,20 @@ async function captureCanvas(node: HTMLElement) {
   const roots = [document.documentElement, document.body].filter(Boolean) as HTMLElement[];
   const previous = roots.map((el) => el.style.backgroundColor);
   roots.forEach((el) => (el.style.backgroundColor = "#ffffff"));
+  const restoreComputedStyle = patchComputedStyle();
   try {
     return await html2canvas(node, {
       backgroundColor: "#ffffff",
       scale: Math.min(window.devicePixelRatio || 1, 2),
       useCORS: true,
       logging: false,
-      onclone: (_doc, element) => normalizeColors(element as HTMLElement),
     });
   } finally {
+    restoreComputedStyle();
     roots.forEach((el, i) => (el.style.backgroundColor = previous[i]));
   }
 }
+
 
 
 
