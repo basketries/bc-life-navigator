@@ -81,6 +81,16 @@ function patchComputedStyle() {
   };
 }
 
+/** Narrow viewports capture at a low pixel width, so upscale to keep text crisp. */
+const EXPORT_TARGET_WIDTH = 1100;
+const MAX_CAPTURE_SCALE = 3;
+
+function captureScaleFor(width: number) {
+  const dpr = window.devicePixelRatio || 1;
+  const needed = width > 0 ? EXPORT_TARGET_WIDTH / width : 1;
+  return Math.min(MAX_CAPTURE_SCALE, Math.max(2, dpr, needed));
+}
+
 async function captureCanvas(node: HTMLElement) {
   const { default: html2canvas } = await import("html2canvas");
   // html2canvas reads the live document's html/body background colours, which are
@@ -89,18 +99,29 @@ async function captureCanvas(node: HTMLElement) {
   const previous = roots.map((el) => el.style.backgroundColor);
   roots.forEach((el) => (el.style.backgroundColor = "#ffffff"));
   const restoreComputedStyle = patchComputedStyle();
+  // Use the full scrollable box so nothing overflowing the viewport gets clipped.
+  const width = Math.ceil(Math.max(node.scrollWidth, node.getBoundingClientRect().width));
+  const height = Math.ceil(Math.max(node.scrollHeight, node.getBoundingClientRect().height));
   try {
     return await html2canvas(node, {
       backgroundColor: "#ffffff",
-      scale: Math.min(window.devicePixelRatio || 1, 2),
+      scale: captureScaleFor(width),
       useCORS: true,
       logging: false,
+      width,
+      height,
+      windowWidth: Math.max(document.documentElement.clientWidth, width),
+      scrollX: 0,
+      scrollY: 0,
+      x: 0,
+      y: 0,
     });
   } finally {
     restoreComputedStyle();
     roots.forEach((el, i) => (el.style.backgroundColor = previous[i]));
   }
 }
+
 
 function sanitizeFileName(value: string): string {
   return value
