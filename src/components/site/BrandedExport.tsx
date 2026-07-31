@@ -62,17 +62,20 @@ function normalizeColors(root: HTMLElement) {
     return out;
   };
 
-  const fix = (el: HTMLElement) => {
+  const MODERN = /(oklch|oklab|lch\(|lab\(|color\()/i;
+
+  const fix = (el: Element) => {
+    const style = (el as HTMLElement).style;
+    if (!style) return;
     const computed = win.getComputedStyle(el);
-    for (const prop of COLOR_PROPS) {
-      const converted = toRgb(computed[prop] as string);
-      if (converted) el.style.setProperty(hyphenate(prop), converted);
-    }
-    if (/(oklch|oklab|lch\(|lab\()/i.test(computed.backgroundImage)) {
-      el.style.backgroundImage = "none";
-    }
-    if (/(oklch|oklab|lch\(|lab\()/i.test(computed.boxShadow)) {
-      el.style.boxShadow = "none";
+    for (let i = 0; i < computed.length; i++) {
+      const prop = computed.item(i);
+      if (!/color|shadow|fill|stroke|background|outline|border/i.test(prop)) continue;
+      const value = computed.getPropertyValue(prop);
+      if (!value || !MODERN.test(value)) continue;
+      const converted = toRgb(value);
+      if (converted) style.setProperty(prop, converted);
+      else if (/shadow|image|background$/i.test(prop)) style.setProperty(prop, "none");
     }
   };
 
@@ -84,10 +87,9 @@ function normalizeColors(root: HTMLElement) {
     el.style.setProperty("background-image", "none", "important");
   }
   fix(root);
-  root.querySelectorAll<HTMLElement>("*").forEach(fix);
-  console.log("[export] clone html/body bg", win.getComputedStyle(doc.documentElement).backgroundColor, doc.body && win.getComputedStyle(doc.body).backgroundColor, win.getComputedStyle(root).backgroundColor);
-
+  root.querySelectorAll("*").forEach(fix);
 }
+
 
 const hyphenate = (s: string) => s.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
 
