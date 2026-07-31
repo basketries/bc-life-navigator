@@ -274,7 +274,7 @@ function NeighbourhoodQuiz() {
           ) : (
             <BrandedExport
               className="mt-8"
-              fileName="settleinbc-quiz-results"
+              fileName={`settleinbc-quiz-results${results[0] ? `-${results[0].slug}` : ""}`}
               title="Where in BC should you live? — your matches"
             >
               <Sparkles className="h-6 w-6 text-primary" />
