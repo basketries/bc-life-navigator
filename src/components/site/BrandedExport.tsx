@@ -80,7 +80,7 @@ function normalizeColors(root: HTMLElement) {
   root.querySelectorAll("*").forEach(fix);
   const leftovers: string[] = [];
   [root, ...Array.from(root.querySelectorAll("*"))].forEach((el) => {
-    const cs = win.getComputedStyle(el);
+    const cs = window.getComputedStyle(el);
     for (let i = 0; i < cs.length; i++) {
       const p2 = cs.item(i);
       const v = cs.getPropertyValue(p2);
