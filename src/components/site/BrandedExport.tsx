@@ -270,12 +270,13 @@ export function BrandedExport({
         )}
       </div>
 
-      <div ref={areaRef} className="rounded-3xl bg-background p-4 md:p-6">
+      <div ref={areaRef} className="overflow-hidden rounded-3xl bg-background p-5 sm:p-6 md:p-8">
         {children}
 
-        <footer className="mt-8 rounded-2xl border border-border bg-card px-6 py-5">
-          <div className="flex flex-wrap items-center justify-between gap-6">
-            <div className="flex items-center gap-3">
+        <footer className="mt-8 rounded-2xl border border-border bg-card px-5 py-5 sm:px-6">
+          <div className="flex flex-wrap items-center justify-between gap-5 sm:gap-6">
+            <div className="flex min-w-0 items-center gap-3">
+
               <img
                 src={logo.url}
                 alt="SettleInBC"
