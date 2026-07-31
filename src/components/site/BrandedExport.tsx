@@ -145,9 +145,10 @@ export function BrandedExport({
     setError(null);
     try {
       const canvas = await captureCanvas(areaRef.current);
+      const downloadName = generateFileName(fileName);
       if (kind === "png") {
         const link = document.createElement("a");
-        link.download = `${fileName}.png`;
+        link.download = `${downloadName}.png`;
         link.href = canvas.toDataURL("image/png");
         link.click();
       } else {
