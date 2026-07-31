@@ -29,40 +29,57 @@ function normalizeColors(root: HTMLElement) {
   const doc = root.ownerDocument;
   const win = doc.defaultView;
   if (!win) return;
-  const probe = doc.createElement("canvas").getContext("2d");
-  const cache = new Map<string, string>();
+  const canvas = doc.createElement("canvas");
+  canvas.width = 1;
+  canvas.height = 1;
+  const probe = canvas.getContext("2d", { willReadFrequently: true });
+  const cache = new Map<string, string | null>();
 
   const toRgb = (value: string): string | null => {
-    if (!value || !/(oklch|oklab|lch|lab|color)\(/i.test(value)) return null;
+    if (!value || !/(oklch|oklab|lch\(|lab\(|color\()/i.test(value)) return null;
     if (cache.has(value)) return cache.get(value)!;
-    if (!probe) return null;
-    try {
-      probe.fillStyle = "#000000";
-      probe.fillStyle = value;
-      const out = probe.fillStyle as string;
-      cache.set(value, out);
-      return out;
-    } catch {
-      return null;
+    let out: string | null = null;
+    if (probe) {
+      try {
+        probe.clearRect(0, 0, 1, 1);
+        probe.fillStyle = "#000000";
+        probe.fillStyle = value;
+        probe.fillRect(0, 0, 1, 1);
+        const [r, g, b, a] = probe.getImageData(0, 0, 1, 1).data;
+        // fillRect composites over transparent black, so recover the source alpha.
+        const alpha = a / 255;
+        out =
+          alpha === 0
+            ? "rgba(0, 0, 0, 0)"
+            : `rgba(${Math.round(r / alpha)}, ${Math.round(g / alpha)}, ${Math.round(
+                b / alpha,
+              )}, ${Number(alpha.toFixed(3))})`;
+      } catch {
+        out = null;
+      }
     }
+    cache.set(value, out);
+    return out;
   };
 
-  const elements = [root, ...Array.from(root.querySelectorAll<HTMLElement>("*"))];
-  for (const el of elements) {
+  const fix = (el: HTMLElement) => {
     const computed = win.getComputedStyle(el);
     for (const prop of COLOR_PROPS) {
       const converted = toRgb(computed[prop] as string);
       if (converted) el.style.setProperty(hyphenate(prop), converted);
     }
-    const bgImage = computed.backgroundImage;
-    if (bgImage && /(oklch|oklab|lch|lab)\(/i.test(bgImage)) {
+    if (/(oklch|oklab|lch\(|lab\()/i.test(computed.backgroundImage)) {
       el.style.backgroundImage = "none";
     }
-    const shadow = computed.boxShadow;
-    if (shadow && /(oklch|oklab|lch|lab)\(/i.test(shadow)) {
+    if (/(oklch|oklab|lch\(|lab\()/i.test(computed.boxShadow)) {
       el.style.boxShadow = "none";
     }
-  }
+  };
+
+  if (doc.documentElement) fix(doc.documentElement);
+  if (doc.body) fix(doc.body);
+  fix(root);
+  root.querySelectorAll<HTMLElement>("*").forEach(fix);
 }
 
 const hyphenate = (s: string) => s.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
@@ -77,6 +94,7 @@ async function captureCanvas(node: HTMLElement) {
     onclone: (_doc, element) => normalizeColors(element as HTMLElement),
   });
 }
+
 
 export function BrandedExport({
   children,
