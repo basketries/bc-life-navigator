@@ -211,7 +211,7 @@ function MovingCostEstimator() {
 
         <BrandedExport
           className="mt-6"
-          fileName="settleinbc-moving-cost-estimate"
+          fileName={`settleinbc-moving-cost-${origin.id}-${size.id}`}
           title={`Estimated move costs — ${origin.label}, ${size.label}`}
         >
         <div className="grid gap-4 sm:grid-cols-2">
