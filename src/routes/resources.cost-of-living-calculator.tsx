@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/select";
 import { Home, ShoppingBasket, Bus, Plug, HeartPulse, Info } from "lucide-react";
 import { GroceryBasisToggle } from "@/components/site/GroceryBasisToggle";
+import { BrandedExport } from "@/components/site/BrandedExport";
+
 import {
   CostComparisonChart,
   COST_CHART_COLORS,
@@ -261,7 +263,12 @@ function CostOfLivingCalculator() {
           </span>
         </div>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        <BrandedExport
+          className="mt-6"
+          fileName={`settleinbc-cost-of-living-${city.slug}`}
+          title={`Estimated monthly costs — ${city.name}`}
+        >
+        <div className="grid gap-4 sm:grid-cols-2">
           {breakdown.map((b) => (
             <article
               key={b.label}
@@ -327,6 +334,8 @@ function CostOfLivingCalculator() {
             </p>
           </div>
         </div>
+        </BrandedExport>
+
       </section>
 
       <EmailBreakdown cityName={city.name} householdLabel={household.label} total={total} />
