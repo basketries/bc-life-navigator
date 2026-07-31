@@ -11,6 +11,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Truck, Home, Boxes, Receipt, Info } from "lucide-react";
+import { BrandedExport } from "@/components/site/BrandedExport";
+
 
 export const Route = createFileRoute("/resources/moving-cost-estimator")({
   head: () => ({
@@ -207,7 +209,12 @@ function MovingCostEstimator() {
           </span>
         </div>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        <BrandedExport
+          className="mt-6"
+          fileName="settleinbc-moving-cost-estimate"
+          title={`Estimated move costs — ${origin.label}, ${size.label}`}
+        >
+        <div className="grid gap-4 sm:grid-cols-2">
           {lines.map((l) => (
             <article
               key={l.label}
@@ -230,6 +237,8 @@ function MovingCostEstimator() {
             A planning range only. Quotes from two or three movers will always beat an estimate.
           </p>
         </div>
+        </BrandedExport>
+
 
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           <div className="rounded-2xl border border-border bg-card p-6">
