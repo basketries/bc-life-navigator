@@ -78,6 +78,16 @@ function normalizeColors(root: HTMLElement) {
   }
   fix(root);
   root.querySelectorAll("*").forEach(fix);
+  const leftovers: string[] = [];
+  [root, ...Array.from(root.querySelectorAll("*"))].forEach((el) => {
+    const cs = win.getComputedStyle(el);
+    for (let i = 0; i < cs.length; i++) {
+      const p2 = cs.item(i);
+      const v = cs.getPropertyValue(p2);
+      if (MODERN.test(v)) leftovers.push(`${el.tagName}.${p2}=${v}`);
+    }
+  });
+  console.log("[export] leftovers", leftovers.slice(0, 12), leftovers.length);
 }
 
 
