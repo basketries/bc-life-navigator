@@ -86,14 +86,24 @@ const hyphenate = (s: string) => s.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}
 
 async function captureCanvas(node: HTMLElement) {
   const { default: html2canvas } = await import("html2canvas");
-  return html2canvas(node, {
-    backgroundColor: "#ffffff",
-    scale: Math.min(window.devicePixelRatio || 1, 2),
-    useCORS: true,
-    logging: false,
-    onclone: (_doc, element) => normalizeColors(element as HTMLElement),
-  });
+  // html2canvas reads the live document's html/body background colours, which are
+  // oklch tokens it cannot parse. Neutralise them for the duration of the capture.
+  const roots = [document.documentElement, document.body].filter(Boolean) as HTMLElement[];
+  const previous = roots.map((el) => el.style.backgroundColor);
+  roots.forEach((el) => (el.style.backgroundColor = "#ffffff"));
+  try {
+    return await html2canvas(node, {
+      backgroundColor: "#ffffff",
+      scale: Math.min(window.devicePixelRatio || 1, 2),
+      useCORS: true,
+      logging: false,
+      onclone: (_doc, element) => normalizeColors(element as HTMLElement),
+    });
+  } finally {
+    roots.forEach((el, i) => (el.style.backgroundColor = previous[i]));
+  }
 }
+
 
 
 export function BrandedExport({
