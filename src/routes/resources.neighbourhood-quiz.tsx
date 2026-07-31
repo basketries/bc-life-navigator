@@ -5,6 +5,8 @@ import { RevealGroup } from "@/components/site/RevealGroup";
 import { cities, type City } from "@/data/cities";
 import { useSubmitLead } from "@/lib/leads/client";
 import { ArrowLeft, ArrowRight, MapPin, RotateCcw, Sparkles } from "lucide-react";
+import { BrandedExport } from "@/components/site/BrandedExport";
+
 
 export const Route = createFileRoute("/resources/neighbourhood-quiz")({
   head: () => ({
@@ -270,7 +272,11 @@ function NeighbourhoodQuiz() {
               onBack={step > 0 ? () => setStep((s) => s - 1) : undefined}
             />
           ) : (
-            <div className="mt-8">
+            <BrandedExport
+              className="mt-8"
+              fileName="settleinbc-quiz-results"
+              title="Where in BC should you live? — your matches"
+            >
               <Sparkles className="h-6 w-6 text-primary" />
               <h2 className="mt-4 font-serif text-2xl md:text-3xl text-foreground">
                 Based on your answers, start here.
@@ -342,7 +348,8 @@ function NeighbourhoodQuiz() {
                   <RotateCcw className="h-4 w-4" /> Start over
                 </button>
               </div>
-            </div>
+            </BrandedExport>
+
           )}
         </div>
       </section>
