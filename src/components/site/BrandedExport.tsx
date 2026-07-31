@@ -201,7 +201,7 @@ export function BrandedExport({
             offset += h;
           }
         }
-        pdf.save(`${fileName}.pdf`);
+        pdf.save(`${downloadName}.pdf`);
       }
     } catch (e) {
       console.error("Branded export failed", e);
