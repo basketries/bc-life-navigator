@@ -17,6 +17,8 @@ import {
   COST_CHART_COLORS,
 } from "@/components/site/CostComparisonChart";
 import { parseCostAmount } from "@/lib/cost-parse";
+import { BrandedExport } from "@/components/site/BrandedExport";
+
 import {
   cities,
   primaryCities,
@@ -237,10 +239,15 @@ function CompareCities() {
           />
         </div>
 
-        {left && right && <CostChartSection left={left} right={right} />}
-
         {left && right && (
-          <div className="mt-14">
+          <BrandedExport
+            className="mt-14"
+            fileName={`settleinbc-${left.slug}-vs-${right.slug}`}
+            title={`${left.name} vs ${right.name} — city comparison`}
+          >
+            <CostChartSection left={left} right={right} />
+
+            <div className="mt-14">
             <div className="grid gap-3 pb-6 md:grid-cols-[180px_1fr_1fr] md:gap-6">
               <div />
               <div>
@@ -295,8 +302,10 @@ function CompareCities() {
                 </Link>
               }
             />
-          </div>
+            </div>
+          </BrandedExport>
         )}
+
       </section>
 
       {bothPrimary && left && right && (
