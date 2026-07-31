@@ -102,8 +102,27 @@ async function captureCanvas(node: HTMLElement) {
   }
 }
 
+function sanitizeFileName(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
 
+function formatTimestamp(date = new Date()): string {
+  const pad = (n: number) => String(n).padStart(2, "0");
+  const yyyy = date.getFullYear();
+  const mm = pad(date.getMonth() + 1);
+  const dd = pad(date.getDate());
+  const hh = pad(date.getHours());
+  const min = pad(date.getMinutes());
+  return `${yyyy}-${mm}-${dd}-${hh}${min}`;
+}
 
+function generateFileName(base: string): string {
+  const clean = sanitizeFileName(base) || "settleinbc";
+  return `${clean}-${formatTimestamp()}`;
+}
 
 export function BrandedExport({
   children,
@@ -126,9 +145,10 @@ export function BrandedExport({
     setError(null);
     try {
       const canvas = await captureCanvas(areaRef.current);
+      const downloadName = generateFileName(fileName);
       if (kind === "png") {
         const link = document.createElement("a");
-        link.download = `${fileName}.png`;
+        link.download = `${downloadName}.png`;
         link.href = canvas.toDataURL("image/png");
         link.click();
       } else {
@@ -181,7 +201,7 @@ export function BrandedExport({
             offset += h;
           }
         }
-        pdf.save(`${fileName}.pdf`);
+        pdf.save(`${downloadName}.pdf`);
       }
     } catch (e) {
       console.error("Branded export failed", e);
