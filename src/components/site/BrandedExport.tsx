@@ -84,7 +84,7 @@ function normalizeColors(root: HTMLElement) {
     for (let i = 0; i < cs.length; i++) {
       const p2 = cs.item(i);
       const v = cs.getPropertyValue(p2);
-      if (MODERN.test(v)) leftovers.push(`${el.tagName}.${p2}=${v}`);
+      if (!p2.startsWith("--") && MODERN.test(v)) leftovers.push(`${el.tagName}.${p2}=${v}`);
     }
   });
   console.log("[export] leftovers", leftovers.slice(0, 12), leftovers.length);
