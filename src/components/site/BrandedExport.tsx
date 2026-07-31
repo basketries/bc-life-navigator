@@ -135,20 +135,52 @@ export function BrandedExport({
         const { jsPDF } = await import("jspdf");
         const orientation: "landscape" | "portrait" =
           canvas.width >= canvas.height ? "landscape" : "portrait";
-        const pdf = new jsPDF({
-          orientation,
-          unit: "px",
-          format: [canvas.width, canvas.height],
-        });
+        const pdf = new jsPDF({ orientation, unit: "pt", format: "a4" });
+        const pageW = pdf.internal.pageSize.getWidth();
+        const pageH = pdf.internal.pageSize.getHeight();
+        const margin = 24;
+        const contentW = pageW - margin * 2;
+        const contentH = pageH - margin * 2;
+        // How many source pixels fit on one PDF page at the fitted scale.
+        const scale = contentW / canvas.width;
+        const sliceHeight = Math.floor(contentH / scale);
 
-        pdf.addImage(
-          canvas.toDataURL("image/png"),
-          "PNG",
-          0,
-          0,
-          canvas.width,
-          canvas.height,
-        );
+        if (canvas.height <= sliceHeight) {
+          pdf.addImage(
+            canvas.toDataURL("image/png"),
+            "PNG",
+            margin,
+            margin,
+            contentW,
+            canvas.height * scale,
+          );
+        } else {
+          const slice = document.createElement("canvas");
+          slice.width = canvas.width;
+          const ctx = slice.getContext("2d");
+          let offset = 0;
+          let first = true;
+          while (offset < canvas.height) {
+            const h = Math.min(sliceHeight, canvas.height - offset);
+            slice.height = h;
+            if (ctx) {
+              ctx.fillStyle = "#ffffff";
+              ctx.fillRect(0, 0, slice.width, h);
+              ctx.drawImage(canvas, 0, offset, canvas.width, h, 0, 0, canvas.width, h);
+            }
+            if (!first) pdf.addPage();
+            pdf.addImage(
+              slice.toDataURL("image/png"),
+              "PNG",
+              margin,
+              margin,
+              contentW,
+              h * scale,
+            );
+            first = false;
+            offset += h;
+          }
+        }
         pdf.save(`${fileName}.pdf`);
       }
     } catch (e) {
