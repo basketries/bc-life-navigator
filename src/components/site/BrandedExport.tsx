@@ -6,20 +6,6 @@ import { activeSponsors } from "@/data/sponsors";
 
 const SITE_URL = "https://settleinbc.com";
 
-const COLOR_PROPS = [
-  "color",
-  "backgroundColor",
-  "borderTopColor",
-  "borderRightColor",
-  "borderBottomColor",
-  "borderLeftColor",
-  "outlineColor",
-  "textDecorationColor",
-  "fill",
-  "stroke",
-  "caretColor",
-] as const;
-
 /**
  * html2canvas cannot parse modern CSS colour functions (oklch/lab/color()).
  * The site's design tokens are oklch, so before capture we resolve every
@@ -94,8 +80,6 @@ function normalizeColors(root: HTMLElement) {
   root.querySelectorAll("*").forEach(fix);
 }
 
-
-const hyphenate = (s: string) => s.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
 
 async function captureCanvas(node: HTMLElement) {
   const { default: html2canvas } = await import("html2canvas");
